@@ -1,0 +1,34 @@
+.sidebar{
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.sidebar img{
+    width: 80%;
+    margin: 3% 5%;
+}
+
+.sidebar li{
+    list-style-type: none;
+    padding: 15px 0 15px 15%;
+    width: 100%;
+    background: #fff;
+}
+
+.sidebar a{
+    text-decoration: none;
+    color: #222;
+    font-size: 1.1em;
+}
+
+.sidebar a:hover{
+    color: #fff; 
+}
+
+.sidebar li:hover{
+    background: #01aaef;
+}

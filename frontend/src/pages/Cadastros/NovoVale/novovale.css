@@ -1,0 +1,56 @@
+.cabecalho{
+  display: flex;
+  flex-direction: column;
+  padding: 15px 5%;
+}
+
+.cabecalho select{
+  border: 1px solid #33333350;
+  border-radius: 4px;
+  height: 35px;
+  margin-top: 5px;
+}
+
+.novovale{
+  display: grid;
+  grid-template-columns: 32% 32% 32%;
+  column-gap: 2%;
+  margin: 0 5%;
+}
+
+.novovale label{
+  display: flex;
+  flex-direction: column;
+  color: #333;
+  font-size: 0.9em;
+  font-weight: 700;
+  padding: 3% 0;
+}
+
+.novovale label input, .novovale label select{
+  border: 1px solid #33333350;
+  height: 30px;
+  border-radius: 4px;
+  margin-top: 3px;
+  padding: 0 5px;
+}
+
+.botao{
+  grid-column-end: span 2;
+  margin: 2% 30% 3% 30%;
+  color: #ffffff;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 10px 0;
+  background: #0076FF;
+  border: 2px solid #0076FF;
+  border-radius: 4px;
+  transition: 300ms
+}
+
+.botao:hover{
+  background: #fff;
+  color: #0076FF;
+}

@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body{
+    background: #F8F9FE;
+}
+
+.geral{
+    display: flex;
+}
+
+.main{
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translatex(-50%);
+    width: 80%;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border-radius: 10px;
+    margin-bottom: 5%;
+}
+
+.top{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-image: url(./assets/fundo3.jpg);
+    height: 40vh;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    background-position: top;
+    background-size: cover;
+}
+
+.menu{
+    width: 20%;
+    position: fixed;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+.content{
+    margin-left: 20%;
+    width: 80%;
+    height: 100vh;
+    position: relative;
+}
+
+.see{
+    border: none;
+    background: #12a025;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.delete{
+    border: none;
+    background: #860d0d;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px 15px;
+    cursor: pointer;
+}
