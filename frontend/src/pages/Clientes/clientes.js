@@ -20,7 +20,7 @@ class Clientes extends Component {
     async delete(e) {
 
         const token = localStorage.getItem('token')
-        const remove = await api.delete(`empresa/${e.target.id}`, 
+        await api.delete(`empresa/${e.target.id}`, 
         {headers: {'Authorization': `Bearer ${token}`}})
 
         const empresa = await api.get(`empresa`, 

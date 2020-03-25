@@ -23,7 +23,7 @@ class Motoristas extends Component {
     async delete(e) {
 
         const token = localStorage.getItem('token')
-        const remove = await api.put(`motorista/${e.target.id}`, {
+        await api.put(`motorista/${e.target.id}`, {
             status: 1
         }, 
         {headers: {'Authorization': `Bearer ${token}`}})

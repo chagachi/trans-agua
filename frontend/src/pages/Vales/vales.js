@@ -28,7 +28,7 @@ class Vales extends Component {
     async delete(e) {
 
         const token = localStorage.getItem('token')
-            const remove = await api.delete(`pedido/${e.target.id}`, 
+            await api.delete(`pedido/${e.target.id}`, 
             {headers: {'Authorization': `Bearer ${token}`}})
 
             const pedido = await api.get(`pedido`, 
