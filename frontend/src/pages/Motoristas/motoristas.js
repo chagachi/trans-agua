@@ -37,10 +37,10 @@ class Motoristas extends Component {
 
     async next(){
         const token = localStorage.getItem('token')
-        const user = await api.get(`pedidosantigos`, 
+        const user = await api.get(`motorista`, 
         {headers: {'Authorization': `Bearer ${token}`, pagina: `${Number(this.state.paginate) + 1}`}})
     
-        this.setState( { pedidos: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
+        this.setState( { moto: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
     
     }
 
@@ -123,7 +123,7 @@ class Motoristas extends Component {
         }
     
         if (endPage <= this.state.lastPage - 1) { page.push(<span onClick={this.next}>»</span>) }
-        console.log(startPage, endPage)
+
         return page
     }
 

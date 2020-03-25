@@ -5,6 +5,7 @@ import PrivateRoute from './auth'
 import Login from './pages/Login/login'
 import Dash from './pages/Dashboard/dashboard'
 import Clientes from './pages/Clientes/clientes'
+import Relatorios from './pages/Relatorios/relatorios'
 import Cli from './pages/Clientes/cli'
 import Vales from './pages/Vales/vales'
 import Vale from './pages/Vales/vale'
@@ -25,6 +26,7 @@ function Routes() {
                 <Route path="/" exact component={Login}/>
                 <Route path="/logout" exact component={Logout}/>
                 <PrivateRoute path="/dashboard" exact component={Dash}/>
+                <PrivateRoute path="/relatorios" exact component={Relatorios}/>
                 <PrivateRoute path="/clientes" exact component={Clientes}/>
                 <PrivateRoute path="/clientes/cliente" exact component={Cli}/>
                 <PrivateRoute path="/clientes/novocliente" component={NovoCliente}/>

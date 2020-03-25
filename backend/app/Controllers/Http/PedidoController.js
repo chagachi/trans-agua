@@ -32,6 +32,29 @@ class PedidoController {
         return empresa
   }
 
+  async range ({ request, response, params, auth}) {
+
+    const { startDate, finalDate, motorista } = request.all()
+
+    if(motorista == null){
+      const empresa = await Database
+        .select('id','empresa','cnpj', 'motorista')
+        .from('pedidos')
+        .whereBetween('created_at', [startDate, finalDate])
+        .orderBy('id', 'desc')
+
+        return empresa
+    }
+    const empresa = await Database
+        .select('id','empresa','cnpj', 'motorista')
+        .from('pedidos')
+        .whereBetween('created_at', [startDate, finalDate])
+        .where('motorista', motorista)
+        .orderBy('id', 'desc')
+
+        return empresa
+  }
+
   /**
    * Create/save a new cadastroempresa.
    * POST Pedido

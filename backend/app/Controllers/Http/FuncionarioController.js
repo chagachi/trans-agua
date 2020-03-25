@@ -34,7 +34,11 @@ class FuncionarioController {
   }
 
   async list ({ request, response, params }) {
-        const user = await Database.select('id', 'nome').from('funcionarios').where('status', 0)
+        const user = await Database
+        .select('id', 'nome')
+        .from('funcionarios')
+        .where('status', 0)
+        .orderBy('nome', 'asc')
 
         return user
   }

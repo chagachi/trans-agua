@@ -25,6 +25,10 @@ export default function menu() {
         <Link to='/valesantigos'>
           <li>Vales Antigos</li>
         </Link>
+        
+        <Link to='/relatorios'>
+          <li>Relatórios</li>
+        </Link>
 
         <Link to='/motoristas'>
           <li>Motoristas</li>

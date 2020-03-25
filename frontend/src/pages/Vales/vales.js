@@ -23,10 +23,12 @@ class Vales extends Component {
 
     async next(){
         const token = localStorage.getItem('token')
-        const user = await api.get(`pedidosantigos`, 
+        const user = await api.get(`pedido`, 
         {headers: {'Authorization': `Bearer ${token}`, pagina: `${Number(this.state.paginate) + 1}`}})
     
-        this.setState( { pedidos: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
+        this.setState( { 
+            pedido: [].concat(user.data.data), 
+            paginate: `${Number(this.state.paginate) + 1}`})
     
      }
      async back(){

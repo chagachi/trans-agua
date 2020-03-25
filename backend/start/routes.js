@@ -23,5 +23,6 @@ Route.resource('empresa', 'CadastroempresaController').apiOnly().middleware('aut
 Route.resource('pedido', 'PedidoController').apiOnly().middleware('auth')
 Route.resource('pedidosantigos', 'PedidosantigosController').apiOnly().middleware('auth')
 
+Route.post('relatorio', 'PedidoController.range').middleware('auth')
 Route.get('/listarempresas', 'CadastroempresaController.list').middleware('auth')
 Route.get('/listarmotoristas', 'FuncionarioController.list').middleware('auth')

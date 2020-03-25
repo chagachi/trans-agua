@@ -1,12 +1,3 @@
-button{
-  border: none;
-  padding: 10px 20px;
-  color: #fff;
-  font-size: 20px;
-  background: #840000;
-  margin: 0 10px;
-}
-
 header{
   display: flex;
   justify-content: space-between;

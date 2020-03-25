@@ -60,6 +60,7 @@ body{
     font-weight: bold;
     padding: 10px 15px;
     cursor: pointer;
+    color: #fff;
 }
 
 .delete{
@@ -69,4 +70,5 @@ body{
     font-weight: bold;
     padding: 10px 15px;
     cursor: pointer;
+    color: #fff;
 }

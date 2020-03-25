@@ -1,0 +1,57 @@
+header{
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  color: #fff;
+  width: 100%;
+}
+
+.head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 2%;
+}
+
+.head a{
+  text-decoration: none;
+  color: #fff;
+  padding: 5px 10px;
+  background: #0072FF;
+  border-radius: 5px;
+}
+
+.tabs-rel{
+  background: rgb(221, 223, 226);
+  display: grid;
+  grid-template-columns: 40% 30% 15% 15%;
+  padding: 5px 2%;
+  font-weight: 700;
+}
+
+.form label input, .form label select{
+  border: 1px solid #33333350;
+  height: 30px;
+  border-radius: 4px;
+  margin-top: 3px;
+  padding: 0 5px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.clientes-rel{
+  display: grid;
+  grid-template-columns: 40% 30% 15% 15%;
+  padding: 15px 2%;
+  align-items: center;
+  justify-content: center;
+}
+
+.clientes-rel div{
+  display: flex;
+  justify-content: space-around;
+}
+
+.clientes-rel div a {
+  cursor: pointer;
+}
