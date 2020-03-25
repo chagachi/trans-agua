@@ -21,11 +21,13 @@ class PedidoController {
    * @param {View} ctx.view
    */
   async index ({ request, response, params}) {
+
+    const pagina = request.header('pagina')
     const empresa = await Database
         .select('id','empresa','cnpj')
         .from('pedidos')
         .orderBy('id', 'desc')
-        .paginate(1,10)
+        .paginate(pagina,10)
 
         return empresa
   }

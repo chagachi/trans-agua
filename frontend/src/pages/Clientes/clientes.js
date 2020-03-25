@@ -11,10 +11,14 @@ class Clientes extends Component {
         super(props)
         this.state = {
             clientes: [],
-            pagina: 1,
+            lastPage: '',
+            paginate: 1,
         }
 
         this.delete = this.delete.bind(this)
+        this.next = this.next.bind(this)
+        this.back = this.back.bind(this)
+        this.unique = this.unique.bind(this)
     }
 
     async delete(e) {
@@ -29,14 +33,105 @@ class Clientes extends Component {
         this.setState({ clientes: empresa.data.data })
     }
 
+    async next(){
+        const token = localStorage.getItem('token')
+        const user = await api.get(`empresa`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${Number(this.state.paginate) + 1}`}})
+    
+        this.setState( { clientes: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
+    
+     }
+     async back(){
+        const token = localStorage.getItem('token')
+        const user = await api.get(`empresa`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${this.state.paginate - 1}`}})
+    
+        this.setState( { clientes: [].concat(user.data.data), paginate: `${this.state.paginate - 1}`})
+    
+     }
+    
+     async unique(e){
+        const token = localStorage.getItem('token')
+        const key = e.target.id
+        const user = await api.get(`empresa`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${key}`}})
+    
+        this.setState( { clientes: [].concat(user.data.data), paginate: key})
+     }
+
+     createPagination = () => {
+        const limite = 2;
+        const page = []
+        let i
+    
+        let startPage = (this.state.paginate - limite) > 1 ? 
+        this.state.paginate - limite : 
+        1;
+    
+        let endPage = Number(Number(this.state.paginate) + Number(limite)) < this.state.lastPage ? 
+        Number(Number(this.state.paginate) + Number(limite)) :
+        Number(this.state.lastPage);
+    
+        if (this.state.paginate > 1) { page.push(<span onClick={this.back}>«</span>) }
+        
+        if(this.state.lastPage > 1 && this.state.paginate <= this.state.lastPage){
+            if(this.state.lastPage > 3){
+                if(this.state.paginate <=3){
+                    for(i = 1; i <= 5; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                    }
+                } else{
+                    for(i = startPage; i <= endPage; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                            } else{
+                                page.push(<p prop={`${i}`}
+                                id={`${i}`} 
+                                onClick={this.unique}>{i}</p>)
+                            }
+                    }
+                }
+            } else{
+                for(i = startPage; i <= endPage; i++){
+                    if(i == this.state.paginate){
+                        page.push(<p prop={`${i}`} 
+                        className='active' 
+                        id={`${i}`} 
+                        onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                }
+            } 
+        }
+    
+        if (endPage <= this.state.lastPage - 1) { page.push(<span onClick={this.next}>»</span>) }
+        console.log(startPage, endPage)
+        return page
+    }
+
     async componentDidMount(){
         const token = localStorage.getItem('token')
         const user = await api.get(`empresa`, 
-        {headers: {'Authorization': `Bearer ${token}`, pagina: this.state.pagina}})
+        {headers: {'Authorization': `Bearer ${token}`, paginate: this.state.pagina}})
 
         console.log(user.data)
 
-        this.setState({ clientes: user.data.data})
+        this.setState({ clientes: user.data.data, lastPage: user.data.lastPage})
     }     
 
     render() {
@@ -85,11 +180,7 @@ class Clientes extends Component {
                             ))}
                             
                             <div className='pagination'>
-                                <span> 1 </span>
-                                <span> 2 </span>
-                                <span> 3 </span>
-                                <span> 4 </span>
-                                <span> 5 </span>
+                                {this.createPagination()}                                
                             </div>
                         </div>
                 </div>

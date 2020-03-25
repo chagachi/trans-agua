@@ -11,9 +11,108 @@ class Vales extends Component {
         super(props)
         this.state = {
             pedido: [],
+            lastPage: '',
+            paginate: 1,
         }
 
         this.delete = this.delete.bind(this)
+        this.next = this.next.bind(this)
+        this.back = this.back.bind(this)
+        this.unique = this.unique.bind(this)
+    }
+
+    async next(){
+        const token = localStorage.getItem('token')
+        const user = await api.get(`pedidosantigos`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${Number(this.state.paginate) + 1}`}})
+    
+        this.setState( { pedidos: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
+    
+     }
+     async back(){
+        const token = localStorage.getItem('token')
+        const user = await api.get(`pedido`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${this.state.paginate - 1}`}})
+  
+        this.setState( { 
+            pedido: [].concat(user.data.data), 
+            paginate: `${this.state.paginate - 1}`
+        })
+
+     }
+
+     async unique(e){
+        const token = localStorage.getItem('token')
+        const key = e.target.id
+        const user = await api.get(`pedido`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${key}`}})
+
+        this.setState( { pedido: [].concat(user.data.data), paginate: key})
+     }
+
+     createPagination = () => {
+        const limite = 2;
+        const page = []
+        let i
+    
+        let startPage = (this.state.paginate - limite) > 1 ? 
+        this.state.paginate - limite : 
+        1;
+    
+        let endPage = (this.state.paginate + limite) < this.state.lastPage ? 
+        Number(Number(this.state.paginate) + Number(limite)) :
+        this.state.lastPage;
+    
+        if (this.state.paginate > 1) { page.push(<span onClick={this.back}>«</span>) }
+        
+        if(this.state.lastPage > 1 && this.state.paginate <= this.state.lastPage){
+            if(this.state.lastPage > 3){
+                if(this.state.paginate <=3){
+                    for(i = 1; i <= 5; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                    }
+                } else{
+                    for(i = startPage; i <= endPage; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                            } else{
+                                page.push(<p prop={`${i}`}
+                                id={`${i}`} 
+                                onClick={this.unique}>{i}</p>)
+                            }
+                    }
+                }
+            } else{
+                for(i = startPage; i <= endPage; i++){
+                    if(i == this.state.paginate){
+                        page.push(<p prop={`${i}`} 
+                        className='active' 
+                        id={`${i}`} 
+                        onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                }
+            } 
+        }
+    
+        if (endPage <= this.state.lastPage - 1) { page.push(<span onClick={this.next}>»</span>) }
+    
+        return page
     }
 
     async componentDidMount(){
@@ -22,7 +121,7 @@ class Vales extends Component {
         const pedido = await api.get(`pedido`, 
         {headers: {'Authorization': `Bearer ${token}`}})
 
-        this.setState({ pedido: pedido.data.data })
+        this.setState({ pedido: pedido.data.data, lastPage: pedido.data.lastPage })
     }
 
     async delete(e) {
@@ -85,12 +184,8 @@ class Vales extends Component {
                             ))}
                             
                             <div className='pagination'>
-                                <span> 1 </span>
-                                <span> 2 </span>
-                                <span> 3 </span>
-                                <span> 4 </span>
-                                <span> 5 </span>
-                            </div>
+                                {this.createPagination(this.state.paginate, this.state.lastPage)}                                
+                            </div>  
                         </div>
                 </div>
             </div>

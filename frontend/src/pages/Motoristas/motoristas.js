@@ -37,20 +37,19 @@ class Motoristas extends Component {
 
     async next(){
         const token = localStorage.getItem('token')
-        const user = await api.get(`motorista`, 
-        {headers: {'Authorization': `Bearer ${token}`, pagina: `${this.state.paginate + 1}`}})
-  
-        this.setState( { moto: [].concat(user.data.data), paginate: `${this.state.paginate + 1}`})
-        console.log(this.state.paginate)
+        const user = await api.get(`pedidosantigos`, 
+        {headers: {'Authorization': `Bearer ${token}`, pagina: `${Number(this.state.paginate) + 1}`}})
+    
+        this.setState( { pedidos: [].concat(user.data.data), paginate: `${Number(this.state.paginate) + 1}`})
+    
+    }
 
-     }
      async back(){
         const token = localStorage.getItem('token')
         const user = await api.get(`motorista`, 
         {headers: {'Authorization': `Bearer ${token}`, pagina: `${this.state.paginate - 1}`}})
   
         this.setState( { moto: [].concat(user.data.data), paginate: `${this.state.paginate - 1}`})
-        console.log(this.state.paginate)
 
      }
 
@@ -61,73 +60,71 @@ class Motoristas extends Component {
         {headers: {'Authorization': `Bearer ${token}`, pagina: `${key}`}})
 
         this.setState( { moto: [].concat(user.data.data), paginate: key})
-        console.log(this.state.paginate)
      }
 
-    createPagination = (page, lastPage) => {
-        var paginacao = [];        
-        let startPage = 1;
-        let endPage = lastPage;        
-        // -- Base -- //
+     createPagination = () => {
+        const limite = 2;
+        const page = []
+        let i
+    
+        let startPage = (this.state.paginate - limite) > 1 ? 
+        this.state.paginate - limite : 
+        1;
+    
+        let endPage = Number(Number(this.state.paginate) + Number(limite)) < this.state.lastPage ? 
+        Number(Number(this.state.paginate) + Number(limite)) :
+        Number(this.state.lastPage);
+    
+        if (this.state.paginate > 1) { page.push(<span onClick={this.back}>«</span>) }
         
-        //  |»   ░   «|
-        // 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6
-
-        if (lastPage <= 5) {
-            endPage = lastPage;
+        if(this.state.lastPage > 1 && this.state.paginate <= this.state.lastPage){
+            if(this.state.lastPage > 3){
+                if(this.state.paginate <=3){
+                    for(i = 1; i <= 5; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                    }
+                } else{
+                    for(i = startPage; i <= endPage; i++){
+                        if(i == this.state.paginate){
+                            page.push(<p prop={`${i}`} 
+                            className='active' 
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                            } else{
+                                page.push(<p prop={`${i}`}
+                                id={`${i}`} 
+                                onClick={this.unique}>{i}</p>)
+                            }
+                    }
+                }
+            } else{
+                for(i = startPage; i <= endPage; i++){
+                    if(i == this.state.paginate){
+                        page.push(<p prop={`${i}`} 
+                        className='active' 
+                        id={`${i}`} 
+                        onClick={this.unique}>{i}</p>)
+                        } else{
+                            page.push(<p prop={`${i}`}
+                            id={`${i}`} 
+                            onClick={this.unique}>{i}</p>)
+                        }
+                }
+            } 
         }
-        
-        if (lastPage > 5) {
-            if (page <= 5) {
-                endPage = (lastPage <= page + 2) ? lastPage : 5;
-            }            
-        }
-        if (page <= 3) {
-            endPage = (lastPage <= 5) ? lastPage : 5;            
-        }
-        
-        if (page === 4 ) {  
-            if (lastPage <= 5) {
-                endPage = lastPage
-            } else {
-                startPage = page - 2;
-                endPage = page + 2;
-            }
-        }
-
-        if (page === 5) {
-            endPage = (lastPage <= page + 2) ? lastPage : page + 2;          
-        }       
-        
-        if (page >= 5) {
-            startPage = page - 2;
-            endPage = (lastPage <= page + 2) ? lastPage : page + 2;             
-        }        
-
-        if (page >= 6) {
-            startPage = page - 2;
-            endPage = (lastPage <= page + 2) ? lastPage : page + 2;             
-        }
-
-        if ((page >= 5) && (page === lastPage)) {
-            startPage = lastPage - 5;
-            endPage = lastPage;
-        }
-
-        if ((page >= 5) && (page >= lastPage - 2)) {
-            startPage = lastPage - 4;
-            endPage = lastPage;
-        }        
-
-        
-        if (page > 1) { paginacao.push(<span onClick={this.back}>«</span>) }
-        for (let i = startPage ; i <= endPage; i++) {
-            paginacao.push(<p prop={`${i}`} id={`${i}`} onClick={this.unique}>{i}</p>) 
-        }           
-        if (page <= lastPage - 3) { paginacao.push(<span onClick={this.next}>»</span>) }
-        
-
-        return paginacao
+    
+        if (endPage <= this.state.lastPage - 1) { page.push(<span onClick={this.next}>»</span>) }
+        console.log(startPage, endPage)
+        return page
     }
 
     async componentDidMount(){

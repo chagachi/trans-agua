@@ -92,6 +92,7 @@ header{
   width: 25px;
   height: 25px;
   border-radius: 100px;
+  font-weight: bold;
   margin: 0 3px;
   border: 1px solid #bbbbbb;
   color: #bbbbbb;
@@ -99,6 +100,11 @@ header{
 }
 
 .pagination span:hover{
+  background: #0072FF;
+  color: #fff;
+}
+
+.active{
   background: #0072FF;
   color: #fff;
 }
