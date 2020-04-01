@@ -18,6 +18,7 @@ const providers = [
   '@adonisjs/lucid/providers/LucidProvider'
 ]
 
+
 /*
 |--------------------------------------------------------------------------
 | Ace Providers
