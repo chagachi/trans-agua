@@ -16,6 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
+
 Route.post('/login', 'UserController.login')
 Route.resource('user', 'UserController').apiOnly().middleware('auth')
 Route.resource('motorista', 'FuncionarioController').apiOnly().middleware('auth')

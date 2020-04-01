@@ -1,0 +1,31 @@
+<service>
+	<id>transgua.exe</id>
+	<name>Trans Água</name>
+	<description>desenvolvido por cherry tech</description>
+	<executable>C:\Program Files\nodejs\node.exe</executable>
+	<argument>--harmony</argument>
+	<argument>C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js</argument>
+	<argument>--file</argument>
+	<argument>C:\Users\SERVIDOR\Documents\trans agua\frontend</argument>
+	<argument>--scriptoptions=</argument>
+	<argument>--log</argument>
+	<argument>Trans Água wrapper</argument>
+	<argument>--grow</argument>
+	<argument>0.25</argument>
+	<argument>--wait</argument>
+	<argument>1</argument>
+	<argument>--maxrestarts</argument>
+	<argument>3</argument>
+	<argument>--abortonerror</argument>
+	<argument>n</argument>
+	<argument>--stopparentfirst</argument>
+	<argument>undefined</argument>
+	<logmode>rotate</logmode>
+	<stoptimeout>30sec</stoptimeout>
+	<serviceaccount>
+		<domain>SERVIDOR</domain>
+		<user>LocalSystem</user>
+		<password></password>
+	</serviceaccount>
+	<workingdirectory>C:\Users\SERVIDOR\Documents\trans agua\frontend</workingdirectory>
+</service>
