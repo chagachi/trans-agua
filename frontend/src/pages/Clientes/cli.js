@@ -27,6 +27,7 @@ class Moto extends Component {
       site: '',
       valorfixo: '',
       message: '',
+      adm: localStorage.getItem('adm')
   }
   }
 
@@ -92,6 +93,185 @@ handleSubmit = async event => {
 }
 
     render() {
+
+        if(this.state.adm == 1){
+            return(
+                <>
+                <div className='geral'>
+                    <div className='menu'>
+                        <Menu />
+                    </div>
+    
+                    <div className='content'>
+                        <header>
+                            <span>Painel de Controle ><strong> Vales </strong></span>
+                            <span>Olá Felipe Marcondes</span>
+                        </header>
+    
+                        <div className='top'></div>
+                        <div className='main'>
+    
+                        <div className='cabecalho'>
+                                {
+                                    this.state.message !== ''? (
+                                        window.alert(this.state.message)
+                                    ) : ''
+                                }
+                              <div className='head'>
+                                <Link 
+                                  to='/clientes'>
+                                  <span>Voltar</span>
+                                </Link>
+                                <h3></h3>
+                              </div>
+                              
+                              <form class='form' onSubmit={this.handleSubmit}>
+                              <label> Nome Fantasia
+                                  <input 
+                                  type='text' 
+                                  name='nomefantasia'
+                                  id='nomefantasia'
+                                  onChange={e => this.setState({nomefantasia: e.target.value})}
+                                  value={this.state.nomefantasia} 
+                                  />
+                              </label>
+                              <label> Razão Social
+                                  <input 
+                                  type='text' 
+                                  name='razaosocial' 
+                                  id='razaosocial'
+                                  onChange={e => this.setState({razaosocial: e.target.value})}
+                                  value={this.state.razaosocial}
+                                  />
+                              </label>
+                              <label>CNPJ
+                                  <input 
+                                  type='text' 
+                                  name='cnpj' 
+                                  id='cnpj'
+                                  onChange={e => this.setState({cnpj: e.target.value})}
+                                  value={this.state.cnpj}
+                                  />
+                              </label>
+                              <label>Inscrição Estadual
+                                  <input 
+                                  type='text' 
+                                  name='ie' 
+                                  id='ie'
+                                  onChange={e => this.setState({ie: e.target.value})}
+                                  value={this.state.ie}
+                                  />
+                              </label>
+                              <label> Endereço 1
+                                  <input 
+                                  type='text' 
+                                  name='endereco' 
+                                  id='endereco'
+                                  onChange={e => this.setState({endereco: e.target.value})}
+                                  value={this.state.endereco}
+                                  />
+                              </label>
+                              <label> Número
+                                  <input 
+                                  type='text' 
+                                  name='numero' 
+                                  id='numero'
+                                  onChange={e => this.setState({numero: e.target.value})}
+                                  value={this.state.numero}
+                                  />
+                              </label>
+                              <label> Endereço 2
+                                  <input 
+                                  type='text' 
+                                  name='endereco1' 
+                                  id='endereco1'
+                                  onChange={e => this.setState({endereco1: e.target.value})}
+                                  value={this.state.endereco1}
+                                  />
+                              </label>
+                              <label> Bairro
+                                  <input 
+                                  type='text' 
+                                  name='bairro' 
+                                  id='bairro'
+                                  onChange={e => this.setState({bairro: e.target.value})}
+                                  value={this.state.bairro}
+                                  />
+                              </label>
+                              <label> Cidade
+                                  <input 
+                                  type='text' 
+                                  name='cidade' 
+                                  id='cidade'
+                                  onChange={e => this.setState({cidade: e.target.value})}
+                                  value={this.state.cidade}
+                                  />
+                              </label>
+                              <label> Estado
+                                  <input 
+                                  type='text' 
+                                  name='estado' 
+                                  id='estado'
+                                  onChange={e => this.setState({estado: e.target.value})}
+                                  value={this.state.estado}
+                                  />
+                              </label>
+                              <label> Telefone
+                                  <input 
+                                  type='text' 
+                                  name='telefone1' 
+                                  id='telefone1'
+                                  onChange={e => this.setState({telefone1: e.target.value})}
+                                  value={this.state.telefone1}
+                                  />
+                              </label>
+                              <label> Celular
+                                  <input 
+                                  type='text' 
+                                  name='telefone2' 
+                                  id='telefone2'
+                                  onChange={e => this.setState({telefone2: e.target.value})}
+                                  value={this.state.telefone2}
+                                  />
+                              </label>
+                              <label> E-mail
+                                  <input 
+                                  type='text' 
+                                  name='email' 
+                                  id='email'
+                                  onChange={e => this.setState({email: e.target.value})}
+                                  value={this.state.email}
+                                  />
+                              </label>
+                              <label> Site
+                                  <input 
+                                  type='text' 
+                                  name='site' 
+                                  id='site'
+                                  onChange={e => this.setState({site: e.target.value})}
+                                  value={this.state.site}
+                                  />
+                              </label>
+                              <label> Valor
+                                  <input 
+                                  type='text' 
+                                  name='valorfixo' 
+                                  id='valorfixo'
+                                  onChange={e => this.setState({valorfixo: e.target.value})}
+                                  value={this.state.valorfixo}
+                                  />
+                              </label>
+    
+                              <input class='botao' type='submit' name='cadastrar' value='Cadastrar' />
+                            </form>
+                                </div>
+                          </div>
+                        </div>
+                    </div>
+                </>
+            );
+        }
+
         return(
             <>
             <div className='geral'>
@@ -124,142 +304,65 @@ handleSubmit = async event => {
                           
                           <form class='form' onSubmit={this.handleSubmit}>
                           <label> Nome Fantasia
-                              <input 
-                              type='text' 
-                              name='nomefantasia'
-                              id='nomefantasia'
-                              onChange={e => this.setState({nomefantasia: e.target.value})}
-                              value={this.state.nomefantasia} 
-                              />
-                          </label>
-                          <label> Razão Social
-                              <input 
-                              type='text' 
-                              name='razaosocial' 
-                              id='razaosocial'
-                              onChange={e => this.setState({razaosocial: e.target.value})}
-                              value={this.state.razaosocial}
-                              />
-                          </label>
-                          <label>CNPJ
-                              <input 
-                              type='text' 
-                              name='cnpj' 
-                              id='cnpj'
-                              onChange={e => this.setState({cnpj: e.target.value})}
-                              value={this.state.cnpj}
-                              />
-                          </label>
-                          <label>Inscrição Estadual
-                              <input 
-                              type='text' 
-                              name='ie' 
-                              id='ie'
-                              onChange={e => this.setState({ie: e.target.value})}
-                              value={this.state.ie}
-                              />
-                          </label>
-                          <label> Endereço 1
-                              <input 
-                              type='text' 
-                              name='endereco' 
-                              id='endereco'
-                              onChange={e => this.setState({endereco: e.target.value})}
-                              value={this.state.endereco}
-                              />
-                          </label>
-                          <label> Número
-                              <input 
-                              type='text' 
-                              name='numero' 
-                              id='numero'
-                              onChange={e => this.setState({numero: e.target.value})}
-                              value={this.state.numero}
-                              />
-                          </label>
-                          <label> Endereço 2
-                              <input 
-                              type='text' 
-                              name='endereco1' 
-                              id='endereco1'
-                              onChange={e => this.setState({endereco1: e.target.value})}
-                              value={this.state.endereco1}
-                              />
-                          </label>
-                          <label> Bairro
-                              <input 
-                              type='text' 
-                              name='bairro' 
-                              id='bairro'
-                              onChange={e => this.setState({bairro: e.target.value})}
-                              value={this.state.bairro}
-                              />
-                          </label>
-                          <label> Cidade
-                              <input 
-                              type='text' 
-                              name='cidade' 
-                              id='cidade'
-                              onChange={e => this.setState({cidade: e.target.value})}
-                              value={this.state.cidade}
-                              />
-                          </label>
-                          <label> Estado
-                              <input 
-                              type='text' 
-                              name='estado' 
-                              id='estado'
-                              onChange={e => this.setState({estado: e.target.value})}
-                              value={this.state.estado}
-                              />
-                          </label>
-                          <label> Telefone
-                              <input 
-                              type='text' 
-                              name='telefone1' 
-                              id='telefone1'
-                              onChange={e => this.setState({telefone1: e.target.value})}
-                              value={this.state.telefone1}
-                              />
-                          </label>
-                          <label> Celular
-                              <input 
-                              type='text' 
-                              name='telefone2' 
-                              id='telefone2'
-                              onChange={e => this.setState({telefone2: e.target.value})}
-                              value={this.state.telefone2}
-                              />
-                          </label>
-                          <label> E-mail
-                              <input 
-                              type='text' 
-                              name='email' 
-                              id='email'
-                              onChange={e => this.setState({email: e.target.value})}
-                              value={this.state.email}
-                              />
-                          </label>
-                          <label> Site
-                              <input 
-                              type='text' 
-                              name='site' 
-                              id='site'
-                              onChange={e => this.setState({site: e.target.value})}
-                              value={this.state.site}
-                              />
-                          </label>
-                          <label> Valor
-                              <input 
-                              type='text' 
-                              name='valorfixo' 
-                              id='valorfixo'
-                              onChange={e => this.setState({valorfixo: e.target.value})}
-                              value={this.state.valorfixo}
-                              />
+                            <p>{this.state.nomefantasia}</p>
                           </label>
 
-                          <input class='botao' type='submit' name='cadastrar' value='Cadastrar' />
+                          <label> Razão Social
+                            <p>{this.state.razaosocial}</p>
+                          </label>
+
+                          <label>CNPJ
+                            <p>{this.state.cnpj}</p>
+                          </label>
+
+                          <label>Inscrição Estadual
+                            <p>{this.state.ie}</p>
+                          </label>
+
+                          <label> Endereço 1
+                            <p>{this.state.endereco}</p>
+                          </label>
+
+                          <label> Número
+                            <p>{this.state.numero}</p>
+                          </label>
+
+                          <label> Endereço 2
+                            <p>{this.state.endereco1}</p>
+                          </label>
+
+                          <label> Bairro
+                            <p>{this.state.bairro}</p>
+                          </label>
+
+                          <label> Cidade
+                            <p>{this.state.cidade}</p>
+                          </label>
+
+                          <label> Estado
+                            <p>{this.state.estado}</p>
+                          </label>
+
+                          <label> Telefone
+                             <p>{this.state.telefone1}</p>
+                          </label>
+
+                          <label> Celular
+                            <p>{this.state.telefone2}</p>
+                          </label>
+
+                          <label> E-mail
+                            <p>{this.state.email}</p>
+                          </label>
+
+                          <label> Site
+                            <p>{this.state.site}</p>
+                          </label>
+
+                          <label> Valor
+                            <p>{this.state.valorfixo}</p>
+                          </label>
+
                         </form>
                             </div>
                       </div>

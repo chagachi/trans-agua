@@ -25,10 +25,11 @@ class Login extends Component {
             password: this.state.password
         })
         .then(res => {
-            return res.data.token
-        })
-        .then(token => {
+            const token = res.data[1].token
+            const adm = res.data[0].adm
+
             localStorage.setItem('token', token)
+            localStorage.setItem('adm', adm)
             this.props.history.push('/dashboard')
             return
         })

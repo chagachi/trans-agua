@@ -12,6 +12,7 @@ class Motoristas extends Component {
             moto: [],
             lastPage: '',
             paginate: 1,
+            adm: localStorage.getItem('adm'),
         }
 
         this.next = this.next.bind(this)
@@ -136,6 +137,64 @@ class Motoristas extends Component {
     }
     
     render() {
+
+        if(this.state.adm == 1){
+            return(
+                <>
+                <div className='geral'>
+                    <div className='menu'>
+                        <Menu />
+                    </div>
+    
+                    <div className='content'>
+                        <header>
+                            <span>Painel de Controle ><strong> Clientes</strong></span>
+                        </header>
+    
+                        <div className='top'></div>
+                        <div className='main'>
+                                <div className='head'>
+                                    <h3>Motoristas Cadastrados</h3>
+                                    <Link to='/motoristas/novomotorista'><span>Cadastrar Motorista</span></Link>
+                                </div>
+    
+                                <div className='tabs'>
+                                    <span>NOME</span>
+                                    <span>TELEFONE</span>
+                                    <span>CELULAR</span>
+                                </div>
+    
+                                {this.state.moto.map(post => (
+                                    <div className='clientes' key={post.id}>
+                                        <span> {post.nome} </span>
+                                        <span> {post.telefone} </span>
+                                        <span> {post.celular} </span>
+                                        <div>
+                                            <Link to={{
+                                                pathname:'/motoristas/motorista',
+                                                state: {id: post.id}
+                                                }}><button className='see'>Ver | Editar</button></Link>
+                                            <button 
+                                            className='delete' 
+                                            id={post.id} 
+                                            onClick={this.delete}>
+                                                Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+     
+                                
+                                <div className='pagination'>
+                                    {this.createPagination(this.state.paginate, this.state.lastPage)}                                
+                                </div>                            
+                            </div>
+                    </div>
+                </div>
+                </>
+            );
+        }
+
         return(
             <>
             <div className='geral'>
@@ -146,7 +205,6 @@ class Motoristas extends Component {
                 <div className='content'>
                     <header>
                         <span>Painel de Controle ><strong> Clientes</strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>
@@ -172,12 +230,6 @@ class Motoristas extends Component {
                                             pathname:'/motoristas/motorista',
                                             state: {id: post.id}
                                             }}><button className='see'>Ver | Editar</button></Link>
-                                        <button 
-                                        className='delete' 
-                                        id={post.id} 
-                                        onClick={this.delete}>
-                                            Excluir
-                                        </button>
                                     </div>
                                 </div>
                             ))}

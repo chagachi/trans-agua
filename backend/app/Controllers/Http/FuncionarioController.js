@@ -53,23 +53,15 @@ class FuncionarioController {
    */
   async store ({ request, response, auth }) {
       try{
+        const data = request.only(["nome", "telefone", "celular"])
 
-        if(auth.user.adm == 1) {
+        const user = await Func.create(data)
 
-            const data = request.only(["nome", "telefone", "celular"])
+        return user
 
-            const user = await Func.create(data)
-
-            return user
-
-    }
-
-    response.status(300).send({message:'Você não tem privilégios administrativos.'})
-
-
-    } catch(err){
+      } catch(err){
         return response.status(500).send({ error: `Erro: ${err.message}` })
-    }
+      }
   }
 
   /**

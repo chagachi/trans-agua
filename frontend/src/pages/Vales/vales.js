@@ -13,6 +13,7 @@ class Vales extends Component {
             pedido: [],
             lastPage: '',
             paginate: 1,
+            adm: localStorage.getItem('adm')
         }
 
         this.delete = this.delete.bind(this)
@@ -139,6 +140,64 @@ class Vales extends Component {
     }
 
     render() {
+
+        if(this.state.adm == 1){
+            return(
+                <>
+                <div className='geral'>
+                    <div className='menu'>
+                        <Menu />
+                    </div>
+    
+                    <div className='content'>
+                        <header>
+                            <span>Painel de Controle ><strong> Vales </strong></span>
+                            <span>Olá Felipe Marcondes</span>
+                        </header>
+    
+                        <div className='top'></div>
+                        <div className='main'>
+                                <div className='head'>
+                                    <h3>Últimos Vales Emitidos</h3>
+                                    <Link to='/vales/novovale'><span>Novo Vale</span></Link>
+                                </div>
+    
+                                <div className='tabs-vales'>
+                                    <span>EMPRESA</span>
+                                    <span>CNPJ</span>
+                                    <span>NÚMERO</span>
+                                </div>
+    
+                                {this.state.pedido.map(post => (
+                                    <div className='clientes-vales' key={post.id}>
+                                        <span> {post.empresa} </span>
+                                        <span> {post.cnpj} </span>
+                                        <span> {post.id} </span>
+                                        <div>
+                                            <Link to={{
+                                                pathname:'/vales/vale',
+                                                state: {id: post.id}
+                                                }}><button className='see'>Ver | Editar</button></Link>
+                                            <button 
+                                            className='delete' 
+                                            id={post.id} 
+                                            onClick={this.delete}>
+                                                Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                                
+                                <div className='pagination'>
+                                    {this.createPagination(this.state.paginate, this.state.lastPage)}                                
+                                </div>  
+                            </div>
+                    </div>
+                </div>
+                </>
+            );
+        }
+
         return(
             <>
             <div className='geral'>
@@ -149,7 +208,6 @@ class Vales extends Component {
                 <div className='content'>
                     <header>
                         <span>Painel de Controle ><strong> Vales </strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>
@@ -175,12 +233,6 @@ class Vales extends Component {
                                             pathname:'/vales/vale',
                                             state: {id: post.id}
                                             }}><button className='see'>Ver | Editar</button></Link>
-                                        <button 
-                                        className='delete' 
-                                        id={post.id} 
-                                        onClick={this.delete}>
-                                            Excluir
-                                        </button>
                                     </div>
                                 </div>
                             ))}

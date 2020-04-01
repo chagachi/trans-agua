@@ -10,6 +10,7 @@ class Dash extends Component {
     state = {
         clientes: '',
         pedido: '',
+        adm: localStorage.getItem('adm'),
     }
 
     async componentDidMount(){
@@ -34,7 +35,6 @@ class Dash extends Component {
                 <div className='content'>
                     <header>
                         <h3>Painel de Controle</h3>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'>

@@ -55,6 +55,10 @@ header{
   font-weight: 700;
 }
 
+.form p{
+  font-weight: 400;
+}
+
 .clientes-vales{
   display: grid;
   grid-template-columns: 30% 30% 10% 30%;

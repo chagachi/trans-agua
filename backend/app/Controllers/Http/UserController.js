@@ -29,7 +29,12 @@ class UserController {
 
             const {username, password} = request.all()
 
-            const validaToken = await auth.attempt(username, password)
+            const user = await User.query()
+            .where('username', username)
+            .select('username', 'adm')
+            .first()
+
+            const validaToken = [user, await auth.attempt(username, password)]
 
             return validaToken
 

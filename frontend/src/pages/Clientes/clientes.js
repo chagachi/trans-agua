@@ -13,6 +13,7 @@ class Clientes extends Component {
             clientes: [],
             lastPage: '',
             paginate: 1,
+            adm: localStorage.getItem('adm'),
         }
 
         this.delete = this.delete.bind(this)
@@ -135,6 +136,62 @@ class Clientes extends Component {
     }     
 
     render() {
+
+        if(this.state.adm == 1){
+            return(
+                <>
+                <div className='geral'>
+                    <div className='menu'>
+                        <Menu />
+                    </div>
+    
+                    <div className='content'>
+                        <header>
+                            <span>Painel de Controle ><strong> Clientes</strong></span>
+                            <span>Olá Felipe Marcondes</span>
+                        </header>
+    
+                        <div className='top'></div>
+                        <div className='main'>
+                                <div className='head'>
+                                    <h3>Clientes Cadastrados</h3>
+                                    <Link to='/clientes/novocliente'><span>Cadastrar Cliente</span></Link>
+                                </div>
+    
+                                <div className='tabs-clientes'>
+                                    <span>EMPRESA</span>
+                                    <span>CNPJ</span>
+                                </div>
+    
+                                {this.state.clientes.map(post => (
+                                    <div className='clientes-clientes' key={post.id}>
+                                        <span> {post.nomefantasia} </span>
+                                        <span> {post.cnpj} </span>
+                                        <div>
+                                            <Link to={{
+                                                pathname:'/clientes/cliente',
+                                                state: {id: post.id}
+                                                }}><button className='see'>Ver | Editar</button></Link>
+                                            <button 
+                                            className='delete' 
+                                            id={post.id} 
+                                            onClick={this.delete}>
+                                                Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))}
+                                
+                                <div className='pagination'>
+                                    {this.createPagination()}                                
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                </>
+            );
+        }
+
         return(
             <>
             <div className='geral'>
@@ -152,7 +209,6 @@ class Clientes extends Component {
                     <div className='main'>
                             <div className='head'>
                                 <h3>Clientes Cadastrados</h3>
-                                <Link to='/clientes/novocliente'><span>Cadastrar Cliente</span></Link>
                             </div>
 
                             <div className='tabs-clientes'>
@@ -169,12 +225,6 @@ class Clientes extends Component {
                                             pathname:'/clientes/cliente',
                                             state: {id: post.id}
                                             }}><button className='see'>Ver | Editar</button></Link>
-                                        <button 
-                                        className='delete' 
-                                        id={post.id} 
-                                        onClick={this.delete}>
-                                            Excluir
-                                        </button>
                                     </div>
                                 </div>
                             ))}
