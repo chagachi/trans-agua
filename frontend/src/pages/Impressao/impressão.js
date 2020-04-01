@@ -9,6 +9,7 @@ class Impressao extends Component {
 
   state = {
     pedido: [],
+    data: '',
   }
 
   async componentDidMount(params){
@@ -17,19 +18,19 @@ class Impressao extends Component {
     const pedido = await api.get(`pedido/${id}`, 
     {headers: {'Authorization': `Bearer ${token}`}})
 
-    console.log(pedido.data)
+    const dia = pedido.data.created_at
+    const diaSplit = dia.split(' ')
+    const diaFinal = diaSplit[0].split('-').reverse().join('/')
 
-    this.setState({ pedido: pedido.data})
+    this.setState({ pedido: pedido.data, data: diaFinal})
+
     window.print()
-
+    this.props.history.push('/vales')
 }
 
     render() {
         return(
             <>
-              <div className='botao-voltar'>
-                <Link to='/vales'> Voltar </Link>
-              </div>
 
               <div className='corpo'>
               <div>
@@ -41,10 +42,10 @@ class Impressao extends Component {
               </div>
               <div className='meio'>
                 <div>
-                  <span><b>Nº</b> {this.state.pedido.id}</span>
+                  <span><b>DATA:</b> {this.state.data}</span>
                 </div>
                 <div>
-                  <span><b>DATA:</b> {this.state.pedido.created_at}</span>
+                  <span className='pedido'><b>Nº</b> {this.state.pedido.id}</span>
                 </div>
               </div>
 
@@ -112,7 +113,6 @@ class Impressao extends Component {
               </div>
 
               </div>
-
             </>
         );
     }

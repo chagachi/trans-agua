@@ -34,10 +34,12 @@
 
 .corpo span{
   line-height: 1.2em;
+  font-weight: bold;
 }
 
 .corpo2 span{
   line-height: 1.2em;
+  font-weight: bold;
 }
 
 .corpo small{
@@ -81,10 +83,17 @@
 .meio{
   display: flex !important;
   justify-content: space-between !important;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.meio .pedido{
+  font-size: 1.3em;
 }
 
 .base{
   text-align: left;
+  font-weight: bold;
 }
 
 .base p {
