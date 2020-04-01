@@ -51,7 +51,7 @@ class FuncionarioController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, response, auth }) {
+  async store ({ request, response}) {
       try{
         const data = request.only(["nome", "telefone", "celular"])
 

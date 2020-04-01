@@ -1,3 +1,7 @@
 [32minfo[39m: serving app on http://192.168.1.131:3333
 [32minfo[39m: serving app on http://192.168.1.131:3333
 Connection Error: Error: Connection lost: The server closed the connection.
+Connection Error: Error: read ECONNRESET
+[32minfo[39m: serving app on http://192.168.1.131:3333
+[32minfo[39m: serving app on http://192.168.1.131:3333
+[32minfo[39m: serving app on http://192.168.1.131:3333

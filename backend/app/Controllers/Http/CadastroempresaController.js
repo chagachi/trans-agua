@@ -62,17 +62,12 @@ class CadastroempresaController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, auth }) {
-    if (auth.user.adm == 1) {
+  async show ({ params, request, response }) {
       const empresa = await Cad.query().where('id', params.id).first()
       if (!empresa) {
           return response.status(400).send({message: 'Nenhum usuário encontrado.'})
       }
       return empresa
-    }
-
-    const empresa = await Cad.query().where('id', auth.user.id).first()
-    return empresa
   }
 
   /**
