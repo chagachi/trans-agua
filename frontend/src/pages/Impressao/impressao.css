@@ -6,6 +6,17 @@
   flex-direction: column;
   justify-content: center;
   text-align: center;
+  page-break-after: always;
+}
+
+.corpo2{
+  width: 350px;
+  margin: 10px;
+  padding: 30px 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .botao-voltar{
@@ -25,7 +36,21 @@
   line-height: 1.2em;
 }
 
+.corpo2 span{
+  line-height: 1.2em;
+}
+
 .corpo small{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.corpo2 small{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,7 +64,16 @@
   margin-bottom: 5px;
 }
 
+.corpo2 hr{
+  margin-bottom: 5px;
+}
+
 .corpo img{
+  width: 90%;
+  filter: grayscale(1);
+}
+
+.corpo2 img{
   width: 90%;
   filter: grayscale(1);
 }

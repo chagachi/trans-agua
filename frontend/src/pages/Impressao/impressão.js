@@ -20,6 +20,8 @@ class Impressao extends Component {
     console.log(pedido.data)
 
     this.setState({ pedido: pedido.data})
+    window.print()
+
 }
 
     render() {
@@ -70,7 +72,7 @@ class Impressao extends Component {
 
               </div>
 
-              <div className='corpo'>
+              <div className='corpo2'>
               <div>
                 <img src={logo} alt='Trans Água' />
                 <hr></hr>
@@ -111,7 +113,6 @@ class Impressao extends Component {
 
               </div>
 
-            
             </>
         );
     }
