@@ -8,7 +8,7 @@ class PedidoSchema extends Schema {
     this.create('pedidos', (table) => {
       table.increments()
       // Empresa
-      table.integer('idEmpresa', 11).unsigned().references('id').inTable('cadastroempresas')
+      table.integer('idEmpresa', 11)
       table.string('empresa', 255)
       table.string('cnpj', 255)
       //Motorista
