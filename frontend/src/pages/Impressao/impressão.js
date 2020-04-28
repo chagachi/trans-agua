@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 import api from '../../services/api'
-import logo from '../../assets/logo.png'
+import logo from '../../assets/logo-13.png'
 import './impressao.css'
 
 
@@ -37,15 +37,17 @@ class Impressao extends Component {
                 <img src={logo} alt='Trans Água' />
                 <hr></hr>
                 <span><b>11 2295-2283 • 11 97018-0641</b></span><br/>
-                <span><b>ID:</b> 80*169522</span><br/>
+                <span className='bold'> <b>2657-4056</b></span><br/>
                 <span><b>CNPJ:</b> 03.636.689/0001-33</span><br/>
               </div>
+              <br/>
               <div className='meio'>
                 <div>
-                  <span><b>DATA:</b> {this.state.data}</span>
-                </div>
-                <div>
                   <span className='pedido'><b>Nº</b> {this.state.pedido.id}</span>
+                </div>
+                <br/>
+                <div>
+                  <span className='data'><b>DATA:</b> {this.state.data}</span>
                 </div>
               </div>
 
@@ -55,11 +57,13 @@ class Impressao extends Component {
               <div className='base'>
                 <p> <b>EMP:</b> {this.state.pedido.empresa} </p>
                 <p> <b>CNPJ:</b> {this.state.pedido.cnpj} </p>
-                <p> <b>END:</b> {this.state.pedido.localEntrega} </p>
+                <p> <b>END:</b> {this.state.pedido.localEntrega} </p><br/>
                 <p> <b>Entrada:</b> ______h______min.</p>
-                <p> <b>Saída:</b> ______h______min.</p>
-                <p> <b>Entrada Hid:</b> ______h______min.</p>
-                <p> <b>Saída Hid:</b> ______h______min.</p>
+                <p> <b>Saída:</b> ______h______min.</p><br/>
+                <p> <b>Entrada Hid:</b> </p>
+                <p>______________________</p>
+                <p> <b>Saída Hid:</b> </p>
+                <p>______________________</p><br/>
                 <p> <b>Local:</b> </p>
                 <p> <b>Quantidade:</b> {this.state.pedido.quantidadeCarga}m³</p>
                 <span> <b>Mot:</b> {this.state.pedido.motorista} -</span>
@@ -78,15 +82,17 @@ class Impressao extends Component {
                 <img src={logo} alt='Trans Água' />
                 <hr></hr>
                 <span><b>11 2295-2283 • 11 97018-0641</b></span><br/>
-                <span><b>ID:</b> 80*169522</span><br/>
+                <span className='bold'> <b>2657-4056</b></span><br/>
                 <span><b>CNPJ:</b> 03.636.689/0001-33</span><br/>
               </div>
+              <br/>
               <div className='meio'>
                 <div>
-                  <span><b>Nº</b> {this.state.pedido.id}</span>
+                  <span className='pedido'><b>Nº</b> {this.state.pedido.id}</span>
                 </div>
+                <br/>
                 <div>
-                  <span><b>DATA:</b> {this.state.pedido.created_at}</span>
+                  <span className='data'><b>DATA:</b> {this.state.data}</span>
                 </div>
               </div>
 
@@ -96,11 +102,13 @@ class Impressao extends Component {
               <div className='base'>
                 <p> <b>EMP:</b> {this.state.pedido.empresa} </p>
                 <p> <b>CNPJ:</b> {this.state.pedido.cnpj} </p>
-                <p> <b>END:</b> {this.state.pedido.localEntrega} </p>
+                <p> <b>END:</b> {this.state.pedido.localEntrega} </p><br/>
                 <p> <b>Entrada:</b> ______h______min.</p>
-                <p> <b>Saída:</b> ______h______min.</p>
-                <p> <b>Entrada Hid:</b> ______h______min.</p>
-                <p> <b>Saída Hid:</b> ______h______min.</p>
+                <p> <b>Saída:</b> ______h______min.</p><br/>
+                <p> <b>Entrada Hid:</b> </p>
+                <p>______________________</p>
+                <p> <b>Saída Hid:</b> </p>
+                <p>______________________</p><br/>
                 <p> <b>Local:</b> </p>
                 <p> <b>Quantidade:</b> {this.state.pedido.quantidadeCarga}m³</p>
                 <span> <b>Mot:</b> {this.state.pedido.motorista} -</span>
@@ -113,6 +121,8 @@ class Impressao extends Component {
               </div>
 
               </div>
+
+              
             </>
         );
     }
