@@ -81,7 +81,23 @@ class CadastroempresaController {
   async update ({ params, request, response, auth }) {
     if(auth.user.adm == 1){
 
-      const {nomefantasia, razaosocial, cnpj, ie, endereco, endereco1, numero, bairro, cidade, estado, telefone1, telefone2, email, site, valorfixo} = request.all()
+      const {
+        nomefantasia,
+        razaosocial,
+        cnpj,
+        ie,
+        endereco,
+        endereco1,
+        numero,
+        bairro,
+        cidade,
+        estado,
+        telefone1,
+        telefone2,
+        email,
+        site,
+        valorfixo
+      } = request.all()
       const empresa = await Cad.query().where('id', params.id).first()
 
       if(!empresa){
@@ -138,6 +154,18 @@ class CadastroempresaController {
     .select('id', 'nomefantasia', 'cnpj', 'endereco', 'valorFixo')
     .from('cadastroempresas')
     .orderBy('nomefantasia', 'asc')
+
+    return empresa
+
+  }
+
+  async search ({ params, request, response, auth }){
+
+    const { cnpj } = request.all()
+    const empresa = await Database
+    .select('id', 'nomefantasia', 'cnpj', 'endereco', 'valorFixo')
+    .from('cadastroempresas')
+    .where('cnpj', cnpj)
 
     return empresa
 

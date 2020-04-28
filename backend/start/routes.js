@@ -26,4 +26,5 @@ Route.resource('pedidosantigos', 'PedidosantigosController').apiOnly().middlewar
 
 Route.post('relatorio', 'PedidoController.range').middleware('auth')
 Route.get('/listarempresas', 'CadastroempresaController.list').middleware('auth')
+Route.post('/buscarempresa', 'CadastroempresaController.search').middleware('auth')
 Route.get('/listarmotoristas', 'FuncionarioController.list').middleware('auth')

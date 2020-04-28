@@ -13,13 +13,55 @@ class Clientes extends Component {
             clientes: [],
             lastPage: '',
             paginate: 1,
+            cnpj: "",
             adm: localStorage.getItem('adm'),
+            message: ""
         }
 
         this.delete = this.delete.bind(this)
         this.next = this.next.bind(this)
         this.back = this.back.bind(this)
         this.unique = this.unique.bind(this)
+    }
+
+    handleSubmit = async event => {
+        event.preventDefault()
+
+        const formatCNPJ = () => {
+            var cnpj = this.state.cnpj
+            let v = cnpj.replace(/\D/g,"")
+
+            //Coloca ponto entre o segundo e o terceiro dígitos
+            v=v.replace(/^(\d{2})(\d)/,"$1.$2")
+    
+            //Coloca ponto entre o quinto e o sexto dígitos
+            v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+    
+            //Coloca uma barra entre o oitavo e o nono dígitos
+            v=v.replace(/\.(\d{3})(\d)/,".$1/$2")
+    
+            //Coloca um hífen depois do bloco de quatro dígitos
+            v=v.replace(/(\d{4})(\d)/,"$1-$2")
+            console.log(v)
+            return v
+        }
+
+        const token = localStorage.getItem('token')
+        const busca = await api.post('buscarempresa', {
+            cnpj: formatCNPJ()
+        },
+        {headers: {'Authorization': `Bearer ${token}`}})
+        .then(res => {
+            let teste = res.data[0]
+            if (teste){
+                this.setState({cnpj: formatCNPJ()})
+                this.setState({clientes: [].concat(res.data[0])})
+            } else {
+                this.setState({message: 'erro'})         
+                this.setState({message: ""})         
+            }
+        })
+
     }
 
     async delete(e) {
@@ -157,6 +199,25 @@ class Clientes extends Component {
                                     <h3>Clientes Cadastrados</h3>
                                     <Link to='/clientes/novocliente'><span>Cadastrar Cliente</span></Link>
                                 </div>
+
+                                <form className='pesquisa' onSubmit={this.handleSubmit}>
+                                <label> Digite o cnpj da empresa.
+                                    <input 
+                                        type='text' 
+                                        name='cnpj' 
+                                        id='cnpj'
+                                        onChange={e => this.setState({cnpj: e.target.value})}
+                                        value={this.state.cnpj}
+                                    />
+                                </label>
+                                <input type="submit" value="Pesquisar" />
+                                </form>
+
+                                {
+                                    this.state.message !== ''? (
+                                        window.alert(this.state.message)
+                                    ) : ''
+                                }  
     
                                 <div className='tabs-clientes'>
                                     <span>EMPRESA</span>
@@ -210,6 +271,25 @@ class Clientes extends Component {
                             <div className='head'>
                                 <h3>Clientes Cadastrados</h3>
                             </div>
+
+                            <form className='pesquisa' onSubmit={this.handleSubmit}>
+                                <label> Digite o cnpj da empresa.
+                                    <input 
+                                        type='text' 
+                                        name='cnpj' 
+                                        id='cnpj'
+                                        onChange={e => this.setState({cnpj: e.target.value})}
+                                        value={this.state.cnpj}
+                                    />
+                                </label>
+                                <input type="submit" value="Pesquisar" />
+                            </form>
+
+                            {
+                                this.state.message !== ''? (
+                                    window.alert(this.state.message)
+                                ) : ''
+                            }
 
                             <div className='tabs-clientes'>
                                 <span>EMPRESA</span>
