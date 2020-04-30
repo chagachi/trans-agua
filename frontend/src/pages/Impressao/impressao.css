@@ -19,19 +19,6 @@
   text-align: center;
 }
 
-.botao-voltar{
-  padding: 20px 0;
-}
-
-.botao-voltar a{
-  text-decoration: none;
-  color: #fff;
-  padding: 5px 10px;
-  background: #0072FF;
-  border-radius: 5px;
-  margin: 10px 20px;
-}
-
 .corpo span{
   line-height: 1.2em;
   font-weight: bold;

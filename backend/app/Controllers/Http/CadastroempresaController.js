@@ -159,13 +159,25 @@ class CadastroempresaController {
 
   }
 
-  async search ({ params, request, response, auth }){
+  async searchCNPJ ({ params, request, response, auth }){
 
     const { cnpj } = request.all()
     const empresa = await Database
     .select('id', 'nomefantasia', 'cnpj', 'endereco', 'valorFixo')
     .from('cadastroempresas')
     .where('cnpj', cnpj)
+
+    return empresa
+
+  }
+
+  async searchNome ({ params, request, response, auth }){
+
+    const { nome } = request.all()
+    const empresa = await Database
+    .select('id', 'nomefantasia', 'cnpj', 'endereco', 'valorFixo')
+    .from('cadastroempresas')
+    .where('nomefantasia', 'LIKE', '%'+nome+'%')
 
     return empresa
 

@@ -13,7 +13,7 @@ class Clientes extends Component {
             clientes: [],
             lastPage: '',
             paginate: 1,
-            cnpj: "",
+            busca: "",
             adm: localStorage.getItem('adm'),
             message: ""
         }
@@ -27,40 +27,60 @@ class Clientes extends Component {
     handleSubmit = async event => {
         event.preventDefault()
 
-        const formatCNPJ = () => {
-            var cnpj = this.state.cnpj
-            let v = cnpj.replace(/\D/g,"")
+        if(isNaN(parseFloat(this.state.busca))){
+            
+            const token = localStorage.getItem('token')
+            const busca = await api.post('buscarnome', {
+                nome: this.state.busca
+            },
+            {headers: {'Authorization': `Bearer ${token}`}})
+            .then(res => {
+                let teste = res.data
+                if (teste){
+                    this.setState({clientes: [].concat(res.data)})
+                } else {
+                    this.setState({message: 'Não existe uma empresa com este nome.'})         
+                    this.setState({message: ""})         
+                }
+            })
 
-            //Coloca ponto entre o segundo e o terceiro dígitos
-            v=v.replace(/^(\d{2})(\d)/,"$1.$2")
-    
-            //Coloca ponto entre o quinto e o sexto dígitos
-            v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
-    
-            //Coloca uma barra entre o oitavo e o nono dígitos
-            v=v.replace(/\.(\d{3})(\d)/,".$1/$2")
-    
-            //Coloca um hífen depois do bloco de quatro dígitos
-            v=v.replace(/(\d{4})(\d)/,"$1-$2")
-            console.log(v)
-            return v
-        }
+        } else{
 
-        const token = localStorage.getItem('token')
-        const busca = await api.post('buscarempresa', {
-            cnpj: formatCNPJ()
-        },
-        {headers: {'Authorization': `Bearer ${token}`}})
-        .then(res => {
-            let teste = res.data[0]
-            if (teste){
-                this.setState({cnpj: formatCNPJ()})
-                this.setState({clientes: [].concat(res.data[0])})
-            } else {
-                this.setState({message: 'erro'})         
-                this.setState({message: ""})         
+            const formatCNPJ = () => {
+                var cnpj = this.state.busca
+                let v = cnpj.replace(/\D/g,"")
+                
+                //Coloca ponto entre o segundo e o terceiro dígitos
+                v=v.replace(/^(\d{2})(\d)/,"$1.$2")
+                
+                //Coloca ponto entre o quinto e o sexto dígitos
+                v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3")
+                
+                //Coloca uma barra entre o oitavo e o nono dígitos
+                v=v.replace(/\.(\d{3})(\d)/,".$1/$2")
+                
+                //Coloca um hífen depois do bloco de quatro dígitos
+                v=v.replace(/(\d{4})(\d)/,"$1-$2")
+                console.log(v)
+                return v
             }
-        })
+            
+            const token = localStorage.getItem('token')
+            const busca = await api.post('buscarcnpj', {
+                cnpj: formatCNPJ()
+            },
+            {headers: {'Authorization': `Bearer ${token}`}})
+            .then(res => {
+                let teste = res.data[0]
+                if (teste){
+                    this.setState({cnpj: formatCNPJ()})
+                    this.setState({clientes: [].concat(res.data[0])})
+                } else {
+                    this.setState({message: 'CNPJ não encontrado'})         
+                    this.setState({message: ""})         
+                }
+            })
+        }
 
     }
 
@@ -201,15 +221,15 @@ class Clientes extends Component {
                                 </div>
 
                                 <form className='pesquisa' onSubmit={this.handleSubmit}>
-                                <label> Digite o cnpj da empresa.
+                                
                                     <input 
                                         type='text' 
-                                        name='cnpj' 
-                                        id='cnpj'
-                                        onChange={e => this.setState({cnpj: e.target.value})}
-                                        value={this.state.cnpj}
+                                        name='busca' 
+                                        id='busca'
+                                        onChange={e => this.setState({busca: e.target.value})}
+                                        value={this.state.busca}
                                     />
-                                </label>
+                                
                                 <input type="submit" value="Pesquisar" />
                                 </form>
 
@@ -276,10 +296,10 @@ class Clientes extends Component {
                                 <label> Digite o cnpj da empresa.
                                     <input 
                                         type='text' 
-                                        name='cnpj' 
-                                        id='cnpj'
-                                        onChange={e => this.setState({cnpj: e.target.value})}
-                                        value={this.state.cnpj}
+                                        name='busca' 
+                                        id='buscas'
+                                        onChange={e => this.setState({busca: e.target.value})}
+                                        value={this.state.busca}
                                     />
                                 </label>
                                 <input type="submit" value="Pesquisar" />

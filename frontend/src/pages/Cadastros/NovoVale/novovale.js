@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import Menu from '../../../components/Header'
 import api from '../../../services/api'
+import Select from 'react-select'
 
 import './novovale.css'
 
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ]
 
 class NovoVale extends Component {
 
@@ -24,6 +30,7 @@ class NovoVale extends Component {
             message: '',
             empresas: [],
             motoristas: [],
+            selectedOption: null,
         }
 
         this.change = this.change.bind(this)
@@ -41,6 +48,19 @@ class NovoVale extends Component {
         {headers: {'Authorization': `Bearer ${token}`}})
 
         this.setState({ empresas: user.data, motoristas: moto.data})
+    }
+
+    handleChange = selectedOption => {
+        this.setState({ selectedOption })
+        console.log(`Option selected:`, selectedOption)
+
+        this.setState({
+            empresa: selectedOption.label,
+            cnpj: selectedOption.cnpj, 
+            idEmpresa: selectedOption.key, 
+            localEntrega: selectedOption.endereco,
+            valorUnitario: selectedOption.valor
+        })
     }
 
     handleSubmit = async event => {
@@ -110,6 +130,9 @@ class NovoVale extends Component {
     }
 
 render() {
+
+    const { selectedOption } = this.state
+
       return(
           <>
           <div className='geral'>
@@ -120,7 +143,6 @@ render() {
               <div className='content'>
                   <header>
                       <span>Painel de Controle > Vales > <strong> Emitir Vale </strong></span>
-                      <span>Olá Felipe Marcondes</span>
                   </header>
 
                   <div className='top'></div>
@@ -132,7 +154,7 @@ render() {
                                 ) : ''
                             }
                           <h3>Selecione a Empresa</h3>
-                          <select 
+                          {/* <select 
                           id='empresa'    
                           onChange={this.change}
                           value={this.state.empresa}>
@@ -141,7 +163,8 @@ render() {
                           id='1' 
                           value='' 
                           disabled 
-                          selected> Selecione a empresa</option>
+                          selected > 
+                          Selecione a empresa</option>
                             {this.state.empresas.map(post => (
                                 
                                 <option 
@@ -152,7 +175,22 @@ render() {
                                 endereco={post.endereco}
                                 id={post.id}> {post.nomefantasia} </option>
                             ))}
-                          </select>
+                          </select> */}
+                          <Select 
+                          value={selectedOption}
+                          onChange={this.handleChange}
+                          options={this.state.empresas.map(post => (
+                            { 
+                                key: `${post.id}`, 
+                                label: `${post.nomefantasia}`,
+                                cnpj: `${post.cnpj}`,
+                                valor: `${post.valorFixo}`,
+                                endereco: `${post.endereco}`,
+                            }
+                            ))}
+                          placeholder='Selecione a empresa'
+                          isSearchable={true}
+                          />
                       </div>
 
                       <div>
@@ -224,13 +262,13 @@ render() {
                               />
                           </label>
                           <label> Total
-                              <input 
+                              <p 
                               type='text' 
                               name='total' 
                               id='total'
                               onChange={e => this.setState({totalLiquido: e.target.value})}
                               value={this.state.totalLiquido}
-                              />
+                              >{this.state.totalLiquido}</p>
                           </label>
                           <label> Observação
                               <input 

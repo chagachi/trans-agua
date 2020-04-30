@@ -73,31 +73,27 @@ header{
 .pesquisa {
     width: 100%;
     padding: 1% 2%;
-}
-
-.pesquisa label {
-    width: 24%;
-    margin-right: 2%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .pesquisa input[type=text]{
-    width: 45%;
-    margin: 0 3%;
+    width: 60%;
     border: 1px solid #33333350;
-    height: 30px;
+    height: 35px;
     border-radius: 4px;
     padding: 0 5px;
 }
 
 .pesquisa input[type=submit]{
-    width: 24%;
+    width: 35%;
     color: #ffffff;
     font-size: 1em;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
     letter-spacing: 0.1em;
-    padding: 5px 0;
+    height: 35px;
     background: #0076FF;
     border: 2px solid #0076FF;
     border-radius: 4px;
