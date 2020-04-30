@@ -64,3 +64,53 @@ Stacktrace:   em System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInter
 2020-04-01 08:55:27 - Finished transaguabackend.exe
 2020-04-01 08:55:29 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2020-04-01 08:55:29 - Started 9636
+2020-04-01 09:28:57 - Stopping transaguabackend.exe
+2020-04-01 09:28:57 - ProcessKill 9636
+2020-04-01 09:28:57 - Found child process: 5260 Name: conhost.exe
+2020-04-01 09:28:57 - Found child process: 4196 Name: node.exe
+2020-04-01 09:28:57 - Stopping process 5260
+2020-04-01 09:28:57 - Send SIGINT 5260
+2020-04-01 09:28:57 - SIGINT to 5260 failed - Killing as fallback
+2020-04-01 09:28:57 - Stopping process 4196
+2020-04-01 09:28:57 - Send SIGINT 4196
+2020-04-01 09:28:57 - SIGINT to 4196 failed - Killing as fallback
+2020-04-01 09:28:57 - Stopping process 9636
+2020-04-01 09:28:57 - Send SIGINT 9636
+2020-04-01 09:28:57 - SIGINT to 9636 failed - Killing as fallback
+2020-04-01 09:28:57 - Finished transaguabackend.exe
+2020-04-01 09:29:00 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-01 09:29:00 - Started 3540
+2020-04-04 03:44:34 - Stopping transaguabackend.exe
+2020-04-04 03:44:34 - ProcessKill 3540
+2020-04-04 03:44:35 - Shutdown exception
+Message:O sistema está sendo desligado.
+
+Stacktrace:   em System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   em System.Management.ManagementScope.InitializeGuts(Object o)
+   em System.Management.ManagementScope.Initialize()
+   em System.Management.ManagementObjectSearcher.Initialize()
+   em System.Management.ManagementObjectSearcher.Get()
+   em winsw.WrapperService.GetChildPids(Int32 pid)
+   em winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   em winsw.WrapperService.StopIt()
+   em winsw.WrapperService.OnShutdown()
+2020-04-04 03:48:40 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-04 03:48:40 - Started 1236
+2020-04-18 19:53:53 - Stopping transaguabackend.exe
+2020-04-18 19:53:53 - ProcessKill 1236
+2020-04-18 19:53:54 - Shutdown exception
+Message:O sistema está sendo desligado.
+
+Stacktrace:   em System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInternal(Int32 errorCode, IntPtr errorInfo)
+   em System.Management.ManagementScope.InitializeGuts(Object o)
+   em System.Management.ManagementScope.Initialize()
+   em System.Management.ManagementObjectSearcher.Initialize()
+   em System.Management.ManagementObjectSearcher.Get()
+   em winsw.WrapperService.GetChildPids(Int32 pid)
+   em winsw.WrapperService.StopProcessAndChildren(Int32 pid)
+   em winsw.WrapperService.StopIt()
+   em winsw.WrapperService.OnShutdown()
+2020-04-18 19:58:03 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-18 19:58:03 - Started 2748
+2020-04-26 04:50:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-26 04:50:47 - Started 5316

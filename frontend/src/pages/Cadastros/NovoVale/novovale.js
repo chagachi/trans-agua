@@ -5,11 +5,7 @@ import Select from 'react-select'
 
 import './novovale.css'
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' },
-  ]
+
 
 class NovoVale extends Component {
 
@@ -269,15 +265,6 @@ render() {
                               onChange={e => this.setState({totalLiquido: e.target.value})}
                               value={this.state.totalLiquido}
                               >{this.state.totalLiquido}</p>
-                          </label>
-                          <label> Observação
-                              <input 
-                              type='text' 
-                              name='observacao' 
-                              id='observacao'
-                              onChange={e => this.setState({observacao: e.target.value})}
-                              value={this.state.observacao}
-                              />
                           </label>
 
                           <input className='botao' type='submit' value='Emitir vale' />

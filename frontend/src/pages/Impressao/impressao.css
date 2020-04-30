@@ -21,12 +21,10 @@
 
 .corpo span{
   line-height: 1.2em;
-  font-weight: bold;
 }
 
 .corpo2 span{
   line-height: 1.2em;
-  font-weight: bold;
 }
 
 .corpo small{
@@ -36,7 +34,6 @@
   text-align: center;
   margin-top: 5px;
   font-size: 15px;
-  font-weight: bold;
 }
 
 .corpo2 small{
@@ -46,7 +43,6 @@
   text-align: center;
   margin-top: 5px;
   font-size: 15px;
-  font-weight: bold;
 }
 
 .corpo hr{
@@ -71,27 +67,52 @@
   display: flex !important;
   justify-content: space-between !important;
   flex-direction: column;
-  font-weight: bold;
 }
 
 .meio .pedido{
-  font-size: 1.3em;
+  font-size: 1.2em;
+  float: left;
+}
+
+.meio .data{
+  float: right;
 }
 
 .base{
   text-align: left;
-  font-weight: bold;
 }
 
 .base p {
   line-height: 2em;
 }
 
+/* .base p strong{
+  font-weight: bold;
+} */
+
 @media print {
-  .botao-voltar{
-    display: none;
+  *{
+    font: 13pt Verdana !important;
+    font-weight: bold !important;
   }
-  header{
-    display: none;
+
+  .base p {
+    font-weight: 400 !important;
+  }
+
+  .bold{
+    font-weight: bold;
+  }
+
+  .meio .pedido, .meio .data{
+    font-weight: 400 !important;
+  }
+
+  .corpo span{
+    font-weight: 400 !important;
+  }
+  
+  .corpo2 span{
+    font-weight: 400 !important;
   }
 }
