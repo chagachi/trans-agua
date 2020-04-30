@@ -114,3 +114,111 @@ Stacktrace:   em System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInter
 2020-04-18 19:58:03 - Started 2748
 2020-04-26 04:50:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2020-04-26 04:50:47 - Started 5316
+2020-04-30 11:54:40 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 11:54:40 - Started 6852
+2020-04-30 11:55:45 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 11:55:45 - Started 4136
+2020-04-30 11:56:48 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 11:56:48 - Started 2592
+2020-04-30 11:57:52 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 11:57:52 - Started 9604
+2020-04-30 11:58:56 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 11:58:56 - Started 7176
+2020-04-30 12:00:00 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:00:00 - Started 8644
+2020-04-30 12:01:03 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:01:03 - Started 10136
+2020-04-30 12:02:07 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:02:07 - Started 9864
+2020-04-30 12:03:11 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:03:11 - Started 1988
+2020-04-30 12:04:15 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:04:15 - Started 7896
+2020-04-30 12:05:18 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:05:18 - Started 7932
+2020-04-30 12:06:22 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:06:22 - Started 8300
+2020-04-30 12:07:26 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:07:26 - Started 4592
+2020-04-30 12:08:30 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:08:30 - Started 3292
+2020-04-30 12:09:34 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:09:34 - Started 9720
+2020-04-30 12:10:38 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:10:38 - Started 8396
+2020-04-30 12:11:41 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:11:41 - Started 10268
+2020-04-30 12:12:45 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:12:46 - Started 11016
+2020-04-30 12:13:49 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:13:49 - Started 10336
+2020-04-30 12:14:53 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:14:53 - Started 10916
+2020-04-30 12:15:57 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:15:57 - Started 8588
+2020-04-30 12:17:01 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:17:01 - Started 8496
+2020-04-30 12:18:05 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:18:05 - Started 10592
+2020-04-30 12:19:08 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:19:08 - Started 6616
+2020-04-30 12:20:12 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:20:12 - Started 1128
+2020-04-30 12:21:16 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:21:16 - Started 9524
+2020-04-30 12:22:20 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:22:20 - Started 7492
+2020-04-30 12:23:24 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:23:24 - Started 10636
+2020-04-30 12:24:28 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:24:28 - Started 9640
+2020-04-30 12:25:31 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:25:31 - Started 4752
+2020-04-30 12:26:35 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:26:35 - Started 9880
+2020-04-30 12:27:39 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:27:39 - Started 4056
+2020-04-30 12:28:42 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:28:42 - Started 1128
+2020-04-30 12:29:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:29:47 - Started 10448
+2020-04-30 12:30:51 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:30:51 - Started 7016
+2020-04-30 12:31:54 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:31:54 - Started 5880
+2020-04-30 12:32:58 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:32:58 - Started 3864
+2020-04-30 12:33:19 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:33:19 - Started 5596
+2020-04-30 12:34:02 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:34:02 - Started 4164
+2020-04-30 12:34:23 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:34:23 - Started 9832
+2020-04-30 12:34:41 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:34:41 - Started 11132
+2020-04-30 12:34:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:34:47 - Started 10344
+2020-04-30 12:34:53 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:34:53 - Started 2316
+2020-04-30 12:35:06 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:35:06 - Started 4016
+2020-04-30 12:35:26 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:35:26 - Started 5888
+2020-04-30 12:35:45 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:35:45 - Started 4016
+2020-04-30 12:40:33 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:40:33 - Started 6552
+2020-04-30 12:40:48 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:40:48 - Started 2748
+2020-04-30 12:41:39 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:41:39 - Started 7064
+2020-04-30 12:41:52 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:41:52 - Started 1584
+2020-04-30 12:42:43 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:42:43 - Started 7004
+2020-04-30 12:42:55 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:42:55 - Started 8684
+2020-04-30 12:43:47 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:43:47 - Started 5660
+2020-04-30 12:43:59 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-04-30 12:43:59 - Started 8884
