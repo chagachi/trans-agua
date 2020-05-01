@@ -222,3 +222,67 @@ Stacktrace:   em System.Runtime.InteropServices.Marshal.ThrowExceptionForHRInter
 2020-04-30 12:43:47 - Started 5660
 2020-04-30 12:43:59 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
 2020-04-30 12:43:59 - Started 8884
+2020-05-01 08:58:52 - Stopping transaguabackend.exe
+2020-05-01 08:58:52 - ProcessKill 8884
+2020-05-01 08:58:52 - Found child process: 2480 Name: conhost.exe
+2020-05-01 08:58:52 - Found child process: 5584 Name: node.exe
+2020-05-01 08:58:52 - Stopping process 2480
+2020-05-01 08:58:52 - Send SIGINT 2480
+2020-05-01 08:58:52 - SIGINT to 2480 failed - Killing as fallback
+2020-05-01 08:58:52 - Stopping process 5584
+2020-05-01 08:58:52 - Send SIGINT 5584
+2020-05-01 08:58:52 - SIGINT to 5584 failed - Killing as fallback
+2020-05-01 08:58:52 - Stopping process 8884
+2020-05-01 08:58:52 - Send SIGINT 8884
+2020-05-01 08:58:52 - SIGINT to 8884 failed - Killing as fallback
+2020-05-01 08:58:52 - Finished transaguabackend.exe
+2020-05-01 08:58:56 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-05-01 08:58:56 - Started 11768
+2020-05-01 09:02:00 - Stopping transaguabackend.exe
+2020-05-01 09:02:00 - ProcessKill 11768
+2020-05-01 09:02:00 - Found child process: 11788 Name: conhost.exe
+2020-05-01 09:02:00 - Found child process: 11880 Name: node.exe
+2020-05-01 09:02:00 - Stopping process 11788
+2020-05-01 09:02:00 - Send SIGINT 11788
+2020-05-01 09:02:00 - SIGINT to 11788 failed - Killing as fallback
+2020-05-01 09:02:01 - Stopping process 11880
+2020-05-01 09:02:01 - Send SIGINT 11880
+2020-05-01 09:02:01 - SIGINT to 11880 failed - Killing as fallback
+2020-05-01 09:02:01 - Stopping process 11768
+2020-05-01 09:02:01 - Send SIGINT 11768
+2020-05-01 09:02:01 - SIGINT to 11768 failed - Killing as fallback
+2020-05-01 09:02:01 - Finished transaguabackend.exe
+2020-05-01 09:02:02 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-05-01 09:02:02 - Started 11200
+2020-05-01 09:03:01 - Stopping transaguabackend.exe
+2020-05-01 09:03:01 - ProcessKill 11200
+2020-05-01 09:03:01 - Found child process: 4516 Name: conhost.exe
+2020-05-01 09:03:01 - Found child process: 12140 Name: node.exe
+2020-05-01 09:03:01 - Stopping process 4516
+2020-05-01 09:03:01 - Send SIGINT 4516
+2020-05-01 09:03:01 - SIGINT to 4516 failed - Killing as fallback
+2020-05-01 09:03:01 - Stopping process 12140
+2020-05-01 09:03:01 - Send SIGINT 12140
+2020-05-01 09:03:01 - SIGINT to 12140 failed - Killing as fallback
+2020-05-01 09:03:01 - Stopping process 11200
+2020-05-01 09:03:01 - Send SIGINT 11200
+2020-05-01 09:03:01 - SIGINT to 11200 failed - Killing as fallback
+2020-05-01 09:03:01 - Finished transaguabackend.exe
+2020-05-01 09:03:03 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-05-01 09:03:03 - Started 8612
+2020-05-01 09:14:47 - Stopping transaguabackend.exe
+2020-05-01 09:14:47 - ProcessKill 8612
+2020-05-01 09:14:47 - Found child process: 11228 Name: conhost.exe
+2020-05-01 09:14:47 - Found child process: 1104 Name: node.exe
+2020-05-01 09:14:47 - Stopping process 11228
+2020-05-01 09:14:47 - Send SIGINT 11228
+2020-05-01 09:14:47 - SIGINT to 11228 failed - Killing as fallback
+2020-05-01 09:14:47 - Stopping process 1104
+2020-05-01 09:14:47 - Send SIGINT 1104
+2020-05-01 09:14:47 - SIGINT to 1104 failed - Killing as fallback
+2020-05-01 09:14:47 - Stopping process 8612
+2020-05-01 09:14:47 - Send SIGINT 8612
+2020-05-01 09:14:47 - SIGINT to 8612 failed - Killing as fallback
+2020-05-01 09:14:47 - Finished transaguabackend.exe
+2020-05-01 09:14:48 - Starting C:\Program Files\nodejs\node.exe  --harmony C:\Users\SERVIDOR\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js --file C:\Users\SERVIDOR\Documents\transagua\backend\server.js --scriptoptions= --log "transagua-backend wrapper" --grow 0.25 --wait 1 --maxrestarts 3 --abortonerror n --stopparentfirst undefined
+2020-05-01 09:14:48 - Started 11820

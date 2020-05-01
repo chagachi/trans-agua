@@ -162,7 +162,7 @@ handleSubmit = async event => {
                                   value={this.state.ie}
                                   />
                               </label>
-                              <label> Endereço 1
+                              <label> Endereço de Cobrança
                                   <input 
                                   type='text' 
                                   name='endereco' 
@@ -180,7 +180,7 @@ handleSubmit = async event => {
                                   value={this.state.numero}
                                   />
                               </label>
-                              <label> Endereço 2
+                              <label> Endereço de Entrega
                                   <input 
                                   type='text' 
                                   name='endereco1' 

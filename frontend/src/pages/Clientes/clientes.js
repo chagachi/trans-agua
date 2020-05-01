@@ -210,7 +210,6 @@ class Clientes extends Component {
                     <div className='content'>
                         <header>
                             <span>Painel de Controle ><strong> Clientes</strong></span>
-                            <span>Olá Felipe Marcondes</span>
                         </header>
     
                         <div className='top'></div>
@@ -283,7 +282,6 @@ class Clientes extends Component {
                 <div className='content'>
                     <header>
                         <span>Painel de Controle ><strong> Clientes</strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>
@@ -293,17 +291,17 @@ class Clientes extends Component {
                             </div>
 
                             <form className='pesquisa' onSubmit={this.handleSubmit}>
-                                <label> Digite o cnpj da empresa.
+                                
                                     <input 
                                         type='text' 
                                         name='busca' 
-                                        id='buscas'
+                                        id='busca'
                                         onChange={e => this.setState({busca: e.target.value})}
                                         value={this.state.busca}
                                     />
-                                </label>
+                                
                                 <input type="submit" value="Pesquisar" />
-                            </form>
+                                </form>
 
                             {
                                 this.state.message !== ''? (

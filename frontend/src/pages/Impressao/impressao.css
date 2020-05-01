@@ -33,7 +33,7 @@
   justify-content: center;
   text-align: center;
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .corpo2 small{
@@ -42,7 +42,7 @@
   justify-content: center;
   text-align: center;
   margin-top: 5px;
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .corpo hr{
@@ -70,7 +70,7 @@
 }
 
 .meio .pedido{
-  font-size: 1.2em;
+  font-size: 1.1em;
   float: left;
 }
 
@@ -92,7 +92,7 @@
 
 @media print {
   *{
-    font: 13pt Verdana !important;
+    font: 11pt Verdana !important;
     font-weight: bold !important;
   }
 

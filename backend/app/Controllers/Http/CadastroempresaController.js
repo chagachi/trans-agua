@@ -151,7 +151,7 @@ class CadastroempresaController {
   async list ({ params, request, response, auth }){
 
     const empresa = await Database
-    .select('id', 'nomefantasia', 'cnpj', 'endereco', 'valorFixo')
+    .select('id', 'nomefantasia', 'cnpj', 'endereco1', 'valorFixo')
     .from('cadastroempresas')
     .orderBy('nomefantasia', 'asc')
 

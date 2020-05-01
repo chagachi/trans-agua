@@ -39,6 +39,7 @@ class NovoVale extends Component {
         const token = localStorage.getItem('token')
         const user = await api.get(`listarempresas`, 
         {headers: {'Authorization': `Bearer ${token}`}})
+        console.log(user)
 
         const moto = await api.get('listarmotoristas',
         {headers: {'Authorization': `Bearer ${token}`}})
@@ -125,9 +126,15 @@ class NovoVale extends Component {
                 
     }
 
+    
+
 render() {
 
     const { selectedOption } = this.state
+
+    // if (this.state.empresa == "") {
+    //     document.querySelector('#enviar').style.display = "none"
+    // }
 
       return(
           <>
@@ -181,7 +188,7 @@ render() {
                                 label: `${post.nomefantasia}`,
                                 cnpj: `${post.cnpj}`,
                                 valor: `${post.valorFixo}`,
-                                endereco: `${post.endereco}`,
+                                endereco: `${post.endereco1}`,
                             }
                             ))}
                           placeholder='Selecione a empresa'
@@ -192,22 +199,22 @@ render() {
                       <div>
                         <form className='novovale' onSubmit={this.handleSubmit}>
                           <label> Empresa
-                              <input 
+                              <p 
                               type='text' 
                               name='empresa' 
                               id='empresa'
                               onChange={e => this.setState({empresa: e.target.value})}
                               value={this.state.empresa}
-                              />
+                              >{this.state.empresa}</p>
                           </label>
                           <label>CNPJ
-                              <input 
+                              <p 
                               type='text' 
                               name='cnpj' 
                               id='cnpj'
                               onChange={e => this.setState({cnpj: e.target.value})}
                               value={this.state.cnpj}
-                              />
+                              >{this.state.cnpj}</p>
                           </label>
                           <label>Motorista
                               <select 
@@ -239,13 +246,13 @@ render() {
                               />
                           </label>
                           <label> Local de Entrega
-                              <input 
+                              <p 
                               type='text' 
                               name='numero' 
                               id='localEntrega'
                               onChange={e => this.setState({localEntrega: e.target.value})}
                               value={this.state.localEntrega}
-                              />
+                              >{this.state.localEntrega}</p>
                           </label>
                           <label> Quantidade de Carga
                               <input 
@@ -267,7 +274,18 @@ render() {
                               >{this.state.totalLiquido}</p>
                           </label>
 
-                          <input className='botao' type='submit' value='Emitir vale' />
+                          {
+                                this.state.empresa !== '' 
+                                && this.state.motorista !== '' 
+                                && this.state.placa !== '' 
+                                && this.state.quantidadeCarga !== ''
+                                && this.state.totalLiquido !== ''
+                                ? (
+                                    <input className='botao' type='submit' value='Emitir vale' id='enviar'/>
+                                ) : ''
+                        }
+
+                          
                         </form>
                       </div>
                   </div>
