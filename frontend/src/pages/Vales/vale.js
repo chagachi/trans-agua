@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import Menu from '../../components/Header'
 import api from '../../services/api'
 import './vales.css'
+
+import "react-datepicker/dist/react-datepicker.css";
+import pt from 'date-fns/locale/pt-BR';
 
 
 class Vales extends Component {
@@ -22,9 +26,11 @@ class Vales extends Component {
         quantidadeCarga: '',
         totalLiquido: '',
         observacao: '',
+        startDate: '',
         message: '',
         empresas: [],
         motoristas: [],
+        adm: localStorage.getItem('adm'),
     }
 
     this.change = this.change.bind(this)
@@ -47,6 +53,8 @@ async componentDidMount(params){
 
     const data = pedido.data
 
+    console.log(data.created_at)
+
     this.setState({ 
       id: data.id,
       idEmpresa: data.idEmpresa,
@@ -60,6 +68,7 @@ async componentDidMount(params){
       quantidadeCarga: data.quantidadeCarga,
       totalLiquido: data.totalLiquido,
       observacao: data.observacao,
+      data: data.created_at,
       empresas: user.data, 
       motoristas: moto.data
     })
@@ -68,21 +77,26 @@ async componentDidMount(params){
 handleSubmit = async event => {
     event.preventDefault()
 
-    const token = localStorage.getItem('token')
-    const pedido = await api.put(`pedido/${this.state.id}`, 
-    {
-        idEmpresa: this.state.idEmpresa, 
-        empresa: this.state.empresa,
-        cnpj: this.state.cnpj,
-        idMotorista: this.state.idMotorista,
-        motorista: this.state.motorista,
-        placa: this.state.placa,
-        localEntrega: this.state.localEntrega,
-        valorUnitario: this.state.valorUnitario,
-        quantidadeCarga: this.state.quantidadeCarga,
-        totalLiquido: this.state.totalLiquido,
-        observacao: this.state.observacao,
-    },{
+    if (this.state.startDate !== ''){
+        const start = this.state.startDate.toLocaleDateString()
+        const startsplit = start.split('/').reverse().join('/')
+
+        const token = localStorage.getItem('token')
+        const pedido = await api.put(`pedido/${this.state.id}`, 
+        {
+            idEmpresa: this.state.idEmpresa, 
+            empresa: this.state.empresa,
+            cnpj: this.state.cnpj,
+            idMotorista: this.state.idMotorista,
+            motorista: this.state.motorista,
+            placa: this.state.placa,
+            localEntrega: this.state.localEntrega,
+            valorUnitario: this.state.valorUnitario,
+            quantidadeCarga: this.state.quantidadeCarga,
+            totalLiquido: this.state.totalLiquido,
+            observacao: this.state.observacao,
+            create: `${startsplit} 12:00:00`,
+        },{
         headers: {'Authorization': `Bearer ${token}`}
     })
     .then(res => {
@@ -93,6 +107,36 @@ handleSubmit = async event => {
         
     })
     .catch(e => this.setState({message: `${e}`}))
+
+    } else{
+
+        const token = localStorage.getItem('token')
+        const pedido = await api.put(`pedido/${this.state.id}`, 
+        {
+            idEmpresa: this.state.idEmpresa, 
+            empresa: this.state.empresa,
+            cnpj: this.state.cnpj,
+            idMotorista: this.state.idMotorista,
+            motorista: this.state.motorista,
+            placa: this.state.placa,
+            localEntrega: this.state.localEntrega,
+            valorUnitario: this.state.valorUnitario,
+            quantidadeCarga: this.state.quantidadeCarga,
+            totalLiquido: this.state.totalLiquido,
+            observacao: this.state.observacao,
+        },{
+        headers: {'Authorization': `Bearer ${token}`}
+    })
+    .then(res => {
+        this.setState({message: 'Vale emitido com sucesso!'})
+        this.props.history.push({
+            pathname: '/impressao', 
+            state:{id: res.data.id}})
+        
+    })
+    .catch(e => this.setState({message: `${e}`}))
+
+    }
 }
 
 change(event){
@@ -270,6 +314,21 @@ carga(event){
                                 value={this.state.observacao}
                                 />
                             </label>
+
+                            {
+                                this.state.adm == 1? (
+                                    <label> Data
+                                        <Datepicker 
+                                            selected={this.state.startDate}
+                                            dateFormat="dd/MM/yyyy"
+                                            locale="pt-BR"
+                                            onChange={date => this.setState({startDate: date})}
+                                        />
+                                    </label>
+                                ) : ''
+                            }
+
+                            
 
                             <input className='botao' type='submit' value='Salvar' />
                           </form>

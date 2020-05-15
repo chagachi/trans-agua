@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import api from '../../services/api'
 import Menu from '../../components/Header'
 import './relatorios.css'
+import Select from 'react-select'
 
 import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt-BR';
@@ -16,10 +17,13 @@ class Relatorios extends Component {
         this.state = {
             pedido: [],
             moto: [],
+            empresas: [],
+            empresa: '',
             motorista: '',
             total: '0',
             startDate: new Date(),
             finalDate: new Date(),
+            selectedOption: null,
         }
 
         this.moto = this.moto.bind(this)
@@ -32,7 +36,11 @@ class Relatorios extends Component {
         const moto = await api.get('listarmotoristas', 
         {headers: {Authorization: `Bearer ${token}`}})
 
-        this.setState({ moto: moto.data })
+        const user = await api.get(`listarempresas`, 
+        {headers: {'Authorization': `Bearer ${token}`}})
+
+        this.setState({ empresas: user.data, moto: moto.data})
+        
     }
 
     moto(event){
@@ -61,6 +69,7 @@ class Relatorios extends Component {
             startDate: `${startsplit} 00:00:00`, 
             finalDate: `${finalsplit} 23:59:59`,
             motorista: this.state.motorista,
+            nomeEmpresa: this.state.empresa,
         },{
             headers: {'Authorization': `Bearer ${token}`}
         })
@@ -68,8 +77,20 @@ class Relatorios extends Component {
         this.setState({pedido: relatorio.data, total: relatorio.data.length})
         console.log(relatorio.data)
     }
+
+    handleChange = selectedOption => {
+        this.setState({ selectedOption })
+        console.log(`Option selected:`, selectedOption)
+
+        this.setState({
+            empresa: selectedOption.label,
+        })
+    }
     
     render() {
+
+        const { selectedOption } = this.state
+
         return(
             <>
             <div className='geral'>
@@ -80,17 +101,15 @@ class Relatorios extends Component {
                 <div className='content'>
                     <header>
                         <span>Painel de Controle ><strong> Clientes</strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>
                     <div className='main'>
                             <div className='head'>
                                 <h3>Gerar Relatório</h3>
-                                <Link to='/motoristas/novomotorista'><span>Cadastrar Motorista</span></Link>
                             </div>
 
-                            <form className='form' onSubmit={this.handleSubmit}>
+                            <form className='form-rel' onSubmit={this.handleSubmit}>
                                 <label> Data de Inicio
                                     <Datepicker 
                                     selected={this.state.startDate}
@@ -128,6 +147,24 @@ class Relatorios extends Component {
                                         id={moto.id}> {moto.nome} </option>
                                         ))}
                                     </select>
+                                </label>
+
+                                <label>Selecione a Empresa
+                                    <Select 
+                                        value={selectedOption}
+                                        onChange={this.handleChange}
+                                        options={this.state.empresas.map(post => (
+                                            { 
+                                                key: `${post.id}`, 
+                                                label: `${post.nomefantasia}`,
+                                                cnpj: `${post.cnpj}`,
+                                                valor: `${post.valorFixo}`,
+                                                endereco: `${post.endereco1}`,
+                                            }
+                                            ))}
+                                        placeholder='Selecione a empresa'
+                                        isSearchable={true}
+                                    />
                                 </label>
                                 
                                 <input class='botao' type='submit' name='Buscar' value='Buscar' />
