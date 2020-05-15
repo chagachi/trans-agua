@@ -260,7 +260,7 @@ render() {
                               name='quantidadeCarga' 
                               id='quantidadeCarga'
                               onChange={e => this.setState({quantidadeCarga: e.target.value})}
-                              onBlur={this.carga}
+                              onKeyUp={this.carga}
                               value={this.state.quantidadeCarga}
                               />
                           </label>

@@ -49,7 +49,7 @@ class CadastroempresaController {
       }
     response.status(300).send({message:'Você não tem privilégios administrativos.'})
     } catch(err){
-        return response.status(500).send({ error: `Erro: ${err.message}` })
+        return response.status(500).send({ error: `Erro: ${err.message} teste` })
     }
   }
 

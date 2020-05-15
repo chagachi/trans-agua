@@ -32,20 +32,20 @@ class NovoCliente extends Component {
         const token = localStorage.getItem('token')
         const empresa = await api.post(`empresa`, 
         {
-            nomefantasia: this.state.nomefantasia, 
-            razaosocial: this.state.razaosocial,
-            cnpj: this.state.cnpj,
-            ie: this.state.ie,
-            endereco: this.state.endereco,
-            endereco1: this.state.endereco1,
-            numero: this.state.numero,
-            bairro: this.state.bairro,
-            cidade: this.state.cidade,
-            estado: this.state.estado,
-            telefone1: this.state.telefone1,
-            telefone2: this.state.telefone2,
-            email: this.state.email,
-            site: this.state.site,
+            nomefantasia: this.state.nomefantasia || 'não tem', 
+            razaosocial: this.state.razaosocial || 'não tem',
+            cnpj: this.state.cnpj || 'não tem',
+            ie: this.state.ie || 'não tem',
+            endereco: this.state.endereco || 'não tem',
+            endereco1: this.state.endereco1 || 'não tem',
+            numero: this.state.numero || 'não tem',
+            bairro: this.state.bairro || 'não tem',
+            cidade: this.state.cidade || 'não tem',
+            estado: this.state.estado || 'não tem',
+            telefone1: this.state.telefone1 || 'não tem',
+            telefone2: this.state.telefone2 || 'não tem',
+            email: this.state.email || 'não tem',
+            site: this.state.site || 'não tem',
             valorfixo: this.state.valorfixo,
         },{
             headers: {'Authorization': `Bearer ${token}`}
@@ -54,7 +54,10 @@ class NovoCliente extends Component {
             this.setState({message: 'Empresa cadastrada com sucesso!'})
             this.props.history.push('/clientes')
         })
-        .catch(e => this.setState({message: `${e}`}))
+        .catch(e => {
+            this.setState( { message: `${e} teste` } )
+            this.setState( { message: '' } )
+        })
     }
 
   render() {
@@ -121,7 +124,7 @@ class NovoCliente extends Component {
                               value={this.state.ie}
                               />
                           </label>
-                          <label> Endereço 1
+                          <label> Endereço de Cobrança
                               <input 
                               type='text' 
                               name='endereco' 
@@ -139,7 +142,7 @@ class NovoCliente extends Component {
                               value={this.state.numero}
                               />
                           </label>
-                          <label> Endereço 2
+                          <label> Endereço de Entrega
                               <input 
                               type='text' 
                               name='endereco1' 
