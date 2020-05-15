@@ -34,9 +34,9 @@ class PedidoController {
 
   async range ({ request, response, params, auth}) {
 
-    const { startDate, finalDate, motorista } = request.all()
+    const { startDate, finalDate, motorista, nomeEmpresa } = request.all()
 
-    if(motorista == null){
+    if(motorista == null && nomeEmpresa == null){
       const empresa = await Database
         .select('id','empresa','cnpj', 'motorista')
         .from('pedidos')
@@ -45,7 +45,10 @@ class PedidoController {
 
         return empresa
     }
-    const empresa = await Database
+
+    if (motorista != null && nomeEmpresa == null){
+
+      const empresa = await Database
         .select('id','empresa','cnpj', 'motorista')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
@@ -53,6 +56,32 @@ class PedidoController {
         .orderBy('id', 'desc')
 
         return empresa
+
+    }
+
+    if (motorista == null && nomeEmpresa != null){
+
+      const empresa = await Database
+      .select('id','empresa','cnpj', 'motorista')
+      .from('pedidos')
+      .whereBetween('created_at', [startDate, finalDate])
+      .where('empresa', nomeEmpresa)
+      .orderBy('id', 'desc')
+
+      return empresa
+
+    }
+
+    const empresa = await Database
+        .select('id','empresa','cnpj', 'motorista')
+        .from('pedidos')
+        .whereBetween('created_at', [startDate, finalDate])
+        .where('motorista', motorista)
+        .where('empresa', nomeEmpresa)
+        .orderBy('id', 'desc')
+
+    return empresa
+
   }
 
   /**
@@ -121,7 +150,7 @@ class PedidoController {
       idEmpresa, empresa, cnpj,
       idMotorista, motorista, placa,
       localEntrega, valorUnitario, quantidadeCarga,
-      totalLiquido, observacao, status
+      totalLiquido, observacao, status, create
     } = request.all()
 
     pedido.idEmpresa = idEmpresa
@@ -136,6 +165,7 @@ class PedidoController {
     pedido.totalLiquido = totalLiquido
     pedido.observacao = observacao
     pedido.status = status
+    pedido.created_at = create
 
     await pedido.save()
 

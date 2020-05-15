@@ -29,14 +29,18 @@ header{
   font-weight: 700;
 }
 
-.form label input, .form label select{
+.form-rel{
+  display: grid;
+  grid-template-columns: 20% 20% 25% 35%;
+  padding: 0 2%;
+}
+
+.form-rel label input, .form-rel label select{
   border: 1px solid #33333350;
   height: 30px;
   border-radius: 4px;
   margin-top: 3px;
   padding: 0 5px;
-  display: grid;
-  grid-template-columns: 25% 25% 25% 25%;
 }
 
 .clientes-rel{

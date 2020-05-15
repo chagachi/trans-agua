@@ -31,6 +31,7 @@ class NovoVale extends Component {
 
         this.change = this.change.bind(this)
         this.moto = this.moto.bind(this)
+        this.placa = this.placa.bind(this)
         this.carga = this.carga.bind(this)
     }
 
@@ -107,11 +108,20 @@ class NovoVale extends Component {
     moto(event){
         let motoristas = document.getElementById('motorista');
         let att = motoristas.options[motoristas.selectedIndex].attributes
-        console.log(att)
 
         this.setState({
             motorista: att.name.value,
             idMotorista: att.id.value
+        })
+                
+    }
+
+    placa(event){
+        let placa = document.getElementById('placa');
+        let placatt = placa.options[placa.selectedIndex].attributes
+
+        this.setState({
+            placa: placatt.name.value
         })
                 
     }
@@ -157,28 +167,6 @@ render() {
                                 ) : ''
                             }
                           <h3>Selecione a Empresa</h3>
-                          {/* <select 
-                          id='empresa'    
-                          onChange={this.change}
-                          value={this.state.empresa}>
-                          <option 
-                          name='inicio' 
-                          id='1' 
-                          value='' 
-                          disabled 
-                          selected > 
-                          Selecione a empresa</option>
-                            {this.state.empresas.map(post => (
-                                
-                                <option 
-                                key={post.id} 
-                                name={post.nomefantasia} 
-                                cnpj={post.cnpj}
-                                valor={post.valorFixo}
-                                endereco={post.endereco}
-                                id={post.id}> {post.nomefantasia} </option>
-                            ))}
-                          </select> */}
                           <Select 
                           value={selectedOption}
                           onChange={this.handleChange}
@@ -237,13 +225,31 @@ render() {
                               </select>
                           </label>
                           <label> Placa
-                              <input 
-                              type='text' 
-                              name='placa' 
-                              id='placa'
-                              onChange={e => this.setState({placa: e.target.value})}
-                              value={this.state.placa}
-                              />
+
+                            <select 
+                                id='placa'    
+                                onChange={this.placa}
+                                value={this.state.placa}>
+
+                                <option 
+                                name='ini' 
+                                id='1' 
+                                value='' 
+                                disabled>
+                                    Selecione a Placa
+                                </option>
+
+                                <option key='1' id='1' name="2131"> 2131 </option>
+                                <option key='2' id='2' name="8274"> 8274 </option>
+                                <option key='3' id='3' name="7858"> 7858 </option>
+                                <option key='4' id='4' name="3376"> 3376 </option>
+                                <option key='5' id='5' name="1730"> 1730 </option>
+                                <option key='6' id='6' name="7907"> 7907 </option>
+                                <option key='7' id='7' name="0013"> 0013 </option>
+                                <option key='8' id='8' name="8952"> 8952 </option>
+
+                            </select>
+
                           </label>
                           <label> Local de Entrega
                               <p 
