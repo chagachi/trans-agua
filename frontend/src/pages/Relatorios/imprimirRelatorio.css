@@ -89,4 +89,7 @@
   .voltar{
     display: none;
   }
+  .principal{
+    font-weight: 400 !important;
+  }
 }
