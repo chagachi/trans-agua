@@ -20,12 +20,15 @@ class Relatorios extends Component {
             empresas: [],
             empresa: '',
             motorista: '',
+            inicio: '',
+            fim: '',
             total: '0',
             startDate: new Date(),
             finalDate: new Date(),
             selectedOption: null,
         }
 
+        this.imprimir = this.imprimir.bind(this)
         this.moto = this.moto.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -63,6 +66,8 @@ class Relatorios extends Component {
         const final = this.state.finalDate.toLocaleDateString()
         const finalsplit = final.split('/').reverse().join('/')
 
+        this.setState({inicio: startsplit, fim: finalsplit})
+
         const token = localStorage.getItem('token')
         const relatorio = await api.post(`relatorio`, 
         {
@@ -85,6 +90,17 @@ class Relatorios extends Component {
         this.setState({
             empresa: selectedOption.label,
         })
+    }
+
+    imprimir() {
+        this.props.history.push({
+            pathname: '/imprimir', 
+            state:{
+                empresa: this.state.empresa,
+                motorista: this.state.motorista,
+                inicio: this.state.inicio,
+                fim: this.state.fim
+            }})
     }
     
     render() {
@@ -198,7 +214,18 @@ class Relatorios extends Component {
                                         </Link>
                                     </div>
                                 </div>
-                            ))}                         
+                            ))} 
+
+                            {
+                                this.state.total !== '0' ? (
+                                    <button 
+                                    className="imprimir" 
+                                    onClick={this.imprimir} >
+                                        imprimir
+                                    </button>
+                                ) : ''
+                            }
+                                                  
                         </div>
                 </div>
             </div>
