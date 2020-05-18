@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
 import api from '../../services/api'
 import logo from '../../assets/logo-13.png'
 import './impressao.css'
@@ -15,7 +14,7 @@ class Impressao extends Component {
   async componentDidMount(params){
     const token = localStorage.getItem('token')
     const {id} = this.props.location.state
-    const pedido = await api.get(`pedido/${id}`, 
+    const pedido = await api.get(`pedido/${id}`,
     {headers: {'Authorization': `Bearer ${token}`}})
 
     const dia = pedido.data.created_at

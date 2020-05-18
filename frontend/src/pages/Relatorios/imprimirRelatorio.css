@@ -1,0 +1,92 @@
+.topo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px auto;
+}
+
+.topo div{
+  margin: 0 20px;
+}
+
+.topo div img{
+  filter: grayscale();
+  width: 300px;
+}
+
+.topo div p {
+  font-size: 0.9em;
+  line-height: 1.2em;
+}
+
+.desc{
+  display: block;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.principal-menu{
+  display: grid;
+  grid-template-columns: 10% 40% 13% 15% 10% 12%;
+  margin: 10px 5%;
+  padding: 10px 0;
+  font-size: 1.3em;
+}
+
+.conteudo{
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+  margin: 0 5%;
+}
+
+.principal{
+  display: grid;
+  grid-template-columns: 10% 40% 13% 15% 10% 12%;
+  margin: 10px 0;
+  padding: 10px 0;
+  font-size: 1.1em;
+  border-bottom: 1px solid gray;
+}
+
+.rodape{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 5%;
+}
+
+.rodape div{
+  padding: 30px 0;
+  width: 32%;
+  text-align: center;
+  border: 2px solid black;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.voltar{
+  margin: 2% 5%;
+  padding: 10px 30px;
+  border: 2px solid #0072FF;
+  background: #0072FF;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.voltar:hover{
+  background: #ffffff;
+  color: #0072FF;
+}
+
+@media print{
+  .voltar{
+    display: none;
+  }
+}
