@@ -186,7 +186,17 @@ class Relatorios extends Component {
                                 <input class='botao' type='submit' name='Buscar' value='Buscar' />
                             </form>
 
+                            {
+                                this.state.total !== '0' ? (
+                                    <button 
+                                    className="imprimir" 
+                                    onClick={this.imprimir} >
+                                        imprimir
+                                    </button>
+                                ) : ''
+                            }
                             <div className='tabs-rel'>
+
                                 
                                 {
                                     this.state.total !== '0'? (
@@ -216,15 +226,7 @@ class Relatorios extends Component {
                                 </div>
                             ))} 
 
-                            {
-                                this.state.total !== '0' ? (
-                                    <button 
-                                    className="imprimir" 
-                                    onClick={this.imprimir} >
-                                        imprimir
-                                    </button>
-                                ) : ''
-                            }
+                            
                                                   
                         </div>
                 </div>

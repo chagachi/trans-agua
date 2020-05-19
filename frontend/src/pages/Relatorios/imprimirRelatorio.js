@@ -42,9 +42,6 @@ class Imprimir extends Component {
 
       this.setState({pedido: relatorio.data, total: relatorio.data.length})
 
-      console.log(empresa, motorista, inicio, fim)
-      console.log(this.state.pedido)
-
 
       const pedidos  = this.state.pedido
 
@@ -56,9 +53,7 @@ class Imprimir extends Component {
         return acumulador += parseInt(quantidadeCarga);
       },0);
       
-      this.setState({valor: totalLiquido, volume: quantidadeCarga})
-      console.log(`totalLiquido: ${totalLiquido}`)
-      console.log(`quantidadeCarga: ${quantidadeCarga}`)              
+      this.setState({valor: totalLiquido, volume: quantidadeCarga})           
   }
 
   DatePtBr(created_at) {     
@@ -96,7 +91,7 @@ class Imprimir extends Component {
             <h5>Data</h5>
             <h5>motorista</h5>
             <h5>Placa</h5>
-            <h5>Qtde. de Carga</h5>
+            <h5>Carga</h5>
           </div>
 
           <div className="conteudo">

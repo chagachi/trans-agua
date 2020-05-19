@@ -142,6 +142,8 @@ handleSubmit = async event => {
 change(event){
     let empresas = document.getElementById('empresa');
     let attr = empresas.options[empresas.selectedIndex].attributes
+    console.log(this.state.empresas)
+    console.log(empresas.options[empresas.selectedIndex].attributes)
 
     this.setState({
         empresa: attr.name.value,
@@ -186,7 +188,6 @@ carga(event){
                 <div className='content'>
                     <header>
                         <span>Painel de Controle ><strong> Vales </strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>
@@ -223,7 +224,7 @@ carga(event){
                                 name={post.nomefantasia} 
                                 cnpj={post.cnpj}
                                 valor={post.valorFixo}
-                                endereco={post.endereco}
+                                endereco={post.endereco1}
                                 id={post.id}> {post.nomefantasia} </option>
                             ))}
                           </select>
@@ -292,7 +293,7 @@ carga(event){
                                 name='quantidadeCarga' 
                                 id='quantidadeCarga'
                                 onChange={e => this.setState({quantidadeCarga: e.target.value})}
-                                onBlur={this.carga}
+                                onKeyUp={this.carga}
                                 value={this.state.quantidadeCarga}
                                 />
                             </label>

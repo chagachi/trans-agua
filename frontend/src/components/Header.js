@@ -25,10 +25,6 @@ function menu() {
             <li>Vales</li>
           </Link>
           
-          <Link to='/valesantigos'>
-            <li>Vales Antigos</li>
-          </Link>
-          
           <Link to='/relatorios'>
             <li>Relatórios</li>
           </Link>
