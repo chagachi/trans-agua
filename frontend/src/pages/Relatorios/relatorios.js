@@ -26,9 +26,12 @@ class Relatorios extends Component {
             startDate: new Date(),
             finalDate: new Date(),
             selectedOption: null,
+            volume: '',
+            totalLiquido: '',
         }
 
         this.imprimir = this.imprimir.bind(this)
+        this.delete = this.delete.bind(this)
         this.moto = this.moto.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
@@ -80,7 +83,21 @@ class Relatorios extends Component {
         })
 
         this.setState({pedido: relatorio.data, total: relatorio.data.length})
+        
+        const pedidos  = this.state.pedido;
+        
+        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
+            return acumulador += parseInt(totalLiquido.replace(',','.'));
+        },0);
+        
+        const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
+            return acumulador += parseInt(quantidadeCarga.replace(',','.'));
+        },0);
+        
+        this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})   
         console.log(relatorio.data)
+        // console.log(this.state.totalLiquido)
+        // console.log(this.state.volume)
     }
 
     handleChange = selectedOption => {
@@ -101,6 +118,45 @@ class Relatorios extends Component {
                 inicio: this.state.inicio,
                 fim: this.state.fim
             }})
+    }
+
+    async delete(e) {
+
+        const token = localStorage.getItem('token')
+            await api.delete(`pedido/${e.target.id}`, 
+            {headers: {'Authorization': `Bearer ${token}`}})
+
+        const start = this.state.startDate.toLocaleDateString()
+        const startsplit = start.split('/').reverse().join('/')
+
+        const final = this.state.finalDate.toLocaleDateString()
+        const finalsplit = final.split('/').reverse().join('/')
+
+        this.setState({inicio: startsplit, fim: finalsplit})
+
+        const relatorio = await api.post(`relatorio`, 
+        {
+            startDate: `${startsplit} 00:00:00`, 
+            finalDate: `${finalsplit} 23:59:59`,
+            motorista: this.state.motorista,
+            nomeEmpresa: this.state.empresa,
+        },{
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+
+        this.setState({pedido: relatorio.data, total: relatorio.data.length})
+        
+        const pedidos  = this.state.pedido;
+        
+        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
+            return acumulador += parseInt(totalLiquido.replace(',','.'));
+        },0);
+        
+        const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
+            return acumulador += parseInt(quantidadeCarga.replace(',','.'));
+        },0);
+        
+        this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})
     }
     
     render() {
@@ -183,7 +239,7 @@ class Relatorios extends Component {
                                     />
                                 </label>
                                 
-                                <input class='botao' type='submit' name='Buscar' value='Buscar' />
+                                <input className='botao' type='submit' name='Buscar' value='Buscar' />
                             </form>
 
                             {
@@ -197,14 +253,15 @@ class Relatorios extends Component {
                             }
                             <div className='tabs-rel'>
 
-                                
                                 {
                                     this.state.total !== '0'? (
                                         <>
                                         <span>NOME</span>
                                         <span>MOTORISTA</span>
                                         <span>PEDIDO</span>
-                                        <span>TOTAL: {this.state.total}</span>
+                                        <span>CARGA</span>
+                                        <span>VALOR</span>
+                                        <span>TOTAL</span>
                                         </>
                                     ) : ''
                                 }
@@ -215,6 +272,8 @@ class Relatorios extends Component {
                                     <span> {post.empresa} </span>
                                     <span> {post.motorista} </span>
                                     <span> {post.id} </span>
+                                    <span> {post.quantidadeCarga} </span>
+                                    <span> {post.totalLiquido} </span>
                                     <div>
                                         <Link to={{
                                             pathname:'/vales/vale',
@@ -222,11 +281,30 @@ class Relatorios extends Component {
                                             }}>
                                             <button className='see'>Ver | Editar</button>
                                         </Link>
+                                        <button 
+                                        className='delete' 
+                                        id={post.id} 
+                                        onClick={this.delete}>
+                                            Excluir
+                                        </button>
                                     </div>
                                 </div>
                             ))} 
 
-                            
+                            {
+                                this.state.total !== '0'? (
+                                    <>
+                                    <div className="rodape">
+                                        <div>
+                                            Metro cúbicos (m³): {this.state.volume}
+                                        </div>
+                                        <div>
+                                            Valor total: {this.state.totalLiquido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }
+                                        </div>
+                                    </div>
+                                    </>
+                                ) : ''
+                            }
                                                   
                         </div>
                 </div>

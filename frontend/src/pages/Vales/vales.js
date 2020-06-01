@@ -152,7 +152,6 @@ class Vales extends Component {
                     <div className='content'>
                         <header>
                             <span>Painel de Controle ><strong> Vales </strong></span>
-                            <span>Olá Felipe Marcondes</span>
                         </header>
     
                         <div className='top'></div>

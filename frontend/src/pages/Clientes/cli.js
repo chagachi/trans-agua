@@ -64,24 +64,27 @@ async componentDidMount(params){
 handleSubmit = async event => {
     event.preventDefault()
 
+    const formatValue = this.state.valorfixo
+    const valorFormatado = formatValue.replace(",", ".");
+
     const token = localStorage.getItem('token')
     const pedido = await api.put(`empresa/${this.state.id}`, 
     {
-      nomefantasia: this.state.nomefantasia, 
-      razaosocial: this.state.razaosocial,
-      cnpj: this.state.cnpj,
-      ie: this.state.ie,
-      endereco: this.state.endereco,
-      endereco1: this.state.endereco1,
-      numero: this.state.numero,
-      bairro: this.state.bairro,
-      cidade: this.state.cidade,
-      estado: this.state.estado,
-      telefone1: this.state.telefone1,
-      telefone2: this.state.telefone2,
-      email: this.state.email,
-      site: this.state.site,
-      valorfixo: this.state.valorfixo,
+      nomefantasia: this.state.nomefantasia || 'não tem', 
+      razaosocial: this.state.razaosocial || 'não tem',
+      cnpj: this.state.cnpj || 'não tem',
+      ie: this.state.ie || 'não tem',
+      endereco: this.state.endereco || 'não tem',
+      endereco1: this.state.endereco1 || 'não tem',
+      numero: this.state.numero || 'não tem',
+      bairro: this.state.bairro || 'não tem',
+      cidade: this.state.cidade || 'não tem',
+      estado: this.state.estado || 'não tem',
+      telefone1: this.state.telefone1 || 'não tem',
+      telefone2: this.state.telefone2 || 'não tem',
+      email: this.state.email || 'não tem',
+      site: this.state.site || 'não tem',
+      valorfixo: valorFormatado,
     },{
         headers: {'Authorization': `Bearer ${token}`}
     })

@@ -46,11 +46,11 @@ class Imprimir extends Component {
       const pedidos  = this.state.pedido
 
       const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
-        return acumulador += parseInt(totalLiquido);
+        return acumulador += parseInt(totalLiquido.replace(',','.'));
       },0);
 
       const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
-        return acumulador += parseInt(quantidadeCarga);
+        return acumulador += parseInt(quantidadeCarga.replace(',','.'));
       },0);
       
       this.setState({valor: totalLiquido, volume: quantidadeCarga})           

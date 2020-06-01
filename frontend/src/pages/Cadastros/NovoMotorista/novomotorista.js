@@ -44,7 +44,6 @@ class NovoMotorista extends Component {
                 <div className='content'>
                     <header>
                         <span>Painel de Controle > Motoristas > <strong> Cadastrar Motorista </strong></span>
-                        <span>Olá Felipe Marcondes</span>
                     </header>
 
                     <div className='top'></div>

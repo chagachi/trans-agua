@@ -77,6 +77,9 @@ async componentDidMount(params){
 handleSubmit = async event => {
     event.preventDefault()
 
+    const formatValue = this.state.quantidadeCarga
+    const valorFormatado = formatValue.replace(",", ".");
+
     if (this.state.startDate !== ''){
         const start = this.state.startDate.toLocaleDateString()
         const startsplit = start.split('/').reverse().join('/')
@@ -168,12 +171,15 @@ moto(event){
 }
 
 carga(event){
-    let carga = event.target.value
-    let total = carga * this.state.valorUnitario
+    const formatValue = event.target.value;
+    const valorFormatado = formatValue.replace(",", ".");        
 
+    let carga = event.target.value;
+    let total = valorFormatado * this.state.valorUnitario;
+    
     this.setState({
-        totalLiquido: total
-    })
+        totalLiquido: total.toFixed(2)
+    }) 
             
 }
 

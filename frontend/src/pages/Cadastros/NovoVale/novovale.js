@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import Menu from '../../../components/Header'
 import api from '../../../services/api'
 import Select from 'react-select'
+import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
+import pt from 'date-fns/locale/pt-BR';
 
 import './novovale.css'
 
@@ -27,6 +30,8 @@ class NovoVale extends Component {
             empresas: [],
             motoristas: [],
             selectedOption: null,
+            startDate: '',
+            adm: localStorage.getItem('adm'),
         }
 
         this.change = this.change.bind(this)
@@ -63,6 +68,9 @@ class NovoVale extends Component {
 
     handleSubmit = async event => {
         event.preventDefault()
+    
+        const formatValue = this.state.quantidadeCarga
+        const valorFormatado = formatValue.replace(",", ".");
 
         const token = localStorage.getItem('token')
         const pedido = await api.post(`pedido`, 
@@ -75,7 +83,7 @@ class NovoVale extends Component {
             placa: this.state.placa,
             localEntrega: this.state.localEntrega,
             valorUnitario: this.state.valorUnitario,
-            quantidadeCarga: this.state.quantidadeCarga,
+            quantidadeCarga: valorFormatado,
             totalLiquido: this.state.totalLiquido,
             observacao: this.state.observacao,
         },{
@@ -126,14 +134,16 @@ class NovoVale extends Component {
                 
     }
 
-    carga(event){
-        let carga = event.target.value
-        let total = carga * this.state.valorUnitario
+    carga(event) {
+        const formatValue = event.target.value;
+        const valorFormatado = formatValue.replace(",", ".");        
 
+        let carga = event.target.value;
+        let total = valorFormatado * this.state.valorUnitario;
+       
         this.setState({
-            totalLiquido: total
-        })
-                
+            totalLiquido: total.toFixed(2)
+        })                
     }
 
     
@@ -279,6 +289,19 @@ render() {
                               value={this.state.totalLiquido}
                               >{this.state.totalLiquido}</p>
                           </label>
+
+                          {
+                                this.state.adm == 1 ? (
+                                    <label> Data
+                                        <Datepicker 
+                                            selected={this.state.startDate}
+                                            dateFormat="dd/MM/yyyy"
+                                            locale="pt-BR"
+                                            onChange={date => this.setState({startDate: date})}
+                                        />
+                                    </label>
+                                ) : ''
+                            }
 
                           {
                                 this.state.empresa !== '' 

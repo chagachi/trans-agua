@@ -29,6 +29,9 @@ class NovoCliente extends Component {
     handleSubmit = async event => {
         event.preventDefault()
 
+        const formatValue = this.state.valorfixo;
+        const valorFormatado = formatValue.replace(",", "."); 
+
         const token = localStorage.getItem('token')
         const empresa = await api.post(`empresa`, 
         {
@@ -46,7 +49,7 @@ class NovoCliente extends Component {
             telefone2: this.state.telefone2 || 'não tem',
             email: this.state.email || 'não tem',
             site: this.state.site || 'não tem',
-            valorfixo: this.state.valorfixo,
+            valorfixo: valorFormatado,
         },{
             headers: {'Authorization': `Bearer ${token}`}
         })
@@ -71,7 +74,6 @@ class NovoCliente extends Component {
               <div className='content'>
                   <header>
                       <span>Painel de Controle > Empresas > <strong> Cadatrar Empresa </strong></span>
-                      <span>Olá Felipe Marcondes</span>
                   </header>
 
                   <div className='top'></div>
