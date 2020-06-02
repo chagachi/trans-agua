@@ -19,10 +19,11 @@ function Vales(){
     const [data, setData] = useState('')
     const [mensagem, setMensagem] = useState('')
     const location = useLocation()
+    
     const history = useHistory()
     
     function gobackhandle(){
-        history.goBack()
+        history.push({pathname: '/relatorios', state: location.state.pedidos})
     }
     
     useEffect(() => {

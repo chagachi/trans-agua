@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { Link } from 'react-router-dom'
+import { createBrowserHistory } from 'history';
 import api from '../../services/api'
 import Menu from '../../components/Header'
 import './relatorios.css'
@@ -10,7 +11,15 @@ import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', pt)
 
+const history = createBrowserHistory();
+const location = history.location
+const unlisten = history.listen((location, action) => {
+    // location is an object like window.location
+    console.log(action, location.pathname, location.state);
+  });
+
 class Relatorios extends Component {
+
 
     constructor(props){
         super(props)
@@ -37,6 +46,8 @@ class Relatorios extends Component {
     }
 
     async componentDidMount(){
+        console.log(location.state)
+        console.log(unlisten)
         const token = localStorage.getItem('token')
 
         const moto = await api.get('listarmotoristas', 
@@ -279,7 +290,14 @@ class Relatorios extends Component {
                                     <div>
                                         <Link to={{
                                             pathname:'/vales/vale',
-                                            state: {id: post.id}
+                                            state: {
+                                                id: post.id,
+                                                startDate: `${this.state.inicio} 00:00:00`, 
+                                                finalDate: `${this.state.final} 23:59:59`,
+                                                motorista: this.state.motorista,
+                                                pedidos: this.state.pedido,
+                                                nomeEmpresa: this.state.empresa,
+                                            }
                                             }}>
                                             <button className='see'>Ver | Editar</button>
                                         </Link>
