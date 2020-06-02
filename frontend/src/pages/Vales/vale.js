@@ -1,194 +1,170 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router'
 import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import Menu from '../../components/Header'
 import api from '../../services/api'
-import './vales.css'
+import './vale.css'
 
 import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt-BR';
 
 
-class Vales extends Component {
+function Vales(){
 
-  constructor(props){
-    super(props)
-    this.state = {
-        id: '',
-        idEmpresa: '',
-        empresa: '',
-        cnpj: '',
-        idMotorista: '',
-        motorista: '',
-        placa: '',
-        localEntrega: '',
-        valorUnitario: '',
-        quantidadeCarga: '',
-        totalLiquido: '',
-        observacao: '',
-        startDate: '',
-        message: '',
-        empresas: [],
-        motoristas: [],
-        adm: localStorage.getItem('adm'),
+    const [pedido, setPedido] = useState([])
+    const [empresas, setEmpresas] = useState([])
+    const [motorista, setMotorista] = useState([])
+    const [adm, setAdm] = useState(localStorage.getItem('adm'))
+    const [data, setData] = useState('')
+    const [mensagem, setMensagem] = useState('')
+    const location = useLocation()
+    const history = useHistory()
+    
+    function gobackhandle(){
+        history.goBack()
+    }
+    
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        async function user(){
+            const empresas = await api.get(`listarempresas`, 
+            {headers: {'Authorization': `Bearer ${token}`}})
+            setEmpresas(empresas.data)
+            return empresas
+        }
+
+        async function moto(){
+            const motorista = await api.get('listarmotoristas',
+            {headers: {'Authorization': `Bearer ${token}`}})
+            setMotorista(motorista.data)
+            return motorista
+        } 
+        
+        async function pedido(id){
+            const vale = await api.get(`pedido/${id}`,
+            {headers: {'Authorization': `Bearer ${token}`}})
+            await setPedido(vale.data)
+            const formatValue = vale.data.valorUnitario
+            const valorFormatado = formatValue.replace(",", ".");
+            // setPedido({valorUnitario: valorFormatado})
+            return vale.data
+        }
+        user()
+        moto()
+        pedido(location.state.id)
+    },[])
+
+    function change(){
+        let empresas = document.getElementById('empresa');
+        let attr = empresas.options[empresas.selectedIndex].attributes
+        // console.log(this.state.empresas)
+        // console.log(empresas.options[empresas.selectedIndex].attributes)
+
+        setPedido({...pedido,
+            empresa: attr.name.value,
+            cnpj: attr.cnpj.value, 
+            idEmpresa: attr.id.value, 
+            localEntrega: attr.endereco.value,
+            valorUnitario: attr.valor.value
+        })
     }
 
-    this.change = this.change.bind(this)
-    this.moto = this.moto.bind(this)
-    this.carga = this.carga.bind(this)
-}
+    function moto() {
+        let motoristas = document.getElementById('motorista');
+        let att = motoristas.options[motoristas.selectedIndex].attributes
+        console.log(att)
 
-async componentDidMount(params){
-
-    const token = localStorage.getItem('token')
-    const {id} = this.props.location.state
-    const user = await api.get(`listarempresas`, 
-    {headers: {'Authorization': `Bearer ${token}`}})
-
-    const moto = await api.get('listarmotoristas',
-    {headers: {'Authorization': `Bearer ${token}`}})
-    
-    const pedido = await api.get(`pedido/${id}`,
-    {headers: {'Authorization': `Bearer ${token}`}})
-
-    const data = pedido.data
-
-    console.log(data.created_at)
-
-    const formatValue = data.valorUnitario
-    const valorFormatado = formatValue.replace(",", ".");
-
-    this.setState({ 
-      id: data.id,
-      idEmpresa: data.idEmpresa,
-      empresa: data.empresa,
-      cnpj: data.cnpj,
-      idMotorista: data.idMotorista,
-      motorista: data.motorista,
-      placa: data.placa,
-      localEntrega: data.localEntrega,
-      valorUnitario: valorFormatado,
-      quantidadeCarga: data.quantidadeCarga,
-      totalLiquido: data.totalLiquido,
-      observacao: data.observacao,
-      data: data.created_at,
-      empresas: user.data, 
-      motoristas: moto.data
-    })
-}
-
-handleSubmit = async event => {
-    event.preventDefault()
-
-    const formatValue = this.state.quantidadeCarga
-    const valorFormatado = formatValue.replace(",", ".");
-
-    if (this.state.startDate !== ''){
-        const start = this.state.startDate.toLocaleDateString()
-        const startsplit = start.split('/').reverse().join('/')
-
-        const token = localStorage.getItem('token')
-        const pedido = await api.put(`pedido/${this.state.id}`, 
-        {
-            idEmpresa: this.state.idEmpresa, 
-            empresa: this.state.empresa,
-            cnpj: this.state.cnpj,
-            idMotorista: this.state.idMotorista,
-            motorista: this.state.motorista,
-            placa: this.state.placa,
-            localEntrega: this.state.localEntrega,
-            valorUnitario: this.state.valorUnitario,
-            quantidadeCarga: this.state.quantidadeCarga,
-            totalLiquido: this.state.totalLiquido,
-            observacao: this.state.observacao,
-            create: `${startsplit} 12:00:00`,
-        },{
-        headers: {'Authorization': `Bearer ${token}`}
-    })
-    .then(res => {
-        this.setState({message: 'Vale emitido com sucesso!'})
-        this.props.history.push({
-            pathname: '/impressao', 
-            state:{id: res.data.id}})
-        
-    })
-    .catch(e => this.setState({message: `${e}`}))
-
-    } else{
-
-        const token = localStorage.getItem('token')
-        const pedido = await api.put(`pedido/${this.state.id}`, 
-        {
-            idEmpresa: this.state.idEmpresa, 
-            empresa: this.state.empresa,
-            cnpj: this.state.cnpj,
-            idMotorista: this.state.idMotorista,
-            motorista: this.state.motorista,
-            placa: this.state.placa,
-            localEntrega: this.state.localEntrega,
-            valorUnitario: this.state.valorUnitario,
-            quantidadeCarga: this.state.quantidadeCarga,
-            totalLiquido: this.state.totalLiquido,
-            observacao: this.state.observacao,
-        },{
-        headers: {'Authorization': `Bearer ${token}`}
-    })
-    .then(res => {
-        this.setState({message: 'Vale emitido com sucesso!'})
-        this.props.history.push({
-            pathname: '/impressao', 
-            state:{id: res.data.id}})
-        
-    })
-    .catch(e => this.setState({message: `${e}`}))
-
+        setPedido({...pedido,
+            motorista: att.name.value,
+            idMotorista: att.id.value
+        })
     }
-}
 
-change(event){
-    let empresas = document.getElementById('empresa');
-    let attr = empresas.options[empresas.selectedIndex].attributes
-    console.log(this.state.empresas)
-    console.log(empresas.options[empresas.selectedIndex].attributes)
+    function carga(event) {
+        const formatValue = event.target.value;
+        const valorFormatado = formatValue.replace(",", ".");        
 
-    this.setState({
-        empresa: attr.name.value,
-        cnpj: attr.cnpj.value, 
-        idEmpresa: attr.id.value, 
-        localEntrega: attr.endereco.value,
-        valorUnitario: attr.valor.value
-    })
+        let carga = event.target.value;
+        let total = valorFormatado * pedido.valorUnitario;
+        
+        setPedido({...pedido,
+            totalLiquido: total.toFixed(2)
+        })
+    }
+
+    async function salvar(event){
+        event.preventDefault()
+
+        const formatValue = pedido.quantidadeCarga
+        const valorFormatado = formatValue.replace(",", ".");
+
+        if (data !== ''){
+            const start = data.toLocaleDateString()
+            const startsplit = start.split('/').reverse().join('/')
+
+            const token = localStorage.getItem('token')
+            const putPedido = await api.put(`pedido/${location.state.id}`, 
+            {
+                idEmpresa: pedido.idEmpresa, 
+                empresa: pedido.empresa,
+                cnpj: pedido.cnpj,
+                idMotorista: pedido.idMotorista,
+                motorista: pedido.motorista,
+                placa: pedido.placa,
+                localEntrega: pedido.localEntrega,
+                valorUnitario: pedido.valorUnitario,
+                quantidadeCarga: pedido.quantidadeCarga,
+                totalLiquido: pedido.totalLiquido,
+                observacao: pedido.observacao,
+                create: `${startsplit} 12:00:00`,
+            },{
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+        .then(res => {
+            setMensagem('Vale alterado com sucesso! Deseja Imprimir ?')
+            // history.push({
+            //     pathname: '/impressao', 
+            //     state:{id: res.data.id}})
             
-}
+        })
+        .catch(e => setMensagem(`${e}`))
 
-moto(event){
-    let motoristas = document.getElementById('motorista');
-    let att = motoristas.options[motoristas.selectedIndex].attributes
-    console.log(att)
+        } else{
 
-    this.setState({
-        motorista: att.name.value,
-        idMotorista: att.id.value
-    })
+            const token = localStorage.getItem('token')
+            const putPedido = await api.put(`pedido/${location.state.id}`, 
+            {
+                idEmpresa: pedido.idEmpresa, 
+                empresa: pedido.empresa,
+                cnpj: pedido.cnpj,
+                idMotorista: pedido.idMotorista,
+                motorista: pedido.motorista,
+                placa: pedido.placa,
+                localEntrega: pedido.localEntrega,
+                valorUnitario: pedido.valorUnitario,
+                quantidadeCarga: pedido.quantidadeCarga,
+                totalLiquido: pedido.totalLiquido,
+                observacao: pedido.observacao,
+            },{
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+        .then(res => {
+            setMensagem('Vale alterado com sucesso! Deseja Imprimir ?')
+            // history.push({
+            //     pathname: '/impressao', 
+            //     state:{id: res.data.id}})
             
-}
+        })
+        .catch(e => setMensagem(`${e}`))
 
-carga(event){
-    const formatValue = event.target.value;
-    const valorFormatado = formatValue.replace(",", ".");        
+        }
+    }
 
-    let carga = event.target.value;
-    let total = valorFormatado * this.state.valorUnitario;
     
-    this.setState({
-        totalLiquido: total.toFixed(2)
-    }) 
-            
-}
 
-    render() {
-        return(
-            <>
+    return(
+        <>
             <div className='geral'>
                 <div className='menu'>
                     <Menu />
@@ -204,29 +180,33 @@ carga(event){
 
                     <div className='cabecalho'>
                             {
-                                this.state.message !== ''? (
-                                    window.alert(this.state.message)
-                                ) : ''
+                                mensagem !== ''? (
+                                       window.confirm(mensagem) ? history.push({
+                                        pathname: '/impressao', 
+                                        state:{id: location.state.id}}) : null
+                                    , setMensagem('')
+                                ) : ''                         
                             }
 
-                        <div className='head'>
-                            <Link 
-                                to='/vales'>
-                                <span>Voltar</span>
-                            </Link>
+                        <div className='head-vale'>
+                            <a className='vai'
+                                onClick={gobackhandle}>
+                                Voltar
+                            </a>
                             <h3></h3>
                         </div>
                           <select 
                           id='empresa'    
-                          onChange={this.change}
-                          value={this.state.empresa}>
+                          onChange={change}
+                          value={pedido.empresa}
+                          >
                           <option 
                           name='inicio' 
                           id='1' 
                           value='' 
                           disabled 
                           selected> Selecione a empresa</option>
-                            {this.state.empresas.map(post => (
+                            {empresas.map(post => (
                                 
                                 <option 
                                 key={post.id} 
@@ -239,14 +219,14 @@ carga(event){
                           </select>
                       </div>
 
-                      <form className='novovale' onSubmit={this.handleSubmit}>
+                      <form className='novovale'>
                             <label> Empresa
                                 <input 
                                 type='text' 
                                 name='empresa' 
                                 id='empresa'
-                                onChange={e => this.setState({empresa: e.target.value})}
-                                value={this.state.empresa}
+                                onChange={e => setPedido({...pedido,empresa: e.target.value})}
+                                value={pedido.empresa}
                                 />
                             </label>
                             <label>CNPJ
@@ -254,28 +234,30 @@ carga(event){
                                 type='text' 
                                 name='cnpj' 
                                 id='cnpj'
-                                onChange={e => this.setState({cnpj: e.target.value})}
-                                value={this.state.cnpj}
+                                onChange={e => setPedido({...pedido,cnpj: e.target.value})}
+                                value={pedido.cnpj}
                                 />
                             </label>
                             <label>Motorista
                                 <select 
-                                  id='motorista'    
-                                  onChange={this.moto}
-                                  value={this.state.motorista}>
+                                    id='motorista'    
+                                  onChange={moto}
+                                  value={pedido.motorista}
+                                >
 
-                                  <option 
-                                  name='ini' 
-                                  id='1' 
-                                  value='' 
-                                  disabled>Selecione o Motorista</option>
-                                  {this.state.motoristas.map(moto => (
-                                  
-                                  <option 
-                                  key={moto.id} 
-                                  name={moto.nome}
-                                  id={moto.id}> {moto.nome} </option>
-                              ))}
+                                    <option 
+                                    name='ini' 
+                                    id='1' 
+                                    value='' 
+                                    disabled>Selecione o Motorista</option>
+                                    {motorista.map(moto => (
+                                    
+                                    <option 
+                                    key={moto.id} 
+                                    name={moto.nome}
+                                    id={moto.id}> {moto.nome} </option>
+                                        ))
+                                    }
                                 </select>
                             </label>
                             <label> Placa
@@ -283,8 +265,8 @@ carga(event){
                                 type='text' 
                                 name='placa' 
                                 id='placa'
-                                onChange={e => this.setState({placa: e.target.value})}
-                                value={this.state.placa}
+                                onChange={e => setPedido({...pedido,placa: e.target.value})}
+                                value={pedido.placa}
                                 />
                             </label>
                             <label> Local de Entrega
@@ -292,8 +274,8 @@ carga(event){
                                 type='text' 
                                 name='numero' 
                                 id='localEntrega'
-                                onChange={e => this.setState({localEntrega: e.target.value})}
-                                value={this.state.localEntrega}
+                                onChange={e => setPedido({...pedido,localEntrega: e.target.value})}
+                                value={pedido.localEntrega}
                                 />
                             </label>
                             <label> Quantidade de Carga
@@ -301,9 +283,9 @@ carga(event){
                                 type='text' 
                                 name='quantidadeCarga' 
                                 id='quantidadeCarga'
-                                onChange={e => this.setState({quantidadeCarga: e.target.value})}
-                                onKeyUp={this.carga}
-                                value={this.state.quantidadeCarga}
+                                onChange={e => setPedido({...pedido,quantidadeCarga: e.target.value})}
+                                onKeyUp={carga}
+                                value={pedido.quantidadeCarga}
                                 />
                             </label>
                             <label> Total
@@ -311,8 +293,8 @@ carga(event){
                                 type='text' 
                                 name='total' 
                                 id='total'
-                                onChange={e => this.setState({totalLiquido: e.target.value})}
-                                value={this.state.totalLiquido}
+                                onChange={e => setPedido({...pedido,totalLiquido: e.target.value})}
+                                value={pedido.totalLiquido}
                                 />
                             </label>
                             <label> Observação
@@ -320,19 +302,19 @@ carga(event){
                                 type='text' 
                                 name='observacao' 
                                 id='observacao'
-                                onChange={e => this.setState({observacao: e.target.value})}
-                                value={this.state.observacao}
+                                onChange={e => setPedido({...pedido,observacao: e.target.value})}
+                                value={pedido.observacao}
                                 />
                             </label>
 
                             {
-                                this.state.adm == 1? (
+                                adm == 1? (
                                     <label> Data
                                         <Datepicker 
-                                            selected={this.state.startDate}
+                                            selected={data}
                                             dateFormat="dd/MM/yyyy"
                                             locale="pt-BR"
-                                            onChange={date => this.setState({startDate: date})}
+                                            onChange={date => setData(date)}
                                         />
                                     </label>
                                 ) : ''
@@ -340,14 +322,13 @@ carga(event){
 
                             
 
-                            <input className='botao' type='submit' value='Salvar' />
+                            <input className='botao' type='submit' onClick={salvar} value='Salvar' />
                           </form>
                         </div>
                 </div>
             </div>
             </>
-        );
-    }
+    )
 }
 
-export default Vales;
+export default Vales

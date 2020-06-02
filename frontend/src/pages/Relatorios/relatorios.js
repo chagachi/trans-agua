@@ -262,7 +262,7 @@ class Relatorios extends Component {
                                         <span>PEDIDO</span>
                                         <span>CARGA</span>
                                         <span>VALOR</span>
-                                        <span>TOTAL</span>
+                                        <span>TOTAL: {this.state.pedido.length}</span>
                                         </>
                                     ) : ''
                                 }
