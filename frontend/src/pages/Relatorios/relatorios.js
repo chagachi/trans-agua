@@ -52,7 +52,7 @@ class Relatorios extends Component {
     moto(event){
         let motoristas = document.getElementById('motorista');
         let att = motoristas.options[motoristas.selectedIndex].attributes
-        console.log(att)
+        // console.log(att)
 
         this.setState({
             motorista: att.name.value
@@ -86,12 +86,12 @@ class Relatorios extends Component {
         
         const pedidos  = this.state.pedido;
         
-        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
-            return acumulador += parseInt(totalLiquido.replace(',','.'));
+        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {           
+            return acumulador += parseFloat(totalLiquido.replace(',','.'));
         },0);
         
         const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
-            return acumulador += parseInt(quantidadeCarga.replace(',','.'));
+            return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
         },0);
         
         this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})   
@@ -149,12 +149,13 @@ class Relatorios extends Component {
         const pedidos  = this.state.pedido;
         
         const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
-            return acumulador += parseInt(totalLiquido.replace(',','.'));
+            return acumulador += parseFloat(totalLiquido.replace(',','.'));
         },0);
-        console.log(totalLiquido)
         
         const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
-            return acumulador += parseInt(quantidadeCarga.replace(',','.'));
+            console.log(`acumulador: ${acumulador}`);
+            
+            return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
         },0);
         
         this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})
