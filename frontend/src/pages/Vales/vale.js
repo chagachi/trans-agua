@@ -55,6 +55,9 @@ async componentDidMount(params){
 
     console.log(data.created_at)
 
+    const formatValue = data.valorUnitario
+    const valorFormatado = formatValue.replace(",", ".");
+
     this.setState({ 
       id: data.id,
       idEmpresa: data.idEmpresa,
@@ -64,7 +67,7 @@ async componentDidMount(params){
       motorista: data.motorista,
       placa: data.placa,
       localEntrega: data.localEntrega,
-      valorUnitario: data.valorUnitario,
+      valorUnitario: valorFormatado,
       quantidadeCarga: data.quantidadeCarga,
       totalLiquido: data.totalLiquido,
       observacao: data.observacao,

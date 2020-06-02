@@ -151,6 +151,7 @@ class Relatorios extends Component {
         const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
             return acumulador += parseInt(totalLiquido.replace(',','.'));
         },0);
+        console.log(totalLiquido)
         
         const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
             return acumulador += parseInt(quantidadeCarga.replace(',','.'));
@@ -294,7 +295,7 @@ class Relatorios extends Component {
                             {
                                 this.state.total !== '0'? (
                                     <>
-                                    <div className="rodape">
+                                    <div className="rodape-rel">
                                         <div>
                                             Metro cúbicos (m³): {this.state.volume}
                                         </div>

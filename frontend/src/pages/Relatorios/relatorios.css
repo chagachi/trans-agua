@@ -79,3 +79,20 @@ header{
   background: #fff;
   color: #0072FF;
 }
+
+.rodape-rel{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 5%;
+}
+
+.rodape-rel div{
+  padding: 20px 0;
+  width: 45%;
+  text-align: center;
+  border: 2px solid black;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
