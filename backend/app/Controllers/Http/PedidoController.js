@@ -191,6 +191,17 @@ class PedidoController {
     }
     return response.status(300).send({message:'Você não tem privilégios administrativos.'})
   }
+
+  async buscaPedido ({ params, request, response, auth })
+  {
+    const { id } = request.all()
+    const pedido = await Database
+    .select()
+    .from('pedidos')
+    .where('id', id)
+
+    return pedido
+  }
 }
 
 module.exports = PedidoController

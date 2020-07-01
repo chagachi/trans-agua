@@ -13,13 +13,35 @@ class Vales extends Component {
             pedido: [],
             lastPage: '',
             paginate: 1,
-            adm: localStorage.getItem('adm')
+            adm: localStorage.getItem('adm'),
+            busca: '',
+            message: '',
         }
 
         this.delete = this.delete.bind(this)
         this.next = this.next.bind(this)
         this.back = this.back.bind(this)
         this.unique = this.unique.bind(this)
+    }
+
+    handleSubmit = async event => {
+        event.preventDefault()
+
+        const token = localStorage.getItem('token')
+        const busca = await api.post('buscarpedido', {
+            id: this.state.busca
+        },
+        {headers: {'Authorization': `Bearer ${token}`}})
+        .then(res => {
+            let teste = res.data
+            if (teste){
+                this.setState({pedido: [].concat(res.data)})
+            } else {
+                this.setState({message: 'Não existe uma empresa com este nome.'})         
+                this.setState({message: ""})         
+            }
+        })
+
     }
 
     async next(){
@@ -160,6 +182,25 @@ class Vales extends Component {
                                     <h3>Últimos Vales Emitidos</h3>
                                     <Link to='/vales/novovale'><span>Novo Vale</span></Link>
                                 </div>
+
+                                <form className='pesquisa' onSubmit={this.handleSubmit}>
+                                
+                                    <input 
+                                        type='text' 
+                                        name='busca' 
+                                        id='busca'
+                                        onChange={e => this.setState({busca: e.target.value})}
+                                        value={this.state.busca}
+                                    />
+                                
+                                <input type="submit" value="Pesquisar" />
+                                </form>
+
+                                {
+                                    this.state.message !== ''? (
+                                        window.alert(this.state.message)
+                                    ) : ''
+                                } 
     
                                 <div className='tabs-vales'>
                                     <span>EMPRESA</span>

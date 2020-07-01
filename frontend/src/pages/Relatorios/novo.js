@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { Component } from 'react';
 import Datepicker, { registerLocale, setDefaultLocale } from 'react-datepicker'
 import { Link } from 'react-router-dom'
-import { useLocation, useHistory } from 'react-router'
+import { createBrowserHistory } from 'history';
 import api from '../../services/api'
 import Menu from '../../components/Header'
 import './relatorios.css'
@@ -11,208 +11,173 @@ import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt-BR';
 registerLocale('pt-BR', pt)
 
-function Relatorios(){
+const history = createBrowserHistory();
+const location = history.location
+const unlisten = history.listen((location, action) => {
+    // location is an object like window.location
+    console.log(action, location.pathname, location.state);
+  });
 
-    const [pedidos, setPedidos] = useState([])
-    const [empresas, setEmpresas] = useState([])
-    const [empresa, setEmpresa] = useState('')
-    const [motoristas, setMotoristas] = useState([])
-    const [motorista, setMotorista] = useState('')
-    const [startDate, setStartDate] = useState(new Date())
-    const [finalDate, setFinalDate] = useState(new Date())
-    const [total, setTotal] = useState(0)
-    const [selectedOption, setSelectedOption] = useState(null)
-    const [volume, setVolume] = useState('')
-    const [totalLiquido, setTotalLiquido] = useState('')
-    const [inicio, setInicio] = useState('')
-    const [fim, setFim] = useState('')
+class Relatorios extends Component {
 
-    const location = useLocation()
-    const history = useHistory()
 
-    console.log(location)
-
-    useEffect(() => {
-        const token = localStorage.getItem('token')
-
-        if(location.state !== undefined){
-            async function load(){
-
-                const relatorio = await api.post(`relatorio`, 
-                {
-                    startDate: location.state.startDate, 
-                    finalDate: location.state.finalDate,
-                    motorista: location.state.motorista,
-                    nomeEmpresa: location.state.nomeEmpresa,
-                },{
-                    headers: {'Authorization': `Bearer ${token}`}
-                })
-
-                setPedidos(relatorio.data)
-                setTotal(relatorio.data.length)
-                
-                const vales = pedidos;
-                
-                const Liquido = vales.reduce((acumulador, {totalLiquido} ) => {           
-                    return acumulador += parseFloat(totalLiquido.replace(',','.'));
-                },0);
-                
-                const quantidadeCarga = vales.reduce((acumulador, {quantidadeCarga} ) => {
-                    return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
-                },0);
-    
-    
-                setTotalLiquido(Liquido)
-                setVolume(quantidadeCarga)
-                
-                console.log(relatorio.data)
-                // console.log(this.state.totalLiquido)
-                // console.log(this.state.volume)
-            }
-
-            async function user(){
-                const empresas = await api.get(`listarempresas`, 
-                {headers: {'Authorization': `Bearer ${token}`}})
-                setEmpresas(empresas.data)
-                return empresas
-            }
-    
-            async function moto(){
-                const motorista = await api.get('listarmotoristas',
-                {headers: {'Authorization': `Bearer ${token}`}})
-                setMotoristas(motorista.data)
-                return motorista
-            } 
-            load()
-            user()
-            moto()
-        } else{
-            async function user(){
-                const empresas = await api.get(`listarempresas`, 
-                {headers: {'Authorization': `Bearer ${token}`}})
-                setEmpresas(empresas.data)
-                return empresas
-            }
-    
-            async function moto(){
-                const motorista = await api.get('listarmotoristas',
-                {headers: {'Authorization': `Bearer ${token}`}})
-                setMotoristas(motorista.data)
-                return motorista
-            } 
-            
-            user()
-            moto()
+    constructor(props){
+        super(props)
+        this.state = {
+            pedido: [],
+            moto: [],
+            empresas: [],
+            empresa: '',
+            motorista: '',
+            inicio: '',
+            fim: '',
+            total: '0',
+            startDate: new Date(),
+            finalDate: new Date(),
+            selectedOption: null,
+            volume: '',
+            totalLiquido: '',
         }
 
-    },[])
+        this.imprimir = this.imprimir.bind(this)
+        this.delete = this.delete.bind(this)
+        this.moto = this.moto.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
+    }
 
-    function moto() {
+    async componentDidMount(){
+        console.log(location.state)
+        console.log(unlisten)
+        const token = localStorage.getItem('token')
+
+        const moto = await api.get('listarmotoristas', 
+        {headers: {Authorization: `Bearer ${token}`}})
+
+        const user = await api.get(`listarempresas`, 
+        {headers: {'Authorization': `Bearer ${token}`}})
+
+        this.setState({ empresas: user.data, moto: moto.data})
+        
+    }
+
+    moto(event){
         let motoristas = document.getElementById('motorista');
         let att = motoristas.options[motoristas.selectedIndex].attributes
-        console.log(att)
+        // console.log(att)
 
-        setMotorista(att.name.value)
+        this.setState({
+            motorista: att.name.value
+        })
+                
     }
-    
-    async function salvar(event) {
+
+    handleSubmit = async event => {
         event.preventDefault()
 
-        const start = startDate.toLocaleDateString()
+        const start = this.state.startDate.toLocaleDateString()
         const startsplit = start.split('/').reverse().join('/')
 
-        const final = finalDate.toLocaleDateString()
+        const final = this.state.finalDate.toLocaleDateString()
         const finalsplit = final.split('/').reverse().join('/')
 
-        await setInicio(startsplit)
-        await setFim(finalsplit)
+        this.setState({inicio: startsplit, fim: finalsplit})
 
         const token = localStorage.getItem('token')
         const relatorio = await api.post(`relatorio`, 
         {
-            startDate: `${inicio} 00:00:00`, 
-            finalDate: `${fim} 23:59:59`,
-            motorista: motorista,
-            nomeEmpresa: empresa,
+            startDate: `${startsplit} 00:00:00`, 
+            finalDate: `${finalsplit} 23:59:59`,
+            motorista: this.state.motorista,
+            nomeEmpresa: this.state.empresa,
         },{
             headers: {'Authorization': `Bearer ${token}`}
         })
 
-        await setPedidos(relatorio.data)
-        await setTotal(relatorio.data.length)
+        this.setState({pedido: relatorio.data, total: relatorio.data.length})
         
-        const vales = pedidos;
+        const pedidos  = this.state.pedido;
         
-        const Liquido = await vales.reduce((acumulador, {totalLiquido} ) => {           
+        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {           
             return acumulador += parseFloat(totalLiquido.replace(',','.'));
         },0);
         
-        const quantidadeCarga = await vales.reduce((acumulador, {quantidadeCarga} ) => {
+        const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
             return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
         },0);
-
-
-        await setTotalLiquido(Liquido)
-        await setVolume(quantidadeCarga)
-          
+        
+        this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})   
         console.log(relatorio.data)
         // console.log(this.state.totalLiquido)
         // console.log(this.state.volume)
     }
 
-    function empresaSelecionada(selectedOption) {
-        setSelectedOption(selectedOption)
+    handleChange = selectedOption => {
+        this.setState({ selectedOption })
         console.log(`Option selected:`, selectedOption)
 
-        setEmpresa(selectedOption.label)
+        this.setState({
+            empresa: selectedOption.label,
+        })
     }
 
-    function imprimir() {
-        history.push({
+    imprimir() {
+        this.props.history.push({
             pathname: '/imprimir', 
             state:{
-                empresa: empresa,
-                motorista: motorista,
-                inicio: inicio,
-                fim: fim
+                empresa: this.state.empresa,
+                motorista: this.state.motorista,
+                inicio: this.state.inicio,
+                fim: this.state.fim
             }})
     }
 
-    async function del(e) {
+    async delete(e) {
 
         const token = localStorage.getItem('token')
             await api.delete(`pedido/${e.target.id}`, 
             {headers: {'Authorization': `Bearer ${token}`}})
 
-            const relatorio = await api.post(`relatorio`, 
-            {
-                startDate: `${startDate} 00:00:00`, 
-                finalDate: `${finalDate} 23:59:59`,
-                motorista: motorista,
-                nomeEmpresa: empresa,
-            },{
-                headers: {'Authorization': `Bearer ${token}`}
-            })
-    
-            setPedidos(relatorio.data)
-            setTotal(relatorio.data.length)
-            
-            const vales  = pedidos;
-            
-            const Liquido = vales.reduce((acumulador, {totalLiquido} ) => {           
-                return acumulador += parseFloat(totalLiquido.replace(',','.'));
-            },0);
-            
-            const quantidadeCarga = vales.reduce((acumulador, {quantidadeCarga} ) => {
-                return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
-            },0);
-    
-            setTotalLiquido(Liquido)
-            setVolume(quantidadeCarga)
-    }
+        const start = this.state.startDate.toLocaleDateString()
+        const startsplit = start.split('/').reverse().join('/')
 
-    return(
-        <>
+        const final = this.state.finalDate.toLocaleDateString()
+        const finalsplit = final.split('/').reverse().join('/')
+
+        this.setState({inicio: startsplit, fim: finalsplit})
+
+        const relatorio = await api.post(`relatorio`, 
+        {
+            startDate: `${startsplit} 00:00:00`, 
+            finalDate: `${finalsplit} 23:59:59`,
+            motorista: this.state.motorista,
+            nomeEmpresa: this.state.empresa,
+        },{
+            headers: {'Authorization': `Bearer ${token}`}
+        })
+
+        this.setState({pedido: relatorio.data, total: relatorio.data.length})
+        
+        const pedidos  = this.state.pedido;
+        
+        const totalLiquido = pedidos.reduce((acumulador, {totalLiquido} ) => {
+            return acumulador += parseFloat(totalLiquido.replace(',','.'));
+        },0);
+        
+        const quantidadeCarga = pedidos.reduce((acumulador, {quantidadeCarga} ) => {
+            console.log(`acumulador: ${acumulador}`);
+            
+            return acumulador += parseFloat(quantidadeCarga.replace(',','.'));
+        },0);
+        
+        this.setState({totalLiquido: totalLiquido, volume: quantidadeCarga})
+    }
+    
+    render() {
+
+        const { selectedOption } = this.state
+
+        return(
+            <>
             <div className='geral'>
                 <div className='menu'>
                     <Menu />
@@ -229,37 +194,37 @@ function Relatorios(){
                                 <h3>Gerar Relatório</h3>
                             </div>
 
-                            <form className='form-rel' onSubmit={salvar}>
+                            <form className='form-rel' onSubmit={this.handleSubmit}>
                                 <label> Data de Inicio
                                     <Datepicker 
-                                    selected={startDate}
+                                    selected={this.state.startDate}
                                     dateFormat="dd/MM/yyyy"
                                     locale="pt-BR"
-                                    onChange={date => setStartDate(date)} 
+                                    onChange={date => this.setState({startDate: date})} 
                                     />
                                 </label>
                                 
                                 <label> Data Final
                                     <Datepicker 
-                                    selected={finalDate}
+                                    selected={this.state.finalDate}
                                     dateFormat="dd/MM/yyyy"
                                     locale="pt-BR"
-                                    onChange={date => setFinalDate(date)} 
+                                    onChange={date => this.setState({finalDate: date})} 
                                     />
                                 </label>
                                 
                                 <label> Motorista
                                     <select 
                                     id='motorista'    
-                                    onChange={moto}
-                                    value={motorista}>
+                                    onChange={this.moto}
+                                    value={this.state.motorista}>
 
                                         <option 
                                         name=''
                                         id='1' 
                                         value='' 
                                         >Selecione o Motorista</option>
-                                        {motoristas.map(moto => (
+                                        {this.state.moto.map(moto => (
                                         
                                         <option 
                                         key={moto.id} 
@@ -272,8 +237,8 @@ function Relatorios(){
                                 <label>Selecione a Empresa
                                     <Select 
                                         value={selectedOption}
-                                        onChange={empresaSelecionada}
-                                        options={empresas.map(post => (
+                                        onChange={this.handleChange}
+                                        options={this.state.empresas.map(post => (
                                             { 
                                                 key: `${post.id}`, 
                                                 label: `${post.nomefantasia}`,
@@ -291,10 +256,10 @@ function Relatorios(){
                             </form>
 
                             {
-                                total !== 0 ? (
+                                this.state.total !== '0' ? (
                                     <button 
                                     className="imprimir" 
-                                    onClick={imprimir} >
+                                    onClick={this.imprimir} >
                                         imprimir
                                     </button>
                                 ) : ''
@@ -302,20 +267,20 @@ function Relatorios(){
                             <div className='tabs-rel'>
 
                                 {
-                                    total !== 0 ? (
+                                    this.state.total !== '0'? (
                                         <>
                                         <span>NOME</span>
                                         <span>MOTORISTA</span>
                                         <span>PEDIDO</span>
                                         <span>CARGA</span>
                                         <span>VALOR</span>
-                                        <span>TOTAL: {total}</span>
+                                        <span>TOTAL: {this.state.pedido.length}</span>
                                         </>
                                     ) : ''
                                 }
                             </div>
 
-                            {pedidos.map(post => (
+                            {this.state.pedido.map(post => (
                                 <div className='clientes-rel' key={post.id}>
                                     <span> {post.empresa} </span>
                                     <span> {post.motorista} </span>
@@ -327,11 +292,11 @@ function Relatorios(){
                                             pathname:'/vales/vale',
                                             state: {
                                                 id: post.id,
-                                                startDate: `${inicio} 00:00:00`, 
-                                                finalDate: `${fim} 23:59:59`,
-                                                motorista: motorista,
-                                                pedidos: pedidos,
-                                                nomeEmpresa: empresa,
+                                                startDate: `${this.state.inicio} 00:00:00`, 
+                                                finalDate: `${this.state.final} 23:59:59`,
+                                                motorista: this.state.motorista,
+                                                pedidos: this.state.pedido,
+                                                nomeEmpresa: this.state.empresa,
                                             }
                                             }}>
                                             <button className='see'>Ver | Editar</button>
@@ -339,7 +304,7 @@ function Relatorios(){
                                         <button 
                                         className='delete' 
                                         id={post.id} 
-                                        onClick={del}>
+                                        onClick={this.delete}>
                                             Excluir
                                         </button>
                                     </div>
@@ -347,14 +312,14 @@ function Relatorios(){
                             ))} 
 
                             {
-                                total !== 0 ? (
+                                this.state.total !== '0'? (
                                     <>
                                     <div className="rodape-rel">
                                         <div>
-                                            Metro cúbicos (m³): {volume}
+                                            Metro cúbicos (m³): {this.state.volume}
                                         </div>
                                         <div>
-                                            Valor total: {totalLiquido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }
+                                            Valor total: {this.state.totalLiquido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) }
                                         </div>
                                     </div>
                                     </>
@@ -365,9 +330,8 @@ function Relatorios(){
                 </div>
             </div>
             </>
-    )
-
+        );
+    }
 }
 
-export default Relatorios
-
+export default Relatorios;

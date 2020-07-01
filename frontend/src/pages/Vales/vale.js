@@ -19,15 +19,17 @@ function Vales(){
     const [data, setData] = useState('')
     const [mensagem, setMensagem] = useState('')
     const location = useLocation()
+    console.log(location)
     
     const history = useHistory()
     
     function gobackhandle(){
-        history.push({pathname: '/relatorios', state: location.state.pedidos})
+        history.push({pathname: '/relatorios', state: location.state})
     }
     
     useEffect(() => {
         const token = localStorage.getItem('token')
+
         async function user(){
             const empresas = await api.get(`listarempresas`, 
             {headers: {'Authorization': `Bearer ${token}`}})
@@ -54,7 +56,7 @@ function Vales(){
         user()
         moto()
         pedido(location.state.id)
-    },[])
+    },[location.state.id])
 
     function change(){
         let empresas = document.getElementById('empresa');

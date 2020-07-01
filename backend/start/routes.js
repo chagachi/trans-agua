@@ -30,3 +30,4 @@ Route.get('/listarempresas', 'CadastroempresaController.list').middleware('auth'
 Route.post('/buscarcnpj', 'CadastroempresaController.searchCNPJ').middleware('auth')
 Route.post('/buscarnome', 'CadastroempresaController.searchNome').middleware('auth')
 Route.get('/listarmotoristas', 'FuncionarioController.list').middleware('auth')
+Route.post('/buscarpedido', 'pedidoController.buscaPedido')
