@@ -88,16 +88,22 @@
 @media print{
   *{
     font-weight: 400 !important;
+    font-size: 0.7em !important;
   }
   .voltar{
     display: none;
   }
+  .topo div p {
+    font-size: 0.7em !important;
+    line-height: 1.2em !important;
+    font-weight: 400 !important;
+  }
   .principal span{
-    font-size: 0.8em !important;
+    font-size: 0.7em !important;
     font-weight: 400 !important;
   }
   .rodape div{
     font-weight: 400 !important;
-    font-size: 0.8em !important;
+    font-size: 0.7em !important;
   }
 }

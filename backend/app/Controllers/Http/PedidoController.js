@@ -38,7 +38,7 @@ class PedidoController {
 
     if(motorista == null && nomeEmpresa == null){
       const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .orderBy('id', 'desc')
@@ -49,7 +49,7 @@ class PedidoController {
     if (motorista != null && nomeEmpresa == null){
 
       const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .where('motorista', motorista)
@@ -62,7 +62,7 @@ class PedidoController {
     if (motorista == null && nomeEmpresa != null){
 
       const empresa = await Database
-      .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido')
+      .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
       .from('pedidos')
       .whereBetween('created_at', [startDate, finalDate])
       .where('empresa', nomeEmpresa)
@@ -73,7 +73,7 @@ class PedidoController {
     }
 
     const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .where('motorista', motorista)

@@ -9,6 +9,9 @@ import './vale.css'
 import "react-datepicker/dist/react-datepicker.css";
 import pt from 'date-fns/locale/pt-BR';
 
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 function Vales(){
 
@@ -26,6 +29,9 @@ function Vales(){
     function gobackhandle(){
         history.push({pathname: '/relatorios', state: location.state})
     }
+
+    let query = useQuery()
+    let result = query.get("id")
     
     useEffect(() => {
         const token = localStorage.getItem('token')
@@ -55,8 +61,8 @@ function Vales(){
         }
         user()
         moto()
-        pedido(location.state.id)
-    },[location.state.id])
+        pedido(result)
+    },[result])
 
     function change(){
         let empresas = document.getElementById('empresa');
@@ -107,7 +113,7 @@ function Vales(){
             const startsplit = start.split('/').reverse().join('/')
 
             const token = localStorage.getItem('token')
-            const putPedido = await api.put(`pedido/${location.state.id}`, 
+            const putPedido = await api.put(`pedido/${result}`, 
             {
                 idEmpresa: pedido.idEmpresa, 
                 empresa: pedido.empresa,
@@ -136,7 +142,7 @@ function Vales(){
         } else{
 
             const token = localStorage.getItem('token')
-            const putPedido = await api.put(`pedido/${location.state.id}`, 
+            const putPedido = await api.put(`pedido/${result}`, 
             {
                 idEmpresa: pedido.idEmpresa, 
                 empresa: pedido.empresa,

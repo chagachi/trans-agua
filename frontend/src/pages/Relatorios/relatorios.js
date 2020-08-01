@@ -319,7 +319,7 @@ function Relatorios(){
                                 <div className='clientes-rel' key={post.id}>
                                     <span> {post.empresa} </span>
                                     <span> {post.motorista} </span>
-                                    <span> {post.id} </span>
+                                    <span> {post.id}<br/> {post.observacao} </span>
                                     <span> {post.quantidadeCarga} </span>
                                     <span> {post.totalLiquido} </span>
                                     <div>
@@ -332,16 +332,10 @@ function Relatorios(){
                                                 motorista: motorista,
                                                 pedidos: pedidos,
                                                 nomeEmpresa: empresa,
-                                            }
+                                            }, search: `?id=${post.id}`
                                             }}>
                                             <button className='see'>Ver | Editar</button>
                                         </Link>
-                                        <button 
-                                        className='delete' 
-                                        id={post.id} 
-                                        onClick={del}>
-                                            Excluir
-                                        </button>
                                     </div>
                                 </div>
                             ))} 

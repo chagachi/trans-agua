@@ -71,7 +71,7 @@ class Imprimir extends Component {
           <div className="topo" >
             <div><img src={logo} alt="logo" className="logo" /></div>
 
-            <div>
+            <div className="contact-info">
               <p>11 2295-2283</p>
               <p>www.transaguadistribuidora.com.br</p>
               <p>contato@transaguadistribuidora.com.br</p>
@@ -97,7 +97,7 @@ class Imprimir extends Component {
           <div className="conteudo">
           {this.state.pedido.map(post => (
             <div className='principal' key={post.id}>
-                <span> {post.id} </span>
+                <span> {post.id} <br/> {post.observacao} </span>
                 <span> {post.empresa} </span>
                 <span> {this.DatePtBr(post.created_at)} </span>
 
