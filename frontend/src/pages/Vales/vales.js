@@ -272,7 +272,8 @@ class Vales extends Component {
                                     <div>
                                         <Link to={{
                                             pathname:'/vales/vale',
-                                            state: {id: post.id}
+                                            state: {id: post.id},
+                                            search: `id=${post.id}`
                                             }}><button className='see'>Ver | Editar</button></Link>
                                     </div>
                                 </div>

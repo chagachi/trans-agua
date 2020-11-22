@@ -319,10 +319,7 @@ render() {
                                         this.state.btnEnviado ? (<><br /><br /><h2 className='btnEnviado'>Enviando</h2></>) : ''
                                     }
                                 
-                                </form>
-                            </div>
-                          </> : ''
-                      }
+
 
                       
                   </div>
