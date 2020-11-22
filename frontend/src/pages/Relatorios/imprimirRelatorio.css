@@ -45,10 +45,9 @@
 .principal{
   display: grid;
   grid-template-columns: 10% 38% 15% 15% 10% 12%;
-  margin: 10px 0;
-  padding: 10px 0;
+  margin: 2px 0;
+  padding: 2px 0;
   font-size: 0.9em;
-  border-bottom: 1px solid gray;
 }
 
 .rodape{
@@ -99,8 +98,9 @@
     font-weight: 400 !important;
   }
   .principal span{
-    font-size: 0.7em !important;
+    font-size: 0.5em !important;
     font-weight: 400 !important;
+    line-height: 0.8em !important;
   }
   .rodape div{
     font-weight: 400 !important;
