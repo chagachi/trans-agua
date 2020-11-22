@@ -61,7 +61,7 @@ function Vales(){
         }
         user()
         moto()
-        pedido(result)
+        pedido(result)        
     },[result])
 
     function change(){
@@ -317,7 +317,7 @@ function Vales(){
                             </label>
 
                             {
-                                adm == 1? (
+                                adm == 1 ? (
                                     <label> Data
                                         <Datepicker 
                                             selected={data}

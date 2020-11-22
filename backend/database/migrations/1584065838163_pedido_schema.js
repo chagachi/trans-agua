@@ -24,6 +24,7 @@ class PedidoSchema extends Schema {
       //Misc
       table.string('observacao', 255)
       table.integer('status', 11)
+      table.integer('cron', 1)
       //Datas
       table.timestamps()
     })
