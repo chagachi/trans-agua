@@ -32,6 +32,49 @@ class PedidoController {
         return empresa
   }
 
+  // async alteracaoValor ({ request, response, params}) {
+  //   const { startDate, finalDate, nomeEmpresa } = request.all()
+
+  //   const pedidos = await Database
+  //     .select('id', 'valorUnitario', 'quantidadeCarga', 'totalLiquido')
+  //     .from('pedidos')
+  //     .whereBetween('created_at', [startDate, finalDate])
+  //     .where('empresa', nomeEmpresa)
+  //     .orderBy('id', 'desc')
+
+  //   const novoValor = await Database
+  //     .select('valorfixo')
+  //     .from('cadastroempresas')
+  //     .where('nomefantasia', nomeEmpresa)
+
+  //   await pedidos.map(async (item) => {
+  //     const valorUnitario = novoValor;
+  //     const quantidadeCarga = item.quantidadeCarga;
+  //     const totalLiquido = novoValor * pedido.quantidadeCarga;
+
+  //     const sql = `UPDATE 'pedidos'
+  //     SET 
+  //       totalLiquido = ${totalLiquido},
+  //       valorUnitario = ${novoValor}
+  //     WHERE empresa = ${item.empresa}`
+
+  //     // `UPDATE 'pedidos'
+  //     // SET 
+  //     //   totalLiquido = ?,
+  //     //   valorUnitario = ?
+  //     // WHERE empresa = ?`
+
+  //     await Database
+  //     .raw(sql)
+  //     // .raw('select * from users where username = ?', [totalLiquido,valorUnitario,item.empresa])
+
+  //     // await pedido.save()
+  //     return 'test'
+  //   });
+
+  //   return pedidos
+  // }
+
   async range ({ request, response, params, auth}) {
 
     const { startDate, finalDate, motorista, nomeEmpresa } = request.all()
@@ -99,7 +142,7 @@ class PedidoController {
             'idEmpresa', 'empresa', 'cnpj',
             'idMotorista', 'motorista', 'placa',
             'localEntrega', 'valorUnitario', 'quantidadeCarga',
-            'totalLiquido', 'observacao', 'status'
+            'totalLiquido', 'observacao', 'status', 'cron'
           ])
 
         const pedido = await Pedido.create(data)

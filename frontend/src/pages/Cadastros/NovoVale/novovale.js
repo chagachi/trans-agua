@@ -32,6 +32,7 @@ class NovoVale extends Component {
             selectedOption: null,
             startDate: '',
             adm: localStorage.getItem('adm'),
+            btnEnviado: false,
         }
 
         this.change = this.change.bind(this)
@@ -62,12 +63,15 @@ class NovoVale extends Component {
             cnpj: selectedOption.cnpj, 
             idEmpresa: selectedOption.key, 
             localEntrega: selectedOption.endereco,
-            valorUnitario: selectedOption.valor
+            valorUnitario: selectedOption.valor,
+            quantidadeCarga: '',
+            totalLiquido: ''
         })
     }
 
     handleSubmit = async event => {
         event.preventDefault()
+        this.setState({btnEnviado: true})
     
         const formatValue = this.state.quantidadeCarga
         const valorFormatado = formatValue.replace(",", ".");
@@ -86,6 +90,7 @@ class NovoVale extends Component {
             quantidadeCarga: valorFormatado,
             totalLiquido: this.state.totalLiquido,
             observacao: this.state.observacao,
+            cron: 0,
         },{
             headers: {'Authorization': `Bearer ${token}`}
         })
@@ -140,6 +145,11 @@ class NovoVale extends Component {
 
         let carga = event.target.value;
         let total = valorFormatado * this.state.valorUnitario;
+
+        if (isNaN(parseFloat(total))){
+            this.setState({totalLiquido: ''})
+            return
+        }
        
         this.setState({
             totalLiquido: total.toFixed(2)
@@ -194,129 +204,124 @@ render() {
                           />
                       </div>
 
-                      <div>
-                        <form className='novovale' onSubmit={this.handleSubmit}>
-                          <label> Empresa
-                              <p 
-                              type='text' 
-                              name='empresa' 
-                              id='empresa'
-                              onChange={e => this.setState({empresa: e.target.value})}
-                              value={this.state.empresa}
-                              >{this.state.empresa}</p>
-                          </label>
-                          <label>CNPJ
-                              <p 
-                              type='text' 
-                              name='cnpj' 
-                              id='cnpj'
-                              onChange={e => this.setState({cnpj: e.target.value})}
-                              value={this.state.cnpj}
-                              >{this.state.cnpj}</p>
-                          </label>
-                          <label>Motorista
-                              <select 
-                                id='motorista'    
-                                onChange={this.moto}
-                                value={this.state.motorista}>
+                      {
+                          this.state.empresa !== '' ? 
+                          <>
+                            <div>
+                                <form className='novovale' onSubmit={this.handleSubmit}>
+                                <label> Empresa
+                                    <p 
+                                    type='text' 
+                                    name='empresa' 
+                                    id='empresa'
+                                    onChange={e => this.setState({empresa: e.target.value})}
+                                    value={this.state.empresa}
+                                    >{this.state.empresa}</p>
+                                </label>
+                                <label>CNPJ
+                                    <p 
+                                    type='text' 
+                                    name='cnpj' 
+                                    id='cnpj'
+                                    onChange={e => this.setState({cnpj: e.target.value})}
+                                    value={this.state.cnpj}
+                                    >{this.state.cnpj}</p>
+                                </label>
+                                <label>Motorista
+                                    <select 
+                                        id='motorista'    
+                                        onChange={this.moto}
+                                        value={this.state.motorista}>
 
-                                <option 
-                                name='ini' 
-                                id='1' 
-                                value='' 
-                                disabled>Selecione o Motorista</option>
-                                {this.state.motoristas.map(moto => (
+                                        <option 
+                                        name='ini' 
+                                        id='1' 
+                                        value='' 
+                                        disabled>Selecione o Motorista</option>
+                                        {this.state.motoristas.map(moto => (
+                                        
+                                        <option 
+                                        key={moto.id} 
+                                        name={moto.nome}
+                                        id={moto.id}> {moto.nome} </option>
+                                    ))}
+                                    </select>
+                                </label>
+                                <label> Placa
+
+                                    <select 
+                                        id='placa'    
+                                        onChange={this.placa}
+                                        value={this.state.placa}>
+
+                                        <option 
+                                        name='ini' 
+                                        id='1' 
+                                        value='' 
+                                        disabled>
+                                            Selecione a Placa
+                                        </option>
+
+                                        <option key='1' id='1' name="2131"> 2131 </option>
+                                        <option key='2' id='2' name="8274"> 8274 </option>
+                                        <option key='3' id='3' name="7858"> 7858 </option>
+                                        <option key='4' id='4' name="3376"> 3376 </option>
+                                        <option key='5' id='5' name="1730"> 1730 </option>
+                                        <option key='6' id='6' name="7907"> 7907 </option>
+                                        <option key='7' id='7' name="0013"> 0013 </option>
+                                        <option key='8' id='8' name="8952"> 8952 </option>
+
+                                    </select>
+
+                                </label>
+                                <label> Local de Entrega
+                                    <p 
+                                    type='text' 
+                                    name='numero' 
+                                    id='localEntrega'
+                                    onChange={e => this.setState({localEntrega: e.target.value})}
+                                    value={this.state.localEntrega}
+                                    >{this.state.localEntrega}</p>
+                                </label>
+                                <label> Quantidade de Carga
+                                    <input 
+                                    type='text' 
+                                    name='quantidadeCarga' 
+                                    id='quantidadeCarga'
+                                    onChange={e => this.setState({quantidadeCarga: e.target.value})}
+                                    onKeyUp={this.carga}
+                                    value={this.state.quantidadeCarga}
+                                    />
+                                </label>
+                                <label> Total
+                                    <p 
+                                    type='text' 
+                                    name='total' 
+                                    id='total'
+                                    onChange={e => this.setState({totalLiquido: e.target.value})}
+                                    value={this.state.totalLiquido}
+                                    >{this.state.totalLiquido}</p>
+                                </label>
+
+                                {
+                                        this.state.empresa !== '' 
+                                        && this.state.motorista !== '' 
+                                        && this.state.placa !== '' 
+                                        && this.state.quantidadeCarga !== ''
+                                        && this.state.totalLiquido !== ''
+                                        && !this.state.btnEnviado
+                                        ? (
+                                            <input className='botao' type='submit' value='Emitir vale' id='enviar'/>
+                                        ) : ''
+
+                                    }
+                                    {
+                                        this.state.btnEnviado ? (<><br /><br /><h2 className='btnEnviado'>Enviando</h2></>) : ''
+                                    }
                                 
-                                <option 
-                                key={moto.id} 
-                                name={moto.nome}
-                                id={moto.id}> {moto.nome} </option>
-                            ))}
-                              </select>
-                          </label>
-                          <label> Placa
 
-                            <select 
-                                id='placa'    
-                                onChange={this.placa}
-                                value={this.state.placa}>
 
-                                <option 
-                                name='ini' 
-                                id='1' 
-                                value='' 
-                                disabled>
-                                    Selecione a Placa
-                                </option>
-
-                                <option key='1' id='1' name="2131"> 2131 </option>
-                                <option key='2' id='2' name="8274"> 8274 </option>
-                                <option key='3' id='3' name="7858"> 7858 </option>
-                                <option key='4' id='4' name="GEX6B59"> GEX6B59 </option>
-                                <option key='5' id='5' name="1730"> 1730 </option>
-                                <option key='6' id='6' name="7907"> 7907 </option>
-                                <option key='7' id='7' name="0013"> 0013 </option>
-                                <option key='8' id='8' name="8952"> 8952 </option>
-
-                            </select>
-
-                          </label>
-                          <label> Local de Entrega
-                              <p 
-                              type='text' 
-                              name='numero' 
-                              id='localEntrega'
-                              onChange={e => this.setState({localEntrega: e.target.value})}
-                              value={this.state.localEntrega}
-                              >{this.state.localEntrega}</p>
-                          </label>
-                          <label> Quantidade de Carga
-                              <input 
-                              type='text' 
-                              name='quantidadeCarga' 
-                              id='quantidadeCarga'
-                              onChange={e => this.setState({quantidadeCarga: e.target.value})}
-                              onKeyUp={this.carga}
-                              value={this.state.quantidadeCarga}
-                              />
-                          </label>
-                          <label> Total
-                              <p 
-                              type='text' 
-                              name='total' 
-                              id='total'
-                              onChange={e => this.setState({totalLiquido: e.target.value})}
-                              value={this.state.totalLiquido}
-                              >{this.state.totalLiquido}</p>
-                          </label>
-
-                          {
-                                this.state.adm == 1 ? (
-                                    <label> Data
-                                        <Datepicker 
-                                            selected={this.state.startDate}
-                                            dateFormat="dd/MM/yyyy"
-                                            locale="pt-BR"
-                                            onChange={date => this.setState({startDate: date})}
-                                        />
-                                    </label>
-                                ) : ''
-                            }
-
-                          {
-                                this.state.empresa !== '' 
-                                && this.state.motorista !== '' 
-                                && this.state.placa !== '' 
-                                && this.state.quantidadeCarga !== ''
-                                && this.state.totalLiquido !== ''
-                                ? (
-                                    <input className='botao' type='submit' value='Emitir vale' id='enviar'/>
-                                ) : ''
-                        }
-
-                          
-                        </form>
-                      </div>
+                      
                   </div>
               </div>
           </div>

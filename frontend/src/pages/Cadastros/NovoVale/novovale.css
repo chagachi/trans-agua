@@ -54,3 +54,12 @@
   background: #fff;
   color: #0076FF;
 }
+
+.btnEnviado{
+  background: #4BB543;
+  color: #fff;
+  padding: 5px 10px;
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
