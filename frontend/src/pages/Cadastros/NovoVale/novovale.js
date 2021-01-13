@@ -270,6 +270,7 @@ render() {
                                         <option key='6' id='6' name="7907"> 7907 </option>
                                         <option key='7' id='7' name="0013"> 0013 </option>
                                         <option key='8' id='8' name="8952"> 8952 </option>
+                                        <option key='9' id='9' name="GEX6B59"> GEX6B59 </option>
 
                                     </select>
 
@@ -319,7 +320,10 @@ render() {
                                         this.state.btnEnviado ? (<><br /><br /><h2 className='btnEnviado'>Enviando</h2></>) : ''
                                     }
                                 
-
+                                </form>
+                            </div>
+                          </> : ''
+                      }
 
                       
                   </div>
