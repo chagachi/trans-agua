@@ -271,6 +271,7 @@ render() {
                                         <option key='7' id='7' name="0013"> 0013 </option>
                                         <option key='8' id='8' name="8952"> 8952 </option>
                                         <option key='9' id='9' name="GEX6B59"> GEX6B59 </option>
+                                        <option key='10' id='10' name="TJF 2G06"> TJF 2G06 </option>
 
                                     </select>
 

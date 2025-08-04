@@ -18,35 +18,26 @@
 */
 
 const { Ignitor } = require('@adonisjs/ignitor')
+const makeBackupFromDatabaseSQL = require('./app/Controllers/Http/BackupSQL')
 
 new Ignitor(require('@adonisjs/fold'))
-  .appRoot(__dirname)
-  .fireHttpServer()
-  .catch(console.error)
+.appRoot(__dirname)
+.fireHttpServer()
+.catch(console.error)
 
-var contador = 0;
-function upTimeCherryTech() {
-  const temporizador = 1000 * 60 * 5;
-  const tokenUptimeCherryTech = "lks58d234fmp";
+// try {
+//   const xHorasParaBackup = 8 * 60 * 60 * 1000;
+//   (function backupDatabaseNow() {		
+// 		try {			
+//       makeBackupFromDatabaseSQL();		
+// 		}
+// 		catch (err) {						
+//       console.error(`Falha ao realizar backup sql`,err || null)      			
+// 		} finally {
+// 			setTimeout( backupDatabaseNow, xHorasParaBackup);
+// 		}
+//   })();
   
-  // fetch(`http://apis.cherrytech.com.br/uptime.php?token=${tokenUptimeCherr­yTech}`).
-  // .then((item)=>{
-    //   console.log(item)
-    // })
-    // .catch((err) => {
-      //   console.log(err)
-      // })
-      setTimeout( () => {
-        console.log('> Executando uptime');
-    console.log (`Uptime: ${++contador}`);
-    fetch("http://apis.cherrytech.com.br/uptime.php?token="+tokenUptimeCherryTech)
-    .then((item)=>{
-      console.log(item)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-    upTimeCherryTech();
-  }, temporizador)
-}
-// upTimeCherryTech();
+// } catch (err) {	
+//   console.log(err)      			
+// }
