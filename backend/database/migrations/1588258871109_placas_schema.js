@@ -8,6 +8,7 @@ class PlacasSchema extends Schema {
     this.create('placas', (table) => {
       table.increments()
       table.string('placa', 255)
+      table.timestamps()
     })
   }
 

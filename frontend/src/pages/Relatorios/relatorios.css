@@ -1,11 +1,3 @@
-header{
-  display: flex;
-  justify-content: space-between;
-  padding: 15px 30px;
-  color: #fff;
-  width: 100%;
-}
-
 .head{
   display: flex;
   align-items: center;
@@ -31,13 +23,34 @@ header{
 
 .form-rel{
   display: grid;
-  grid-template-columns: 20% 20% 25% 35%;
-  padding: 0 2%;
+  grid-template-columns: 15% 15% 45% 20%;
+  padding: 0 0 15px 2%;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
-.form-rel label input, .form-rel label select{
+.form-rel label{
+  display: flex;
+  flex-direction: column;
+}
+
+.botaoRel{
+  margin: 0px 40px;
+  color: #ffffff;
+  font-size: 1.1em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 5px 0;
+  background: #0076FF;
+  border: 2px solid #0076FF;
+  border-radius: 4px;
+  transition: 300ms
+}
+
+.form-rel label .react-datepicker-wrapper input, .form-rel label select{
   border: 1px solid #33333350;
-  height: 30px;
+  height: 35px;
   border-radius: 4px;
   margin-top: 3px;
   padding: 0 5px;
@@ -58,6 +71,12 @@ header{
 
 .clientes-rel div a {
   cursor: pointer;
+}
+
+.divButtons{
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
 
 .imprimir{

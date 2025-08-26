@@ -43,7 +43,7 @@ class CadastroempresaController {
   async store ({ request, response, auth }) {
     try{
       if(auth.user.adm == 1) {
-          const data = request.only(['nomefantasia', 'razaosocial', 'cnpj', 'ie', 'endereco', 'endereco1', 'numero', 'bairro', 'cidade', 'estado', 'telefone1', 'telefone2', 'email', 'site', 'valorfixo'])
+          const data = request.only(['nomefantasia', 'razaosocial', 'cnpj', 'ie', 'endereco', 'endereco1', 'numero', 'bairro', 'cidade', 'estado', 'telefone1', 'telefone2', 'email', 'site', 'valorfixo', 'valorRetirada'])
           const user = await Cad.create(data)
           return user
       }
@@ -96,7 +96,8 @@ class CadastroempresaController {
         telefone2,
         email,
         site,
-        valorfixo
+        valorfixo,
+        valorretirada
       } = request.all()
       const empresa = await Cad.query().where('id', params.id).first()
 
@@ -119,6 +120,7 @@ class CadastroempresaController {
       empresa.email = email
       empresa.site = site
       empresa.valorfixo = valorfixo
+      empresa.valorretirada = valorretirada
 
       await empresa.save()
 
@@ -151,7 +153,7 @@ class CadastroempresaController {
   async list ({ params, request, response, auth }){
 
     const empresa = await Database
-    .select('id', 'nomefantasia', 'cnpj', 'endereco1', 'valorFixo')
+    .select('id', 'nomefantasia', 'cnpj', 'endereco1', 'valorFixo', 'valorretirada')
     .from('cadastroempresas')
     .orderBy('nomefantasia', 'asc')
 

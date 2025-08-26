@@ -13,49 +13,27 @@
   border-radius: 5px;
 }
 
-.tabs{
+.tabsPlacas{
   background: rgb(221, 223, 226);
   display: grid;
-  grid-template-columns: 40% 15% 15% 30%;
+  grid-template-columns: 70% 20%;
   padding: 5px 2%;
   font-weight: 700;
 }
 
-.clientes{
+.clientesPlacas{
   display: grid;
-  grid-template-columns: 40% 15% 15% 30%;
+  grid-template-columns: 70% 20%;
   padding: 15px 2%;
   align-items: center;
   justify-content: center;
 }
 
-.clientes div{
+.clientesPlacas div{
   display: flex;
   justify-content: space-around;
 }
 
-.clientes div a {
+.clientesPlacas div a {
   cursor: pointer;
-}
-
-.pagination{
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px 2%;
-  text-align: center;
-}
-
-.pagination p{
-  width: 25px;
-  height: 25px;
-  border-radius: 100px;
-  margin: 0 3px;
-  border: 1px solid #bbbbbb;
-  color: #bbbbbb;
-  cursor: pointer;
-}
-
-.pagination p:hover{
-  background: #0072FF;
-  color: #fff;
 }

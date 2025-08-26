@@ -81,7 +81,7 @@ class PedidoController {
 
     if(motorista == null && nomeEmpresa == null){
       const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao', 'retirada')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .orderBy('id', 'desc')
@@ -92,7 +92,7 @@ class PedidoController {
     if (motorista != null && nomeEmpresa == null){
 
       const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao', 'retirada')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .where('motorista', motorista)
@@ -105,7 +105,7 @@ class PedidoController {
     if (motorista == null && nomeEmpresa != null){
 
       const empresa = await Database
-      .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
+      .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao', 'retirada')
       .from('pedidos')
       .whereBetween('created_at', [startDate, finalDate])
       .where('empresa', nomeEmpresa)
@@ -116,7 +116,7 @@ class PedidoController {
     }
 
     const empresa = await Database
-        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao')
+        .select('id','empresa','cnpj', 'motorista', 'created_at', 'placa', 'quantidadeCarga', 'totalLiquido', 'observacao', 'retirada')
         .from('pedidos')
         .whereBetween('created_at', [startDate, finalDate])
         .where('motorista', motorista)
@@ -142,7 +142,7 @@ class PedidoController {
             'idEmpresa', 'empresa', 'cnpj',
             'idMotorista', 'motorista', 'placa',
             'localEntrega', 'valorUnitario', 'quantidadeCarga',
-            'totalLiquido', 'observacao', 'status', 'cron'
+            'totalLiquido', 'observacao', 'status', 'cron', 'retirada'
           ])
 
         const pedido = await Pedido.create(data)
@@ -193,7 +193,7 @@ class PedidoController {
       idEmpresa, empresa, cnpj,
       idMotorista, motorista, placa,
       localEntrega, valorUnitario, quantidadeCarga,
-      totalLiquido, observacao, status, create
+      totalLiquido, observacao, status, create, retirada
     } = request.all()
 
     pedido.idEmpresa = idEmpresa
@@ -209,6 +209,7 @@ class PedidoController {
     pedido.observacao = observacao
     pedido.status = status
     pedido.created_at = create
+    pedido.retirada = retirada
 
     await pedido.save()
 

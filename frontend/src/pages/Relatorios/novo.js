@@ -179,11 +179,8 @@ class Relatorios extends Component {
         return(
             <>
             <div className='geral'>
-                <div className='menu'>
-                    <Menu />
-                </div>
-
                 <div className='content'>
+                    <Menu />
                     <header>
                         <span>Painel de Controle ><strong> Clientes</strong></span>
                     </header>

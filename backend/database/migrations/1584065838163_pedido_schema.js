@@ -25,6 +25,7 @@ class PedidoSchema extends Schema {
       table.string('observacao', 255)
       table.integer('status', 11)
       table.integer('cron', 1)
+      table.boolean('retirada')
       //Datas
       table.timestamps()
     })

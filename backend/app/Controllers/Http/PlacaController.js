@@ -21,9 +21,13 @@ class PlacaController {
    * @param {View} ctx.view
    */
   async index ({ request, response, view }) {
-    const placa = await Database.select().from('placas')
+    const pagina = request.header('pagina')
+        const user = await Database
+        .select()
+        .from('placas')
+        .paginate(pagina,100)
 
-    return placa
+        return user
   }
 
   /**
@@ -47,6 +51,16 @@ class PlacaController {
    * @param {Response} ctx.response
    */
   async store ({ request, response }) {
+    try{
+        const data = request.only(["placas"])
+
+        const user = await Placa.create(data)
+
+        return data
+
+      } catch(err){
+        return response.status(500).send({ error: `Erro: ${err.message}` })
+      }
   }
 
   /**
@@ -92,7 +106,12 @@ class PlacaController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, request, response, auth }) {
+    const pedido = await Database.table('placas').where('id', params.id).delete()
+    if (!pedido) {
+      return response.status(400).send({message: 'Nenhum registro encontrado.'})
+    }
+    return pedido
   }
 }
 

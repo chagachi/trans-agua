@@ -15,10 +15,12 @@ import ValesAntigos from './pages/ValesAntigos/valesantigos'
 import Antigos from './pages/ValesAntigos/antigos'
 import Impressao from './pages/Impressao/impressão'
 import Motoristas from './pages/Motoristas/motoristas'
+import Placas from './pages/Placas/placas'
 import Moto from './pages/Motoristas/moto'
 import NovoCliente from './pages/Cadastros/NovoCliente/novocliente'
 import NovoVale from './pages/Cadastros/NovoVale/novovale'
 import NovoMotorista from './pages/Cadastros/NovoMotorista/novomotorista'
+import NovaPlaca from './pages/Cadastros/NovoPlaca/novoplaca'
 import Logout from './pages/logout'
 
 function Routes() {
@@ -41,8 +43,10 @@ function Routes() {
                 <PrivateRoute path="/vales/novovale" component={NovoVale}/>
                 <PrivateRoute path="/impressao" component={Impressao}/>
                 <PrivateRoute path="/motoristas" exact component={Motoristas}/>
+                <PrivateRoute path="/placas" exact component={Placas}/>
                 <PrivateRoute path="/motoristas/motorista" exact component={Moto}/>
                 <PrivateRoute path="/motoristas/novomotorista" component={NovoMotorista}/>
+                <PrivateRoute path="/placas/novaplaca" component={NovaPlaca}/>
             </Switch>
         </BrowserRouter>
     )

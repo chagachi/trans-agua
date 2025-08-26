@@ -22,6 +22,7 @@ class CadastroempresaSchema extends Schema {
       table.string('email', 255)
       table.string('site', 255)
       table.string('valorfixo')
+      table.string('valorretirada')
       table.timestamps()
     })
   }

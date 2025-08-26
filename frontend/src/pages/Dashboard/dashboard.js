@@ -1,47 +1,51 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import empresa from '../../assets/empresa.png'
 import ticket from '../../assets/ticket.png'
 import Menu from '../../components/Header'
 import api from '../../services/api'
 import './dashboard.css'
 
-class Dash extends Component {
 
-    state = {
-        clientes: '',
-        pedido: '',
-        adm: localStorage.getItem('adm'),
-    }
+function Dashboard(){
+    const token = localStorage.getItem('token')
+    const [clientes, setClientes] = useState('')
+    const [pedido, setPedido] = useState('')
 
-    async componentDidMount(){
-        const token = localStorage.getItem('token')
+    async function getClientsQTD(){
         const user = await api.get(`empresa`, 
         {headers: {'Authorization': `Bearer ${token}`}})
 
+        setClientes(user.data.total)
+    }
+    
+    async function getPedidosQTD(){
         const pedido = await api.get(`pedido`, 
         {headers: {'Authorization': `Bearer ${token}`}})
 
-        this.setState({ clientes: user.data.total, pedido: pedido.data.total})
+        setPedido(pedido.data.total)
     }
+    
+    useEffect(() => {
+        getClientsQTD()
+        getPedidosQTD()
+    })
 
-    render() {
-        return(
+    return(
             <>
             <div className='geral'>
-                <div className='menu'>
-                    <Menu />
-                </div>
-
+                <Menu />
                 <div className='content'>
-                    <header>
-                        <h3>Painel de Controle</h3>
-                    </header>
-
                     <div className='top'>
+                        <header>
+                            <h3>Painel de Controle</h3>
+                        </header>
+                    </div>
+
+                    <div className='innerCards'>
                         <div className='card'>
                             <div>
                                 <p>Clientes Cadastrados</p>
-                                <span> {this.state.clientes} </span>
+                                <span> {clientes} </span>
                             </div>
                             <img src={empresa} alt='empresa' />
                         </div>
@@ -49,7 +53,7 @@ class Dash extends Component {
                         <div className='card'>
                             <div>
                                 <p>Vales Emitidos</p>
-                                <span> {this.state.pedido} </span>
+                                <span> {pedido} </span>
                             </div>
                             <img src={ticket} alt='ticket' />
                         </div>
@@ -58,7 +62,6 @@ class Dash extends Component {
             </div>
             </>
         );
-    }
 }
 
-export default Dash;
+export default Dashboard;
