@@ -14,6 +14,7 @@ function Vales() {
   const [pedido, setPedido] = useState([]);
   const [empresas, setEmpresas] = useState([]);
   const [motorista, setMotorista] = useState([]);
+  const [placas, setPlacas] = useState([]);
   const adm = localStorage.getItem("adm");
   const [data, setData] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -48,6 +49,13 @@ function Vales() {
       return motorista;
     }
 
+    async function placas(){
+      const placa = await api.get(`placas`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+      setPlacas(placa.data.data)
+    }
+
     async function pedido(id) {
       const vale = await api.get(`pedido/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
@@ -60,6 +68,7 @@ function Vales() {
     }
     user();
     moto();
+    placas();
     pedido(result);
   }, [result]);
 
@@ -88,6 +97,17 @@ function Vales() {
       ...pedido,
       motorista: att.name.value,
       idMotorista: att.id.value,
+    });
+  }
+  
+  function placaChange() {
+    let placas = document.getElementById("placa");
+    let att = placas.options[placas.selectedIndex].attributes;
+    console.log(att);
+
+    setPedido({
+      ...pedido,
+      placa: att.name.value,
     });
   }
 
@@ -270,7 +290,7 @@ function Vales() {
 													type="text"
 													name="motorista"
 													id="motorista"
-													onChange={(e) => setMotorista(e.target.value)}
+													onChange={(e) => setPedido({...pedido, motorista:e.target.value})}
 													value={pedido.motorista}
 												/>
 										}
@@ -278,15 +298,31 @@ function Vales() {
               <label>
                 {" "}
                 Placa
-                <input
-                  type="text"
-                  name="placa"
-                  id="placa"
-                  onChange={(e) =>
-                    setPedido({ ...pedido, placa: e.target.value })
+                {
+                  pedido.retirada === 0 ?
+                  <select
+                      id="placa"
+                      onChange={placaChange}
+                      value={pedido.placa}
+                    >
+                      <option name="ini" id="1" value="" disabled>
+                        Selecione a Placa
+                      </option>
+                      {placas.map((placa) => (
+                        <option key={placa.id} name={placa.placas} id={placa.id}>
+                          {placa.placas}
+                        </option>
+                      ))}
+                    </select>
+                  :
+                    <input
+                      type="text"
+                      name="placa"
+                      id="placa"
+                      onChange={(e) => setPedido({...pedido, placa: e.target.value})}
+                      value={pedido.placa}
+                    />
                   }
-                  value={pedido.placa}
-                />
               </label>
               <label>
                 {" "}
