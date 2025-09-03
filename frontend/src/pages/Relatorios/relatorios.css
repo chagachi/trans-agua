@@ -75,13 +75,25 @@
 
 .divButtons{
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30px;
+}
+
+.retiradas{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.retiradas input{
+  width: 20px;
+  height: 20px;
 }
 
 .imprimir{
-  margin: 15px auto;
-  display: block;
+  margin: 15px 0;
   background: #0072FF;
   color: #ffffff;
   font-size: 1.1em;

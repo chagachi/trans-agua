@@ -13,6 +13,7 @@ registerLocale("pt-BR", pt);
 
 function Relatorios() {
   const [pedidos, setPedidos] = useState([]);
+  const [pedidosFiltered, setPedidosFiltered] = useState([]);
   const [empresas, setEmpresas] = useState([]);
   const [empresa, setEmpresa] = useState("");
   // const [motoristas, setMotoristas] = useState([]);
@@ -21,6 +22,7 @@ function Relatorios() {
   const [startDate, setStartDate] = useState(new Date());
   const [finalDate, setFinalDate] = useState(new Date());
   const [total, setTotal] = useState(0);
+  const [isChecked, setIsChecked] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const [volume, setVolume] = useState("");
   const [totalLiquido, setTotalLiquido] = useState("");
@@ -43,6 +45,22 @@ function Relatorios() {
     }
   }, []);
 
+  async function handleCheck(){
+    setIsChecked(!isChecked)
+    if(!isChecked){
+      const pedidosFiltered = pedidos.filter(pedido => pedido.retirada === 1)
+      setPedidosFiltered(pedidosFiltered)
+      setTotal(pedidosFiltered.length);
+      calcTotalLiquido(pedidosFiltered)
+      calcQuantidadeCarga(pedidosFiltered)
+    } else{
+      setPedidosFiltered(pedidos)
+      setTotal(pedidos.length);
+      calcTotalLiquido(pedidos)
+      calcQuantidadeCarga(pedidos)
+    }
+  }
+
 	async function load() {
 		setEmpresa(location.state.nomeEmpresa)
 		setStartDate(location.state.startDate)
@@ -64,6 +82,7 @@ function Relatorios() {
 		);
 
 		setPedidos(relatorio.data);
+		setPedidosFiltered(relatorio.data);
 		setTotal(relatorio.data.length);
 
 		calcTotalLiquido(relatorio.data)
@@ -129,6 +148,7 @@ function Relatorios() {
     );
 
     await setPedidos(relatorio.data);
+    await setPedidosFiltered(relatorio.data);
     await setTotal(relatorio.data.length);
 
     await calcTotalLiquido(relatorio.data)
@@ -156,8 +176,8 @@ function Relatorios() {
 
   async function inverse(){
     setRender(false)
-    const teste = await pedidos.reverse()
-    setPedidos(teste)
+    const inversePedidos = await pedidosFiltered.reverse()
+    setPedidosFiltered(inversePedidos)
     setRender(true)
   }
 
@@ -291,6 +311,11 @@ function Relatorios() {
 
             {total !== 0 && (
               <div className="divButtons">
+                <div className="retiradas">
+                  <input type="checkbox" id="retirada" name="Retirada" value={"retirada"} checked={isChecked} onChange={handleCheck} />
+                  <p>Somente Retiradas</p>
+                </div>
+
                 <button className="imprimir" onClick={imprimir}>
                   imprimir
                 </button>
@@ -317,7 +342,7 @@ function Relatorios() {
             </div>
 
             {render === true &&
-              pedidos.map((post) => (
+              pedidosFiltered.map((post) => (
                 <div className="clientes-rel" key={post.id}>
                   <span> {post.empresa} </span>
                   <span> {post.motorista} </span>

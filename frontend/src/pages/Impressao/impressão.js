@@ -43,6 +43,9 @@ class Impressao extends Component {
               <div className='meio'>
                 <div>
                   <span className='pedido'><b>Nº</b> {this.state.pedido.id}</span>
+                  {
+                    this.state.pedido.retirada === 1 && <span className='data'><b>RETIRADA</b></span>
+                  }
                 </div>
                 <br/>
                 <div>
@@ -88,6 +91,9 @@ class Impressao extends Component {
               <div className='meio'>
                 <div>
                   <span className='pedido'><b>Nº</b> {this.state.pedido.id}</span>
+                  {
+                    this.state.pedido.retirada === 1 && <span className='data'><b>RETIRADA</b></span>
+                  }
                 </div>
                 <br/>
                 <div>
