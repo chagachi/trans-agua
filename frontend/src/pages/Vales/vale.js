@@ -18,8 +18,11 @@ function Vales() {
   const adm = localStorage.getItem("adm");
   const [data, setData] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const [modalOpcao, setModalOpcao] = useState(false);
+  const [retirada, setRetirada] = useState(0);
   const location = useLocation();
-  console.log(location);
+  console.log(pedido)
+  console.log(retirada)
 
   const history = useHistory();
 
@@ -61,6 +64,7 @@ function Vales() {
         headers: { Authorization: `Bearer ${token}` },
       });
       await setPedido(vale.data);
+      await setRetirada(vale.data.retirada);
       const formatValue = vale.data.valorUnitario;
       formatValue.replace(",", ".");
       // setPedido({valorUnitario: valorFormatado})
@@ -85,7 +89,11 @@ function Vales() {
       idEmpresa: attr.id.value,
       localEntrega: attr.endereco.value,
       valorUnitario: attr.valor.value,
+      valorRetirada: attr.valorRetirada.value,
     });
+    if (attr.valorRetirada.value != null && parseInt(attr.valorRetirada.value) > 0) {
+      setModalOpcao(true);
+    }
   }
 
   function moto() {
@@ -147,6 +155,7 @@ function Vales() {
             totalLiquido: pedido.totalLiquido,
             observacao: pedido.observacao,
             create: `${startsplit} 12:00:00`,
+            retirada: retirada,
           },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -176,6 +185,7 @@ function Vales() {
             quantidadeCarga: pedido.quantidadeCarga,
             totalLiquido: pedido.totalLiquido,
             observacao: pedido.observacao,
+            retirada: retirada,
           },
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -190,6 +200,16 @@ function Vales() {
         .catch((e) => setMensagem(`${e}`));
     }
   }
+
+  function handleChangeRetirada(){
+		setRetirada(1)
+		setPedido({
+      ...pedido, 
+      idMotorista: 14,
+      valorUnitario: pedido.valorRetirada
+    })
+		setModalOpcao(false)
+	}
 
   return (
     <>
@@ -231,6 +251,7 @@ function Vales() {
                     name={post.nomefantasia}
                     cnpj={post.cnpj}
                     valor={post.valorFixo}
+                    valorRetirada={post.valorretirada}
                     endereco={post.endereco1}
                     id={post.id}
                   >
@@ -270,7 +291,7 @@ function Vales() {
               <label>
                 Motorista
                 {
-											pedido.retirada === 0 ?
+											retirada === 0 ?
 												<select
 													id="motorista"
 													onChange={moto}
@@ -299,7 +320,7 @@ function Vales() {
                 {" "}
                 Placa
                 {
-                  pedido.retirada === 0 ?
+                  retirada === 0 ?
                   <select
                       id="placa"
                       onChange={placaChange}
@@ -401,6 +422,20 @@ function Vales() {
           </div>
         </div>
       </div>
+      {
+				modalOpcao === true &&
+					<div className="fundoModal">
+						<div className="modalRetirada">
+							<h3>
+								Escolha o método de envio
+							</h3>
+							<div>
+								<button onClick={() => setModalOpcao(false)}>Entrega</button>
+								<button onClick={() => handleChangeRetirada()}>Retirada</button>
+							</div>
+						</div>
+					</div>
+			}
     </>
   );
 }
